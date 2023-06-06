@@ -1,0 +1,414 @@
+@media only screen and (max-width: 1350px) {
+  .wp-up p {
+    margin-bottom: 30px;
+  }
+  .recent-work {
+    padding-bottom: 30px;
+  }
+  .list-package {
+    margin-top: 30px;
+  }
+  .your-package {
+    -webkit-background-size: 112% 112%;
+            background-size: 112%;
+  }
+  .wp-result {
+    padding-top: 0;
+  }
+  .why-with-us .main-why-witch-us {
+    margin-top: 30px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .header .top-number a {
+    font-size: 14px;
+  }
+  .wp-as h3 {
+    margin-top: 40px;
+    margin-bottom: 5px;
+  }
+  .wp-as-bg .container .row {
+    margin-bottom: 10px;
+  }
+  .get-user {
+    -webkit-background-size: 90% 90%;
+            background-size: 90%;
+  }
+  .why-with-us {
+    padding-top: 0;
+  }
+  .why-with-us .main-why-witch-us {
+    margin-bottom: 40px;
+  }
+  .text-us, .text-other {
+    padding: 40px 43px;
+  }
+  .why-with-us ul li {
+    margin-bottom: 10px;
+  }
+  .recent-work figure figcaption {
+    padding: 11px;
+  }
+  .recent-work figure figcaption .name-project {
+    font-size: 11px;
+  }
+  .recent-work figure figcaption .button-slty {
+    padding: 5px 0;
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+  }
+  .more-view {
+    padding-bottom: 30px;
+  }
+  .wp-package .prev-package ul {
+    padding-left: 30px;
+  }
+  .wp-package .prev-package ul li {
+    font-size: 13px;
+  }
+  .wp-set form button {
+    font-size: 14px;
+  }
+  .text-us, .text-other {
+    padding: 37px 30px;
+  }
+  .your-package {
+    -webkit-background-size: 118% 118%;
+            background-size: 118%;
+  }
+  .wp-reviews {
+    margin-top: 40px;
+    margin-bottom: 60px;
+  }
+  .wp-set {
+    padding-bottom: 80px;
+  }
+  .wp-for-what {
+    margin-bottom: 0;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .wp-top-nav {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #000;
+    z-index: 50;
+    text-align: center;
+  }
+  .header nav ul li {
+    float: none;
+  }
+  .header nav ul li a {
+    color: #fff;
+    display: inline-block;
+    margin: 7.5px 0;
+  }
+  .top-number {
+    text-align: right;
+  }
+  .header .top-number span {
+    text-align: right;
+  }
+  .header .top-number a {
+    font-size: 20px;
+  }
+  .header .top-number span {
+    font-size: 12px;
+  }
+  .top-number {
+    padding-top: 25px;
+  }
+  .main-heading h1 {
+    font-size: 45px;
+  }
+  .main-heading p {
+    margin-top: 30px;
+  }
+  .wp-stock-top .stock-top {
+    float: none;
+    margin: 30px auto;
+    padding: 30px 0px;
+  }
+  .wp-welcome h2 {
+    font-size: 30px;
+  }
+  .wp-welcome p {
+    margin-top: 15px;
+  }
+  .wp-for-what {
+    -webkit-background-size: 134% 100%;
+            background-size: 134% 100%;
+  }
+  .wp-for-what .row {
+    margin-top: 60px;
+  }
+  .you-very {
+    padding: 30px 50px;
+  }
+  .you-very p {
+    line-height: 30px;
+  }
+  .wp-for-what .wh-list .wh-item1 {
+    margin-bottom: 20px;
+  }
+  .wp-as-bg {
+    -webkit-background-size: 120% 120%;
+            background-size: 120%;
+  }
+  .wp-as-bg .container {
+    padding: 0 15px;
+    -webkit-background-size: 103% 104%;
+            background-size: 103% 104%;
+  }
+  .wp-up {
+    -webkit-background-size: 300% 108%;
+            background-size: 300% 108%;
+  }
+  .wp-result .enlarge {
+    -webkit-background-size: 82% 82%;
+            background-size: 82%;
+  }
+  .text-other,
+  .text-us, .text-other {
+    -webkit-background-size: 102% 98%;
+            background-size: 102% 98%;
+    padding: 58px 30px;
+  }
+  .list-package .col-md-3 {
+    margin-bottom: 40px;
+  }
+  .your-package {
+    -webkit-background-size: 100% 100%;
+            background-size: 100% 100%;
+  }
+  .wp-set form button {
+    padding: 10px 0;
+  }
+  footer .copy-footer {
+    font-size: 10px;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .total-row {
+    display: block;
+    clear: both;
+  }
+  .wp-welcome {
+    text-align: center;
+    padding: 30px 0;
+  }
+  .wp-any {
+    -webkit-background-size: 500% 100%;
+            background-size: 500% 100%;
+  }
+  .main-heading h1 {
+    font-size: 30px;
+  }
+  .main-heading p,
+  .main-heading p.conf {
+    margin-top: 10px;
+    font-size: 20px;
+  }
+  .main-heading {
+    margin-top: 30px;
+  }
+  .top-page {
+    padding-bottom: 15px;
+  }
+  .wp-for-what,
+  .wp-as-bg {
+    -webkit-background-size: 500% 100%;
+            background-size: 500% 100%;
+  }
+  .wp-as-bg .container {
+    -webkit-background-size: 200% 100%;
+            background-size: 200% 100%;
+  }
+  .wp-as-bg .container {
+    padding: 40px 15px;
+  }
+  .wp-as h3 {
+    margin-bottom: 30px;
+  }
+  .wp-reviews .container {
+    padding-left: 30px;
+  }
+  .wp-reviews .container {
+    padding-right: 50px;
+    padding-left: 50px;
+  }
+  .wp-carousel .bt-carouser.prev {
+    left: -20px;
+  }
+  .wp-carousel .bt-carouser.next {
+    right: -20px;
+  }
+  .your-package {
+    -webkit-background-size: 421% 100%;
+            background-size: 421% 100%;
+  }
+  .wp-set form input {
+    margin-bottom: 15px;
+    padding: 0 15px;
+  }
+  footer {
+    -webkit-background-size: 400% 100%;
+            background-size: 400% 100%;
+  }
+  footer .footer-contacts a.foo_number {
+    font-size: 11px;
+  }
+  .wp-as {
+    overflow: hidden;
+  }
+  .wp-as p {
+    font-size: 11px;
+  }
+  .get-user {
+    padding: 51px;
+  }
+  .footer-contacts {
+    text-align: center !important;
+    padding: 10px 15px;
+  }
+  footer .footer-goto {
+    text-align: right;
+  }
+  .wp-reviews {
+    -webkit-background-size: 200% 100%;
+            background-size: 200% 100%;
+  }
+  .wp-result p {
+    font-size: 14px;
+  }
+  .wp-result .enlarge {
+    -webkit-background-size: 120% 100%;
+            background-size: 120% 100%;
+  }
+}
+
+@media only screen and (max-width: 570px) {
+  .remodal.package {
+    -webkit-background-size: 100% 100%;
+            background-size: 100% 100%;
+    padding: 10px 113px;
+    max-width: 447px;
+  }
+  .remodal.package h3 {
+    font-size: 14px;
+  }
+  .remodal-close {
+    right: 100px;
+  }
+}
+
+@media only screen and (max-width: 511px) {
+  .remodal.thank {
+    font-size: .8em;
+    padding: 61px 39px;
+  }
+  .remodal.thank .remodal-close {
+    top: 55px;
+  }
+  .wp-reviews {
+    -webkit-background-size: 300% 100%;
+            background-size: 300% 100%;
+  }
+  .top-number {
+    display: none;
+  }
+  .wp-toggle-nav {
+    width: 75%;
+  }
+  .remodal.package {
+    padding: 29px 104px;
+  }
+  .remodal-close {
+    right: 70px;
+  }
+  .remodal.package h3 {
+    font-size: 12px;
+  }
+  .remodal.package {
+    font-size: 11px;
+  }
+  .remodal_window.package {
+    padding: 44px 100px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .remodal.package {
+    padding: 60px 66px;
+  }
+  .remodal.thank {
+    padding: 85px 71px;
+  }
+  .remodal.thank h4 {
+    margin-bottom: 15px;
+    font-size: 20px;
+  }
+  .remodal.thank p {
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+  .remodal.thank .remodal-close {
+    top: 55px;
+    right: 85px;
+  }
+  .remodal.thank .respect {
+    margin-top: 20px !important;
+    font-size: 14px !important;
+  }
+  .remodal.package button {
+    padding: 5px 24px;
+    font-size: 15px;
+    margin-top: 15px;
+  }
+  .remodal_window.package {
+    padding: 30px 100px;
+  }
+  .remodal_window.package button {
+    margin-top: 0;
+  }
+  .remodal.package .sec, .remodal_window.package .sec {
+    line-height: 1;
+  }
+}
+
+@media only screen and (max-width: 380px) {
+  .remodal.thank {
+    padding: 74px 28px;
+    -webkit-background-size: 100% 100%;
+            background-size: 100% 100%;
+  }
+  .remodal.package, .remodal_window.package {
+    padding: 20px 80px;
+  }
+  .remodal.package input, .remodal_window.package input {
+    height: 20px;
+  }
+
+  .remodal_window .button-slty {
+      padding: 8px 30px;
+      font-size: 12px;
+  }
+  .remodal_window h3 {
+    font-size: 18px;
+  }
+  .remodal_window.package .sec {
+    margin-top: 20px;
+    font-size: 12px;
+  }
+  .remodal.package, .remodal_window.package {
+    background-size: cover;
+  }
+}

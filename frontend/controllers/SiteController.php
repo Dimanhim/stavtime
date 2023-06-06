@@ -75,6 +75,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $this->view->title = 'Создание продающих лендингов';
         return $this->render('index');
     }
 

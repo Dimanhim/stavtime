@@ -8,6 +8,7 @@ $params = array_merge(
 
 return [
     'id' => 'app-backend',
+    'name' => 'StavTime',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
@@ -16,6 +17,10 @@ return [
             'class' => 'yii\gii\Module',
             'allowedIPs' => ['*'],
         ],
+        'debug' => [
+            'class' => 'yii\debug\Module',
+            'allowedIPs' => ['*'],
+        ]
     ],
     'components' => [
         'request' => [

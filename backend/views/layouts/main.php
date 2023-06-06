@@ -3,6 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use common\widgets\Alert;
 use yii\helpers\Html;
 
 \hail812\adminlte3\assets\FontAwesomeAsset::register($this);
@@ -23,7 +24,9 @@ $this->registerJsFile($publishedRes[1].'/control_sidebar.js', ['depends' => '\ha
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <?php $this->head() ?>
+    <link href="/admin/css/admin.css?v=<?= mt_rand(1000,10000) ?>" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
 <?php $this->beginBody() ?>

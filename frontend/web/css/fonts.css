@@ -1,0 +1,19 @@
+@font-face {
+  font-family: Exo2Bold;
+  src: url("fonts/Exo2/Exo2Bold.ttf");
+}
+
+@font-face {
+  font-family: Exo2Light;
+  src: url("fonts/Exo2/Exo2Light.ttf");
+}
+
+@font-face {
+  font-family: Exo2Medium;
+  src: url("fonts/Exo2/Exo2Medium.ttf");
+}
+
+@font-face {
+  font-family: Exo2;
+  src: url("fonts/Exo2/Exo2Regular.ttf");
+}
