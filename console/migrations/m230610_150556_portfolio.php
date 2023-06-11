@@ -4,25 +4,27 @@ use yii\db\Migration;
 use yii\db\Schema;
 
 /**
- * Class m220525_183450_clients
+ * Class m230610_150556_portfolio
  */
-class m220525_183450_clients extends Migration
+class m230610_150556_portfolio extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->createTable('{{%clients}}', [
+        $this->createTable('{{%portfolio}}', [
             'id'                    => Schema::TYPE_PK,
             'unique_id'             => Schema::TYPE_STRING . ' NOT NULL',
 
-            'name'                  => Schema::TYPE_STRING . ' NOT NULL',
-            'phone'                 => Schema::TYPE_STRING,
-            'email'                 => Schema::TYPE_STRING,
-            'comment'               => Schema::TYPE_STRING,
-            'type'                  => Schema::TYPE_INTEGER . ' DEFAULT 1',
-            'status_id'             => Schema::TYPE_INTEGER,
+            'order_id'              => Schema::TYPE_INTEGER,
+            'name'                  => Schema::TYPE_STRING,
+            'price'                 => Schema::TYPE_INTEGER,
+            'price_lead'            => Schema::TYPE_INTEGER,
+            'conversion'            => Schema::TYPE_FLOAT,
+            'link'                  => Schema::TYPE_STRING,
+            'description'           => Schema::TYPE_TEXT,
+            'comment'               => Schema::TYPE_TEXT,
 
             'is_active'             => Schema::TYPE_SMALLINT . ' DEFAULT 1',
             'deleted'               => Schema::TYPE_SMALLINT,
@@ -37,6 +39,6 @@ class m220525_183450_clients extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%clients}}');
+        $this->dropTable('{{%portfolio}}');
     }
 }

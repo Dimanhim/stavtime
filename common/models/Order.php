@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "stv_orders".
@@ -35,6 +36,7 @@ class Order extends \common\models\BaseModel
     const STATUS_DONE        = 2;
     const STATUS_WORK        = 3;
     const STATUS_ADMIN       = 5;
+
     /**
      * {@inheritdoc}
      */
@@ -64,11 +66,11 @@ class Order extends \common\models\BaseModel
      */
     public function rules()
     {
-        return parent::rules() + [
+        return array_merge(parent::rules(), [
             [['status_id', 'service_id', 'price', 'client_id'], 'integer'],
             [['utm_source', 'utm_campaign', 'utm_medium', 'utm_content', 'utm_term', 'comment'], 'string'],
             [['name', 'phone', 'email', 'split_template', 'pressed_btn'], 'string', 'max' => 255],
-        ];
+        ]);
     }
 
     /**
@@ -76,7 +78,7 @@ class Order extends \common\models\BaseModel
      */
     public function attributeLabels()
     {
-        return parent::attributeLabels() + [
+        return array_merge(parent::attributeLabels(), [
             'name' => 'Имя',
             'status_id' => 'Статус',
             'client_id' => 'Клиент',
@@ -92,7 +94,7 @@ class Order extends \common\models\BaseModel
             'utm_content' => 'Utm Content',
             'utm_term' => 'Utm Term',
             'comment' => 'Комментарий',
-        ];
+        ]);
     }
 
     /**
@@ -101,5 +103,36 @@ class Order extends \common\models\BaseModel
     public function getClient()
     {
         return $this->hasOne(Client::className(), ['id' => 'client_id'])->andWhere(['is_active' => 1])->andWhere(['is', 'deleted', null])->orderBy(['position' => SORT_ASC]);
+    }
+
+    /**
+     * @return array
+     */
+    public static function getStatuses()
+    {
+        return [
+            self::STATUS_ARCHIVE => 'Архив',
+            self::STATUS_DONE    => 'Выполнена',
+            self::STATUS_WORK    => 'В работе',
+            self::STATUS_ADMIN   => 'Администрирование',
+        ];
+    }
+
+    /**
+     * @return bool|mixed
+     */
+    public function getStatusName()
+    {
+        $statuses = self::getStatuses();
+        if($this->status_id and array_key_exists($this->status_id, $statuses)) return $statuses[$this->status_id];
+        return false;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getUtmArray($attribute)
+    {
+        return ArrayHelper::map(Order::find()->groupBy($attribute)->asArray()->all(), $attribute, $attribute);
     }
 }

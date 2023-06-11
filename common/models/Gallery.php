@@ -25,6 +25,7 @@ class Gallery extends \common\models\BaseModel
     const TYPE_ORDER       = 1;
     const TYPE_IMAGE       = 2;
     const TYPE_CLIENT      = 3;
+    const TYPE_PORTFOLIO   = 4;
 
     /**
      * {@inheritdoc}
@@ -55,11 +56,11 @@ class Gallery extends \common\models\BaseModel
      */
     public function rules()
     {
-        return parent::rules() + [
+        return array_merge(parent::rules(), [
             [['description', 'short_description'], 'string'],
             [['object_id', 'object_type'], 'integer'],
             [['name'], 'string', 'max' => 255],
-        ];
+        ]);
     }
 
     /**
@@ -67,13 +68,13 @@ class Gallery extends \common\models\BaseModel
      */
     public function attributeLabels()
     {
-        return parent::attributeLabels() + [
+        return array_merge(parent::attributeLabels(), [
             'name' => 'Name',
             'description' => 'Description',
             'short_description' => 'Short Description',
             'object_id' => 'Object ID',
             'object_type' => 'Object Type',
-        ];
+        ]);
     }
 
     /**
@@ -85,6 +86,7 @@ class Gallery extends \common\models\BaseModel
             self::TYPE_ORDER               => 'Заявки',
             self::TYPE_IMAGE               => 'Изображения',
             self::TYPE_CLIENT              => 'Клиенты',
+            self::TYPE_PORTFOLIO           => 'Портфолио',
         ];
     }
 

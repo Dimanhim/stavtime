@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
                         $form->field($model, 'name')->textInput(['maxlength' => true]),
                         $form->field($model, 'phone')->textInput(['maxlength' => true, 'class' => 'form-control phone-mask']),
                         $form->field($model, 'email')->textInput(['maxlength' => true]),
-                        $form->field($model, 'address')->textarea(),
+                        $form->field($model, 'comment')->textarea(),
                         $form->field($model, 'is_active')->checkbox()
                     ];
                     echo $model->getFormCard($attributes, 'Основная информация');

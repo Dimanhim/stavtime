@@ -45,10 +45,10 @@ class Client extends \common\models\BaseModel
      */
     public function rules()
     {
-        return parent::rules() + [
+        return array_merge(parent::rules(), [
             [['type', 'status_id'], 'integer'],
-            [['name', 'phone', 'email', 'address'], 'string', 'max' => 255],
-        ];
+            [['name', 'phone', 'email', 'comment'], 'string', 'max' => 255],
+        ]);
     }
 
     /**
@@ -56,14 +56,14 @@ class Client extends \common\models\BaseModel
      */
     public function attributeLabels()
     {
-        return parent::attributeLabels() + [
+        return array_merge(parent::attributeLabels(), [
             'name' => 'ФИО',
             'phone' => 'Номер телефона',
             'email' => 'E-mail',
-            'address' => 'Адрес',
+            'comment' => 'Комментарий',
             'type' => 'Тип',                    // Пока непонятно для чего
             'status_id' => 'Статус',
-        ];
+        ]);
     }
 
     public function beforeSave($insert)

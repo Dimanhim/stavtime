@@ -2,6 +2,8 @@
 
 namespace frontend\controllers;
 
+use common\models\Portfolio;
+use frontend\components\Site;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -75,8 +77,14 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $this->view->title = 'Создание продающих лендингов';
-        return $this->render('index');
+        $site = new Site();
+        $this->view->title = $site->title;
+        $portfolio = Portfolio::findModels()->all();
+
+        return $this->render('index', [
+            'site' => $site,
+            'portfolio' => $portfolio,
+        ]);
     }
 
     /**

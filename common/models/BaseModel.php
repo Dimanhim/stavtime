@@ -137,6 +137,13 @@ class BaseModel extends ActiveRecord
         return false;
     }
 
+    public function fullPath($path)
+    {
+        $prefix = Yii::$app->db->tablePrefix;
+        $dirName = str_replace($prefix, '', self::className()::tableName());
+        return '/images'.$dirName.'/'.$path;
+    }
+
     /**
      * @return mixed
      */
@@ -181,7 +188,7 @@ class BaseModel extends ActiveRecord
      */
     public static function getList()
     {
-        return ArrayHelper::map(self::findModels()->asArray()->all(), 'id', 'name');
+        return ArrayHelper::map(self::findModels()->andWhere(['not', ['name' => null]])->asArray()->all(), 'id', 'name');
     }
 
     /**
@@ -252,37 +259,26 @@ class BaseModel extends ActiveRecord
                 $image = Image::create($filePath, $gallery->id);
             }
         }
-
-
-        /*foreach ($this->image_fields as $image_field => $image_fieldName) {
-            if ($file = UploadedFile::getInstance($this, $image_field)) {
-                $fileName = md5(time().$image_fieldName);
-                $filePath = "/{$dirName}/{$fileName}.{$file->extension}";
-
-                if (!$file->saveAs(Yii::getAlias('@upload').$filePath)) {
-                    continue;
-                }
-
-                if ($this->$image_fieldName and ($existingImage = Image::findOne($this->$image_fieldName))) {
-                    $existingImage->delete();
-                }
-
-                if ($image = Image::create($filePath)) {
-                    $this->$image_fieldName = $image->id;
-                }
-            }
-        }*/
     }
 
     /**
      * @return string
      */
-    public function getImg()
+    public function getImg($width = 100, $height = 100)
     {
         if($this->image) {
-            $img = EasyThumbnailImage::thumbnailImg(Yii::getAlias('@upload').$this->image->path, 100, 100, EasyThumbnailImage::THUMBNAIL_OUTBOUND);
+            $img = EasyThumbnailImage::thumbnailImg(Yii::getAlias('@upload').$this->image->path, $width, $height, EasyThumbnailImage::THUMBNAIL_OUTBOUND);
             return Html::a($img, '/upload/'.$this->image->path, ['target' => '_blanc']);
         }
+    }
+
+    public function getImageByPath($path, $width, $height)
+    {
+        $prefix = Yii::$app->db->tablePrefix;
+        $dirName = str_replace($prefix, '', self::className()::tableName());
+
+        $img = EasyThumbnailImage::thumbnailImg(Yii::getAlias('@upload').'/'.$path, $width, $height, EasyThumbnailImage::THUMBNAIL_OUTBOUND);
+        return $img;
     }
 
     public function getMainImageHtml()

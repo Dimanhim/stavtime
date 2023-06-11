@@ -5,21 +5,30 @@ namespace backend\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Order;
+use yii\data\Pagination;
 
 /**
  * ClientSearch represents the model behind the search form of `common\models\Client`.
  */
 class OrderSearch extends Order
 {
+    public $_created_from;
+    public $_created_to;
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['status_id', 'service_id', 'price', 'client_id'], 'integer'],
-            [['utm_source', 'utm_campaign', 'utm_medium', 'utm_content', 'utm_term', 'comment'], 'string'],
-            [['name', 'phone', 'email', 'split_template', 'pressed_btn'], 'string', 'max' => 255],
+            [
+                [
+                    'status_id', 'service_id', 'price', 'client_id',
+                    'utm_source', 'utm_campaign', 'utm_medium', 'utm_content', 'utm_term', 'comment',
+                    'name', 'phone', 'email', 'split_template', 'pressed_btn',
+                    'utm_source','utm_campaign','utm_medium','utm_content','utm_term',
+                    '_created_from', '_created_to'
+                ], 'safe'],
         ];
     }
 
@@ -48,6 +57,10 @@ class OrderSearch extends Order
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => ['defaultOrder' => ['id' => SORT_DESC]],
+            'pagination' => [
+                'pageSize' => 10,
+
+            ],
         ]);
 
         $this->load($params);
@@ -57,6 +70,9 @@ class OrderSearch extends Order
             // $query->where('0=1');
             return $dataProvider;
         }
+        if ($this->_created_from and $this->_created_to) {
+            $query->andWhere(['between', 'created_at', strtotime($this->_created_from), strtotime($this->_created_to) + (60 * 60 * 24) - 1]);
+        }
 
         // grid filtering conditions
         $query->andFilterWhere([
@@ -65,8 +81,6 @@ class OrderSearch extends Order
             'client_id' => $this->client_id,
             'service_id' => $this->service_id,
             'price' => $this->price,
-            'phone' => $this->phone,
-            'email' => $this->email,
             'split_template' => $this->split_template,
             'pressed_btn' => $this->pressed_btn,
             'utm_source' => $this->utm_source,
@@ -77,7 +91,9 @@ class OrderSearch extends Order
             'is_active' => $this->is_active,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'phone', $this->phone])
+            ->andFilterWhere(['like', 'email', $this->email]);
 
         return $dataProvider;
     }
