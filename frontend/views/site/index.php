@@ -55,7 +55,7 @@
                                     class="multi">МУЛЬТИЛЕНДИНГ</span></strong><br/> в подарок!</strong><br/>
                         <a href="#your-package">Узнать подробнее...</a>
                     </p>
-                    <a onclick="showPopup('Акция', 'none');" class="button-slty package-go">Оставить заявку</a>
+                    <a onclick="showPopup('Акция', '');" class="button-slty package-go">Оставить заявку</a>
                 </div>
             </div>
         </div>
@@ -68,32 +68,32 @@
         <div class="row wh-list">
             <div class="col-md-4 col-sm-4 col-xs-4 wh-item1">
                 <p>маркетинговый анализ ниши</p>
-                <img src="/web/css/images/wh-11.png" alt="">
+                <img src="/css/images/wh-11.png" alt="">
                 <span>проведем анализ Ваших конкурентов и целевой аудитории. На основе анализа составим стратегию продвижения и макет будущего лендинга</span>
 
             </div>
             <div class="col-md-4 col-sm-4 col-xs-4 wh-item1">
                 <p>разработку лендинга под ключ</p>
-                <img src="/web/css/images/wh-12.png" alt="">
+                <img src="/css/images/wh-12.png" alt="">
                 <span>Создадим эксклюзивный дизайн, лендинг будет одинаково хорошо отображаться в разных браузерах и на различных экранах от широкоформатных мониторов до экранов мобильных устройств</span>
 
             </div>
             <div class="col-md-4 col-sm-4 col-xs-4 wh-item1">
                 <p>размещение лендинга в интернете</p>
-                <img src="/web/css/images/wh-13.png" alt="">
+                <img src="/css/images/wh-13.png" alt="">
                 <span>подберем смысловое название домена, настроим надежный хостинг на защищенных серверах</span>
 
             </div>
             <div class="clearfix"></div>
             <div class="col-md-4 col-sm-4 col-xs-4 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 wh-item1">
                 <p>настройку и ведение рекламной кампании яндекс директ</p>
-                <img src="/web/css/images/wh-14.png" alt="">
+                <img src="/css/images/wh-14.png" alt="">
                 <span>создадим и запустим рекламную кампанию, оптимизируем ее работу</span>
 
             </div>
             <div class="col-md-4 col-sm-4 col-xs-4 wh-item1">
                 <p>разработку механизмов мультилендинга и проведения А/Б-тестов</p>
-                <img src="/web/css/images/wh-15.png" alt="">
+                <img src="/css/images/wh-15.png" alt="">
                 <span>Подключим на сайт собственную админ-панель, где Вы сможете управлять полученными заявками, проводить их анализ, а также проводить сплит-тесты лендинга для достижения максимальной его эффективности</span>
             </div>
         </div>
@@ -189,7 +189,7 @@
             </div>
         </div>
         <div class="center">
-            <a onclick="showPopup('Схема работы', 'none');" class="get-user package-go">
+            <a onclick="showPopup('Схема работы', '');" class="get-user package-go">
                 Заказать лендинг
             </a>
         </div>
@@ -238,7 +238,7 @@
             <span class="tomorrow"></span> закажите создание продающего лендинга и получите <span class="multi">мультилендинг</span><br/>
             в подарок!</strong>
         </p>
-        <a onclick="showPopup('Новый уровень', 'none');" class="get-user package-go">
+        <a onclick="showPopup('Новый уровень', '');" class="get-user package-go">
             Заказать лендинг
         </a>
     </div>
@@ -248,137 +248,11 @@
         'portfolio' => $portfolio,
 ]) ?>
 
-<div class="your-package" id="your-package">
-    <h3>Выберите свой пакет</h3>
-    <div class="container">
-        <h4>Только <span class="tomorrow"></span><br/>закажите продающий лендинг <br/>и получите в подарок <span
-                    class="multi">МУЛЬТИЛЕНДИНГ!!!</span></h4>
-        <div class="row list-package">
-            <div class="col-md-3 col-sm-6">
-                <div class="wp-package">
-                    <div class="top-package">
-                        <h4>VIP</h4>
-                        <div class="price-package">29 990 р.</div>
-                        <div class="old-price-package">37 490</div>
-                    </div>
-                    <div class="prev-package">
-                        <ul>
-                            <li>Эксклюзивный дизайн</li>
-                            <li>Написание текстов</li>
-                            <li>Адаптивная верстка</li>
-                            <li>Размещение в интернете</li>
-                            <li>Виджет обратного звонка</li>
-                            <li>Создание рекламной кампании Яндекс Директ, внеднерие Яндекс Метрики и настройка целей
-                            </li>
-                            <li>Программирование <br/>- создание админ-панели для сбора статистики</li>
-                            <li>Разработка механизма А/Б тестирования</li>
-                            <li>Разработка функционала мультилендинга</li>
-                            <li>А/Б - тестирование</li>
-                            <li>Оптимизация и ведение рекламной кампании Яндекс Директ<br/>- достижение максимальной
-                                конверсии
-                            </li>
-                            <li>Средний срок - 30 дней</li>
-                        </ul>
-                    </div>
-                    <div class="go-package">
-                        <a onclick="showPopup('Пакет', 'VIP');" class="button-slty package-go" title-package="VIP">Выбрать</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="wp-package">
-                    <div class="top-package">
-                        <h4>Бизнес</h4>
-                        <div class="price-package">28 990 р.</div>
-                        <div class="old-price-package">34 790</div>
-                    </div>
-                    <div class="prev-package">
-                        <ul>
-                            <li>Эксклюзивный дизайн</li>
-                            <li>Написание текстов</li>
-                            <li>Адаптивная верстка</li>
-                            <li>Размещение в интернете</li>
-                            <li>Виджет обратного звонка</li>
-                            <li>Создание рекламной кампании Яндекс Директ, внеднерие Яндекс Метрики и настройка целей
-                            </li>
-                            <li>Программирование <br/>- создание админ-панели для сбора статистики</li>
-                            <li>Разработка механизма А/Б тестирования</li>
-                            <li>Разработка функционала мультилендинга</li>
-                            <li>Средний срок - 14 дней</li>
-                        </ul>
-                    </div>
-                    <div class="go-package">
-                        <a onclick="showPopup('Пакет', 'Бизнес');" class="button-slty package-go"
-                           title-package="Бизнес">Выбрать</a>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix hidden-md hidden-lg">
+<?= $this->render('_services', [
+    'services' => $services,
+]) ?>
 
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="wp-package">
-                    <div class="top-package">
-                        <h4>Премиум</h4>
-                        <div class="price-package">25 490 р.</div>
-                        <div class="old-price-package">28 490</div>
-                    </div>
-                    <div class="prev-package">
-                        <ul>
-                            <li>Эксклюзивный дизайн</li>
-                            <li>Написание текстов</li>
-                            <li>Адаптивная верстка</li>
-                            <li>Размещение в интернете</li>
-                            <li>Виджет обратного звонка</li>
-                            <li>Создание рекламной кампании Яндекс Директ, внеднерие Яндекс Метрики и настройка целей
-                            </li>
-                            <p style="color: #f00; text-align: center; font-weight: bold">АКЦИЯ!</p>
-                            <p style="color: #f00; text-align: center; font-weight: bold">Только <span
-                                        class="tomorrow"></span></p>
-                            <li style="color: #f00;">программирование - создание админ-панели для сбора статистики</li>
-                            <li style="color: #f00;">разработка механизма А/Б тестирования</li>
-                            <li style="color: #f00;">функционал <span class="multi"
-                                                                      style="color: #f00;">мультилендинга</span></li>
-                            <li>Средний срок - 12 дней</li>
-                        </ul>
-                    </div>
-                    <div class="go-package">
-                        <a onclick="showPopup('Пакет', 'Премиум');" class="button-slty package-go"
-                           title-package="Премиум">Выбрать</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="wp-package">
-                    <div class="top-package">
-                        <h4>Старт</h4>
-                        <div class="price-package">21 490 р.</div>
-                        <div class="old-price-package">24 990</div>
-                    </div>
-                    <div class="prev-package">
-                        <ul>
-                            <li>Эксклюзивный дизайн</li>
-                            <li>Написание текстов</li>
-                            <li>Адаптивная верстка</li>
-                            <li>Размещение в интернете</li>
-                            <p style="color: #f00; text-align: center; font-weight: bold">АКЦИЯ!</p>
-                            <p style="color: #f00; text-align: center; font-weight: bold">Только <span
-                                        class="tomorrow"></span></p>
-                            <li style="color: #f00;">программирование - создание админ-панели для сбора статистики</li>
-                            <li style="color: #f00;">разработка механизма А/Б тестирования</li>
-                            <li style="color: #f00;">функционал <span class="multi"
-                                                                      style="color: #f00;">мультилендинга</span></li>
-                            <li>Средний срок - 10 дней</li>
-                        </ul>
-                    </div>
-                    <div class="go-package">
-                        <a onclick="showPopup('Пакет', 'Старт');" class="button-slty package-go" title-package="Старт">Выбрать</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <div class="wp-reviews" id="reviews">
     <h3>Отзывы наших клиентов</h3>
@@ -469,35 +343,10 @@
     <p>Отправьте заявку на разработку Landing Page</p>
     <div class="down"><span class="trin"></span></div>
 
-    <form id="w0" action="/" method="post">
-        <input type="hidden" name="_csrf"
-               value="KpAWAe8Hla7keJk4Hm7ISwbAdXXZZDPP9RlSTCC2AhQe6CZEllDFyoA52lFbCasBd6QXHrUdYvnYfBUtRsR0Xg==">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 col-sm-3">
+    <?= $this->render('_form', [
+        'model' => $model,
+    ]) ?>
 
-                    <input type="text" id="modalform-name" class="" name="ModalForm[name]" placeholder="Имя"
-                           aria-required="true">
-                </div>
-                <div class="col-md-3 col-sm-3">
-
-                    <input type="text" id="modalform-phone" class="phone" name="ModalForm[phone]" placeholder="Телефон"
-                           aria-required="true">
-                </div>
-                <div class="col-md-3 col-sm-3">
-
-                    <input type="email" id="modalform-email" class="" name="ModalForm[email]" placeholder="e-mail">
-                </div>
-
-                <input type="hidden" id="modalform-btn" class="form-control" name="ModalForm[btn]" value="Нижняя форма">
-
-                <input type="hidden" id="modalform-plan" class="form-control" name="ModalForm[plan]" value="Без пакета">
-                <div class="col-md-3 col-sm-3">
-                    <button type="submit" class="button-slty">Получить клиентов</button>
-                </div>
-            </div>
-        </div>
-    </form>
     <p style="text-aling: center; font-size: 10px">Нажимая на эту кнопку, Вы даете согласие на обработку своих
         персональных данных <br/><a style="font-size: 10px;" href="/site/politika" target="blanc">Политика
             конфиденциальности</a></p>
@@ -522,36 +371,9 @@
         </div>
     </div>
 </footer>
-<div class="popup_window popup_form">
-    <div class="remodal_bg"></div>
-    <div class="package remodal_window">
-        <button data-remodal-action="close" class="remodal-close" data-dismiss="modal" aria-label="Close"></button>
-        <h3>Заказать лендинг <br><span>и получить мультилендинг в подарок!</span></h3>
-        <form id="w1" action="/" method="post">
-            <input type="hidden" name="_csrf"
-                   value="KpAWAe8Hla7keJk4Hm7ISwbAdXXZZDPP9RlSTCC2AhQe6CZEllDFyoA52lFbCasBd6QXHrUdYvnYfBUtRsR0Xg==">
-            <input type="text" id="modalform-name" class="" name="ModalForm[name]" placeholder="Имя"
-                   aria-required="true">
-
-            <input type="text" id="modalform-phone" class="phone" name="ModalForm[phone]" placeholder="Телефон"
-                   aria-required="true">
-
-            <input type="email" id="modalform-email" class="" name="ModalForm[email]" placeholder="e-mail">
-
-            <input type="hidden" id="modal-plan" class="form-control" name="ModalForm[plan]" value="">
-
-            <input type="hidden" id="modal-btn" class="form-control" name="ModalForm[btn]" value="">
-            <button type="submit" class="button-slty">Получить клиентов</button>
-        </form>
-        <p class="sec">
-            <i></i>Ваши данные не будут переданы <br> третьим лицам
-        <p style="text-aling: center; font-size: 10px">Нажимая на эту кнопку, Вы даете согласие на обработку своих
-            персональных данных <a style="font-size: 10px;" href="/site/politika" target="blanc">Политика
-                конфиденциальности</a></p>
-
-        </p>
-    </div>
-</div>
+<?= $this->render('_form_popup', [
+    'model' => $model,
+]) ?>
 
 <div class="popup_window popup_success">
     <div class="remodal_bg"></div>

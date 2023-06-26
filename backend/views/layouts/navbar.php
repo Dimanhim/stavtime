@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+$notifications = Yii::$app->notifications->adminData();
 ?>
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -24,7 +25,10 @@ use yii\helpers\Url;
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Справочники</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                 <li><a href="<?= Url::to(['client/index']) ?>" class="dropdown-item">Клиенты</a></li>
+                <li><a href="<?= Url::to(['service/index']) ?>" class="dropdown-item">Услуги</a></li>
                 <li><a href="<?= Url::to(['portfolio/index']) ?>" class="dropdown-item">Портфолио</a></li>
+                <li><a href="<?= Url::to(['brief/index']) ?>" class="dropdown-item">Бриф</a></li>
+                <li><a href="<?= Url::to(['document/index']) ?>" class="dropdown-item">Документы</a></li>
             </ul>
         </li>
     </ul>
@@ -127,27 +131,21 @@ use yii\helpers\Url;
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-bell"></i>
-                <span class="badge badge-warning navbar-badge">15</span>
+                <?php if($notifications) : ?>
+                <span class="badge badge-warning navbar-badge"><?= $notifications ? count($notifications) : 0 ?></span>
+                <?php endif; ?>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <span class="dropdown-header">15 Notifications</span>
+                <span class="dropdown-header"><?= $notifications ? count($notifications) : 0 ?> Уведомлений</span>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-envelope mr-2"></i> 4 new messages
-                    <span class="float-right text-muted text-sm">3 mins</span>
-                </a>
+                <?php if($notifications) : ?>
+                    <?php foreach($notifications as $typeName => $type) : ?>
+                        <a href="<?= Url::to($type['link'])  ?>" class="dropdown-item">
+                            <i class="<?= $type['iconClass'] ?>"></i> <?= $type['text'] ?>
+                        </a>
+                    <?php endforeach; ?>
+                <?php endif; ?>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-users mr-2"></i> 8 friend requests
-                    <span class="float-right text-muted text-sm">12 hours</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-file mr-2"></i> 3 new reports
-                    <span class="float-right text-muted text-sm">2 days</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
         </li>
         <li class="nav-item">

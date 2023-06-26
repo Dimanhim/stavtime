@@ -19,13 +19,14 @@ use kartik\editors\Summernote;
             <div class="col-6">
                 <?php
                     $attributes = [
+                        $form->field($model, 'order_name')->textInput(['maxlength' => true]),
                         $form->field($model, 'name')->textInput(['maxlength' => true]),
                         $form->field($model, 'phone')->textInput(['maxlength' => true, 'class' => 'form-control phone-mask']),
                         $form->field($model, 'email')->textInput(['maxlength' => true, 'type' => 'email']),
                         $form->field($model, 'price')->textInput(['maxlength' => true]),
                         $form->field($model, 'status_id')->dropDownList(Order::getStatuses(), ['prompt' => '[Не выбрано]']),
                         $form->field($model, 'client_id')->widget(Select2::className(), [
-                            'options' => ['placeholder' => '[не выбран]', 'multiple' => true],
+                            'options' => ['placeholder' => '[не выбран]'],
                             'showToggleAll' => false,
                             'pluginOptions' => [
                                 'allowClear' => true,

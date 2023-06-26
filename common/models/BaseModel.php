@@ -283,11 +283,26 @@ class BaseModel extends ActiveRecord
 
     public function getMainImageHtml()
     {
-        if($this->mainImage) return Html::a(
-            EasyThumbnailImage::thumbnailImg(Yii::getAlias('@upload').$this->mainImage->path, 100, 100, EasyThumbnailImage::THUMBNAIL_OUTBOUND),
-            EasyThumbnailImage::thumbnailFileUrl(Yii::getAlias('@upload').$this->mainImage->path, 1000, 1000, EasyThumbnailImage::THUMBNAIL_OUTBOUND),
-            ['data-fancybox' => 'gallery']
-        );
+        if($this->mainImage) {
+            if(in_array($this->mainImage->extension, $this->mainImage->_images_extensions)) {
+                return Html::a(
+                    EasyThumbnailImage::thumbnailImg(Yii::getAlias('@upload').$this->mainImage->path, 100, 100, EasyThumbnailImage::THUMBNAIL_OUTBOUND),
+                    EasyThumbnailImage::thumbnailFileUrl(Yii::getAlias('@upload').$this->mainImage->path, 1000, 1000, EasyThumbnailImage::THUMBNAIL_OUTBOUND),
+                    ['data-fancybox' => 'gallery']
+                );
+            }
+            else {
+                return Html::a($this->mainImage->getExtensionSvg(20, 20, '#000'), $this->mainImage->fileUrl, ['target' => '_blanc', 'download' => true]);
+            }
+
+
+
+
+
+
+
+
+        }
     }
     public function getImagesHtml()
     {
@@ -322,11 +337,25 @@ class BaseModel extends ActiveRecord
         ]);
     }
 
-    public function getFormCard($attributes = [], $cardName = '')
+    public function getFormCard($attributes = [], $cardName = '', $hidden = false)
     {
         return Yii::$app->controller->renderPartial('//chunks/_form_card', [
             'attributes' => $attributes,
             'cardName' => $cardName,
+            'hidden' => $hidden,
         ]);
+    }
+
+    public function notificationData($model_type = null, $type_id = null, $model_id = null, $client_id = null, $user_id = null, $message = null, $name = null)
+    {
+        $data = [];
+        if($model_type) $data['model_type'] = $model_type;
+        if($type_id) $data['type_id'] = $type_id;
+        if($model_id) $data['model_id'] = $model_id;
+        if($message) $data['message'] = $message;
+        if($name) $data['name'] = $name;
+        if($client_id) $data['client_id'] = $client_id;
+        if($user_id) $data['user_id'] = $user_id;
+        return $data;
     }
 }

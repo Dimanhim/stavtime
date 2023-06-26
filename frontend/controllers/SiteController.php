@@ -3,8 +3,10 @@
 namespace frontend\controllers;
 
 use common\models\Portfolio;
+use common\models\Service;
 use frontend\components\Site;
 use frontend\models\ResendVerificationEmailForm;
+use frontend\models\SiteForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
@@ -17,6 +19,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\web\Response;
 
 /**
  * Site controller
@@ -80,11 +83,55 @@ class SiteController extends Controller
         $site = new Site();
         $this->view->title = $site->title;
         $portfolio = Portfolio::findModels()->all();
+        $services = Service::findModels()->all();
+        $model = new SiteForm();
 
         return $this->render('index', [
             'site' => $site,
             'portfolio' => $portfolio,
+            'services' => $services,
+            'model' => $model,
         ]);
+    }
+
+    public function actionFormValidate()
+    {
+        $response = [
+            'result' => 0,
+            'message' => null,
+        ];
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if(Yii::$app->request->isAjax) {
+            $model = new SiteForm();
+            if($model->load(Yii::$app->request->post())) {
+                if(!$model->validate()) {
+                    $response['message'] = $model->firstError();
+                }
+                else {
+                    $response['result'] = 1;
+                }
+            }
+        }
+        return $response;
+    }
+
+    public function actionSendForm()
+    {
+        $response = [
+            'result' => 0,
+        ];
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if(Yii::$app->request->isAjax) {
+            $model = new SiteForm();
+            if($model->load(Yii::$app->request->post()) and $model->validate() and $model->saveData()) {
+                if ($model->sendAdminEmail()) {
+                    $response['result'] = 1;
+                }
+            }
+        }
+        return $response;
     }
 
     /**

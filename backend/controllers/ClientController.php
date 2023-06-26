@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\Client;
 use backend\models\ClientSearch;
+use common\models\ClientInfo;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -56,8 +57,10 @@ class ClientController extends BaseController
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $model->managerSeen();
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
@@ -69,6 +72,7 @@ class ClientController extends BaseController
     public function actionCreate()
     {
         $model = new Client();
+        $info = new ClientInfo();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -80,6 +84,7 @@ class ClientController extends BaseController
 
         return $this->render('create', [
             'model' => $model,
+            'info' => $info,
         ]);
     }
 
@@ -93,13 +98,26 @@ class ClientController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $info = $model->infoInstance;
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            if($info->load($this->request->post())) {
+                $info->client_id = $model->id;
+                if($info->save()) {
+                    return $this->redirect(['index']);
+                }
+                else {
+                    echo "<pre>";
+                    print_r($info->errors);
+                    echo "</pre>";
+                    exit;
+                }
+            }
         }
 
         return $this->render('update', [
             'model' => $model,
+            'info' => $info,
         ]);
     }
 }

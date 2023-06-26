@@ -2,6 +2,8 @@
 
 namespace backend\components;
 
+use Yii;
+
 class Helpers
 {
     /**
@@ -63,4 +65,5 @@ class Helpers
             ]
         ];
     }
+
 }

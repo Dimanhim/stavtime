@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var common\models\Client $model */
 
-$this->title = $model->name;
+$this->title = 'Заявка: '.$model->name;
 $this->params['breadcrumbs'][] = ['label' => $model->modelName, 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -21,6 +21,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'confirm' => 'Вы уверены, что хотите удалить?',
                 'method' => 'post',
             ],
+        ]) ?>
+        <?= Html::a('Информация', ['info', 'id' => $model->id], [
+            'class' => 'btn btn-warning'
+        ]) ?>
+        <?= Html::a('Добавить документ', ['document/create', 'order_id' => $model->id], [
+            'class' => 'btn btn-success'
+        ]) ?>
+        <?= Html::a('Сгенерировать документ', ['document/generate', 'order_id' => $model->id], [
+            'class' => 'btn btn-success'
         ]) ?>
     </p>
 
@@ -80,6 +89,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'updated_at',
                 'value' => function($data) {
                     return $data->updatedAt;
+                }
+            ],
+            [
+                'attribute' => 'Отправить бриф',
+                'format' => 'raw',
+                'value' => function($data) {
+                    if($data->send_brief) {
+                        return Html::tag('span', 'Бриф отправлен', ['class' => 'send-brief']);
+                    }
+                    else {
+                        return Html::a('Отправить', ['order/send-brief', 'id' => $data->id], ['class' => 'btn btn-warning']);
+                    }
                 }
             ],
         ],

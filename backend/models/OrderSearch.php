@@ -50,7 +50,7 @@ class OrderSearch extends Order
      */
     public function search($params)
     {
-        $query = Order::findSearch();
+        $query = Order::findSearch()->orderBy(['id' => 'SORT_DESC']);
 
         // add conditions that should always apply here
 

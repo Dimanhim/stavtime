@@ -8,16 +8,28 @@ $params = array_merge(
 
 return [
     'id' => 'app-frontend',
+    'name' => 'StavTime',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'modules' => [
+        'profile' => [
+            'class' => 'frontend\modules\profile\Profile',
+            'layout' => 'main',
+        ],
+    ],
     'components' => [
+        'assetManager' => [
+            'bundles' => [
+                'yii\web\YiiAsset' => false,
+            ],
+        ],
         'request' => [
             'csrfParam' => '_csrf-frontend',
             'baseUrl' => ''
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'common\models\Client',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
         ],
@@ -37,6 +49,35 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'viewPath' => '@common/mail',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.jino.ru',
+                'username' => 'info@stavtime.ru',
+                'password' => 'HY4tW4My',
+                'port' => '465',
+                'encryption' => 'ssl',
+            ],
+        ],
+        'mailSender' => [
+            'class' => 'backend\components\MailSender',
+        ],
+        /*'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'viewPath' => '@common/mail',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.yandex.ru',
+                'username' => 'stavpage@yandex.ru',
+                'password' => 'lkpnjlapqxjvjgyz',
+                'port' => '465',
+                'encryption' => 'ssl',
+            ],
+        ],*/
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,

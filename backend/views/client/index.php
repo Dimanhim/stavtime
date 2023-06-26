@@ -22,6 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= SortableGridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'rowOptions' => function ($model, $key, $index, $grid) {
+            return ['class' => $model->seenClass()];
+        },
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 

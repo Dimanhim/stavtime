@@ -1260,7 +1260,11 @@ footer .footer-contacts a {
   height: 15px;
   cursor: pointer;
 }
-
+.info-message {
+  color: #f20303 !important;
+  font-size: 14px !important;
+  text-align: left !important;
+}
 @media only screen and (max-width: 1350px) {
   .wp-up p {
     margin-bottom: 30px;

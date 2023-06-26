@@ -48,7 +48,7 @@ $(document).ready(function(){
 				else {
 					$(element).show();
 					if($(element).is(':last-child')) {
-						$('.more-view a').attr("onclick", "showPopup('Портфолио', 'none');").html('Хочу такой же лендинг');
+						$('.more-view a').attr("onclick", "showPopup('Портфолио', '');").html('Хочу такой же лендинг');
 					}
 				}
 			}
@@ -157,7 +157,64 @@ $(document).ready(function(){
 	});
 	$(".phone").inputmask({"mask": "+7 (999) 999-9999"});
 
-	$("form").on("submit", function (e) {
+	$('body').on('change', '.order-form input', function(e) {
+		e.preventDefault();
+		let form = $(this).closest('.order-form')
+		formValidate(form)
+	});
+	function displayFormResult(form, message) {
+		let info = form.find('.info-message');
+		info.text(message);
+	}
+	function formValidate(form) {
+		let data = form.serialize();
+		let button = form.find('button[type="submit"]');
+		let info = form.find('.info-message');
+		info.text('');
+		$.ajax({
+			url: '/site/form-validate',
+			type: 'POST',
+			data: data,
+			success: function (res) {
+				console.log(res)
+				if(res.result == 0) {
+					displayFormResult(form, res.message);
+					button.attr('disabled', 'disabled')
+				}
+				else {
+					button.removeAttr('disabled');
+					info.text('');
+				}
+			},
+			error: function (e) {
+				console.log('Error!', e);
+			}
+		});
+	}
+
+	$('body').on('submit', '.order-form', function (e) {
+		var form = $(this);
+		console.log('submit')
+		$.ajax({
+			url: form.attr("action"),
+			type: form.attr("method"),
+			data: form.serialize(),
+			success: function (res) {
+				console.log('form res', res)
+				if(res.result == 1) {
+					$(".popup_form").modal('hide');
+					$(".popup_success").modal();
+				}
+
+			},
+			error: function () {
+				alert('Произошла ошибка отправки, попробуйте позднее');
+			}
+		});
+		return false;
+	});
+
+	/*$("form").on("submit", function (e) {
 		var email = $(this).find('#modalform-email').val();
 		//alert(email.length);
 		if (email.length < 1) {
@@ -181,12 +238,12 @@ $(document).ready(function(){
 			}
 		});
 		return false;
-	});
+	});*/
 
 });
 function showPopup(form, plan) {
-    $('#modal-plan').val(plan);
-    $('#modal-btn').val(form);
+    $('.form-service').val(plan);
+    $('.form-btn').val(form);
     $('.popup_form').modal();
     //alert($('#modalform-plan').val());
     return false;

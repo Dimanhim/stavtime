@@ -22,10 +22,15 @@ use Yii;
  */
 class Gallery extends \common\models\BaseModel
 {
-    const TYPE_ORDER       = 1;
-    const TYPE_IMAGE       = 2;
-    const TYPE_CLIENT      = 3;
-    const TYPE_PORTFOLIO   = 4;
+    const TYPE_ORDER          = 1;
+    const TYPE_IMAGE          = 2;
+    const TYPE_CLIENT         = 3;
+    const TYPE_PORTFOLIO      = 4;
+    const TYPE_SERVICE        = 5;
+    const TYPE_NOTIFICATION   = 6;
+    const TYPE_BRIEF          = 7;
+    const TYPE_DOCUMENT       = 8;
+    const TYPE_CLIENT_INFO    = 9;
 
     /**
      * {@inheritdoc}
@@ -87,6 +92,11 @@ class Gallery extends \common\models\BaseModel
             self::TYPE_IMAGE               => 'Изображения',
             self::TYPE_CLIENT              => 'Клиенты',
             self::TYPE_PORTFOLIO           => 'Портфолио',
+            self::TYPE_SERVICE             => 'Услуги',
+            self::TYPE_NOTIFICATION        => 'Уведомления',
+            self::TYPE_BRIEF               => 'Бриф',
+            self::TYPE_DOCUMENT            => 'Документы',
+            self::TYPE_CLIENT_INFO         => 'Информация о клиенте',
         ];
     }
 

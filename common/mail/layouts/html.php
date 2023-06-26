@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\swiftmailer\Message;
 
 /** @var \yii\web\View $this view component instance */
 /** @var \yii\mail\MessageInterface $message the message being composed */
@@ -17,7 +18,23 @@ use yii\helpers\Html;
 </head>
 <body>
     <?php $this->beginBody() ?>
-    <?= $content ?>
+    <div style="background-color:#e5e5e5">
+        <div style="width: 500px; margin:auto; background-color: #fff;">
+
+            <div style="padding: 20px;">
+                <div style="text-align: center; padding: 20px;">
+                    <h1 style="font-weight: bold; font-size: 22px;"><?= Yii::$app->name ?></h1>
+                </div>
+                <?= $content ?>
+
+                <p></p>
+                <p>Спасибо!</p>
+                <p>С уважением, Ваш менеджер по проекту - Дмитрий!</p>
+                <p>Сайт <a href="<?= Yii::$app->urlManager->hostInfo ?>"><?= Yii::$app->urlManager->hostInfo ?></a></p>
+            </div>
+
+        </div>
+    </div>
     <?php $this->endBody() ?>
 </body>
 </html>

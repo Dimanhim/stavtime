@@ -18,6 +18,7 @@ class m230606_192254_orders extends Migration
             'unique_id'             => Schema::TYPE_STRING . ' NOT NULL',
 
             'name'                  => Schema::TYPE_STRING,
+            'order_name'            => Schema::TYPE_STRING,
             'client_id'             => Schema::TYPE_INTEGER,
             'status_id'             => Schema::TYPE_INTEGER,
             'service_id'            => Schema::TYPE_INTEGER,
@@ -32,6 +33,7 @@ class m230606_192254_orders extends Migration
             'utm_content'           => Schema::TYPE_TEXT,
             'utm_term'              => Schema::TYPE_TEXT,
             'comment'               => Schema::TYPE_TEXT,
+            'send_brief'            => Schema::TYPE_SMALLINT,
 
             'is_active'             => Schema::TYPE_SMALLINT . ' DEFAULT 1',
             'deleted'               => Schema::TYPE_SMALLINT,

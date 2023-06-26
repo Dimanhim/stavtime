@@ -2,6 +2,9 @@
 
 namespace backend\controllers;
 
+use backend\components\MailSender;
+use Yii;
+use backend\components\Helpers;
 use common\models\Order;
 use backend\models\OrderSearch;
 use yii\web\NotFoundHttpException;
@@ -55,8 +58,10 @@ class OrderController extends BaseController
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $model->managerSeen();
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
@@ -98,6 +103,34 @@ class OrderController extends BaseController
         }
 
         return $this->render('update', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionSendBrief($id)
+    {
+        $model = $this->findModel($id);
+        if($model->createUser()) {
+            if(
+                Yii::$app->mailSender->toAdmin(MailSender::SUBJECT_ADMIN_PROFILE, $model)
+                and
+                Yii::$app->mailSender->toUser($model->email, MailSender::SUBJECT_USER_ORDER, $model)
+            ) {
+                $model->send_brief = 1;
+                if($model->save()) {
+                    Yii::$app->session->setFlash('success', 'Ссылка на ЛК успешно отправлена');
+                    return $this->redirect(['order/view', 'id' => $id]);
+                }
+            }
+        }
+        Yii::$app->session->setFlash('error', 'Произошла ошибка отправки брифа');
+        return $this->redirect(['order/view', 'id' => $id]);
+    }
+
+    public function actionInfo($id)
+    {
+        $model = $this->findModel($id);
+        return $this->render('info', [
             'model' => $model,
         ]);
     }

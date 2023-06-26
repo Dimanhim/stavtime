@@ -18,7 +18,7 @@ class ClientSearch extends Client
     {
         return [
             [['id', 'type', 'status_id', 'is_active', 'deleted', 'position', 'created_at', 'updated_at'], 'integer'],
-            [['unique_id', 'name', 'phone', 'email', 'address'], 'safe'],
+            [['unique_id', 'name', 'phone', 'email'], 'safe'],
         ];
     }
 
@@ -40,12 +40,17 @@ class ClientSearch extends Client
      */
     public function search($params)
     {
-        $query = Client::findSearch();
+        $query = Client::findSearch()->orderBy(['id' => 'SORT_DESC']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => ['defaultOrder' => ['id' => SORT_DESC]],
+            'pagination' => [
+                'pageSize' => 10,
+
+            ],
         ]);
 
         $this->load($params);
@@ -71,8 +76,7 @@ class ClientSearch extends Client
         $query->andFilterWhere(['like', 'unique_id', $this->unique_id])
             ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'phone', $this->phone])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'address', $this->address]);
+            ->andFilterWhere(['like', 'email', $this->email]);
 
         return $dataProvider;
     }

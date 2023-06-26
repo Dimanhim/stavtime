@@ -1,5 +1,7 @@
 <?php
 return [
-    'adminEmail' => 'admin@example.com',
-    'bsVersion' => '5.x',
+    'adminEmail' => 'info@stavtime.ru',
+    //'adminEmail' => 'dimanhim@list.ru',
+    //'senderEmail' => 'stavpage@yandex.ru',
+    'bsVersion' => '4.x',
 ];

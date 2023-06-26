@@ -32,6 +32,8 @@ class AppAsset extends AssetBundle
     public static function getCss()
     {
         return [
+            'css/bootstrap-icons.css',
+            'css/font-awesome.min.css',
             'css/jquery-ui.min.css',
             'css/chosen.css',
             'css/jquery.fancybox.min.css',

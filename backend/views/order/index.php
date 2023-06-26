@@ -25,16 +25,26 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= SortableGridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'rowOptions' => function ($model, $key, $index, $grid) {
+            return ['class' => $model->seenClass()];
+        },
         'columns' => [
+            [
+                'class' => ActionColumn::className(),
+                'urlCreator' => function ($action, Order $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'id' => $model->id]);
+                }
+            ],
             ['class' => 'yii\grid\SerialColumn'],
             [
-                'attribute' => 'name',
+                'attribute' => 'order_name',
                 'format' => 'raw',
                 'value' => function($data) {
-                    $name = $data->name ? $data->name : 'Б/Н';
+                    $name = $data->order_name ? $data->order_name : 'Б/Н';
                     return Html::a($name, ['order/view', 'id' => $data->id]);
                 }
             ],
+            'name',
             [
                 'attribute' => 'created_at',
                 'format' => 'date',
@@ -141,12 +151,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter' => [0 => 'Нет', 1 => 'Да'],
             ],
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Order $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
+
         ],
     ]); ?>
 

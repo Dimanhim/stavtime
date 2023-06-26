@@ -12,6 +12,29 @@
 .date-filter-range input {
     font-size: 12px
 }
+.content-wrapper {
+    height: auto;
+}
+.pale-yellow {
+    background: #f7f394 !important;
+}
+.pale-gray {
+    background: #aaaaaa !important;
+}
+.pale-green {
+    background: #aef7ae !important;
+}
+.pale-red,
+.pale-red td
+{
+    background: #f7bda8 !important;
+}
+.pale-blue {
+    background: #c2c6f7 !important;
+}
+.pale-orange {
+    background: #fbce8f !important;
+}
 /* PAGINATION */
 .pagination {
     list-style: none;

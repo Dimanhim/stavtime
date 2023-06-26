@@ -1,4 +1,7 @@
 <?php
+
+use kartik\mpdf\Pdf;
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -48,12 +51,38 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'viewPath' => '@common/mail',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.jino.ru',
+                'username' => 'no-reply@stavtime.ru',
+                'password' => 'c_CXa=#tqP6Z',
+                'port' => '465',
+                'encryption' => 'ssl',
+            ],
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
+        'notifications' => [
+            'class' => 'backend\components\Notifications',
+        ],
+        'mailSender' => [
+            'class' => 'backend\components\MailSender',
+        ],
+        'pdf' => [
+            'class' => Pdf::classname(),
+            'format' => Pdf::FORMAT_A4,
+            'orientation' => Pdf::ORIENT_PORTRAIT,
+            'destination' => Pdf::DEST_BROWSER,
+            // refer settings section for all configuration options
+        ]
         /*'view' => [
             'theme' => [
                 'pathMap' => [
