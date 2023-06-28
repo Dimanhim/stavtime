@@ -2,19 +2,16 @@
 
 namespace backend\controllers;
 
-use backend\models\GeneratorForm;
-use common\models\Document;
-use backend\models\DocumentSearch;
-use common\models\Order;
-use kartik\mpdf\Pdf;
+use common\models\Organization;
+use backend\models\OrganizationSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * DocumentController implements the CRUD actions for Document model.
+ * OrganizationController implements the CRUD actions for Organization model.
  */
-class DocumentController extends BaseController
+class OrganizationController extends BaseController
 {
     /**
      * @inheritDoc
@@ -24,7 +21,7 @@ class DocumentController extends BaseController
         return array_merge(
             parent::behaviors(),
             [
-                'className' => Document::className(),
+                'className' => Organization::className(),
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -36,13 +33,13 @@ class DocumentController extends BaseController
     }
 
     /**
-     * Lists all Document models.
+     * Lists all Organization models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new DocumentSearch();
+        $searchModel = new OrganizationSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -52,7 +49,7 @@ class DocumentController extends BaseController
     }
 
     /**
-     * Displays a single Document model.
+     * Displays a single Organization model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -65,21 +62,14 @@ class DocumentController extends BaseController
     }
 
     /**
-     * Creates a new Document model.
+     * Creates a new Organization model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate($order_id = null)
+    public function actionCreate()
     {
-        $model = new Document();
-        if($order_id) {
-            if($order = Order::findOne($order_id)) {
-                $model->order_id = $order->id;
-                if($order->client) {
-                    $model->client_id = $order->client->id;
-                }
-            }
-        }
+        $model = new Organization();
+
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -94,7 +84,7 @@ class DocumentController extends BaseController
     }
 
     /**
-     * Updates an existing Document model.
+     * Updates an existing Organization model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -109,40 +99,6 @@ class DocumentController extends BaseController
         }
 
         return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    public function actionGenerate($order_id = null)
-    {
-        $model = new GeneratorForm();
-        if($order_id) {
-            $model ->order_id = $order_id;
-        }
-        if($model->load(\Yii::$app->request->post())) {
-            if($order = Order::findOne($model->order_id)) {
-                if($content = $model->getContent()) {
-                    /*echo "<pre>";
-                    print_r($content);
-                    echo "</pre>";
-                    exit;*/
-
-
-
-
-
-                    $cssInline = $model->cssInline();
-                    $pdf = \Yii::$app->pdf;
-                    $pdf->content = $content;
-                    $pdf->cssInline = $cssInline;
-                    $pdf->destination = Pdf::DEST_DOWNLOAD;
-                    return $pdf->render();
-                }
-
-            }
-        }
-
-        return $this->render('generate_form', [
             'model' => $model,
         ]);
     }

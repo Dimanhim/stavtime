@@ -4,20 +4,20 @@ use yii\db\Migration;
 use yii\db\Schema;
 
 /**
- * Class m230624_205750_clients_info
+ * Class m230626_190832_organization
  */
-class m230624_205750_clients_info extends Migration
+class m230626_190832_organization extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->createTable('{{%clients_info}}', [
+        $this->createTable('{{%organization}}', [
             'id'                    => Schema::TYPE_PK,
             'unique_id'             => Schema::TYPE_STRING . ' NOT NULL',
 
-            'client_id'             => Schema::TYPE_INTEGER . ' NOT NULL',
+            'name'                  => Schema::TYPE_STRING,
             'organization_name'     => Schema::TYPE_STRING,
             'position_name'         => Schema::TYPE_STRING,
             'action_basis'          => Schema::TYPE_STRING,
@@ -49,6 +49,6 @@ class m230624_205750_clients_info extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%clients_info}}');
+        $this->dropTable('{{%organization}}');
     }
 }

@@ -5,15 +5,17 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "stv_clients_info".
+ * This is the model class for table "stv_organization".
  *
  * @property int $id
  * @property string $unique_id
- * @property string|null $client_id
+ * @property string|null $name
  * @property string|null $organization_name
  * @property string|null $position_name
  * @property string|null $action_basis
- * @property string|null $person
+ * @property string|null $person_name
+ * @property string|null $short_person_name
+ * @property string|null $phone
  * @property string|null $email
  * @property string|null $legal_address
  * @property string|null $actual_address
@@ -22,6 +24,7 @@ use Yii;
  * @property string|null $okpo
  * @property string|null $ogrn
  * @property string|null $rs
+ * @property string|null $kors
  * @property string|null $bik
  * @property string|null $bank_name
  * @property int|null $is_active
@@ -30,14 +33,15 @@ use Yii;
  * @property int|null $created_at
  * @property int|null $updated_at
  */
-class ClientInfo extends \common\models\BaseModel
+class Organization extends \common\models\BaseModel
 {
+
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'stv_clients_info';
+        return 'stv_organization';
     }
 
     /**
@@ -45,7 +49,7 @@ class ClientInfo extends \common\models\BaseModel
      */
     public static function modelName()
     {
-        return 'Реквизиты клиентов';
+        return 'Реквизиты организации';
     }
 
     /**
@@ -53,7 +57,7 @@ class ClientInfo extends \common\models\BaseModel
      */
     public static function typeId()
     {
-        return Gallery::TYPE_CLIENT_INFO;
+        return Gallery::TYPE_ORGANIZATION;
     }
 
     /**
@@ -62,8 +66,7 @@ class ClientInfo extends \common\models\BaseModel
     public function rules()
     {
         return array_merge(parent::rules(), [
-            [['client_id'], 'integer'],
-            [['organization_name', 'position_name', 'action_basis', 'person_name', 'short_person_name', 'phone', 'email', 'legal_address', 'actual_address', 'inn', 'kpp', 'okpo', 'ogrn', 'rs', 'kors', 'bik', 'bank_name'], 'string', 'max' => 255],
+            [['name', 'organization_name', 'position_name', 'action_basis', 'person_name', 'short_person_name', 'phone', 'email', 'legal_address', 'actual_address', 'inn', 'kpp', 'okpo', 'ogrn', 'rs', 'kors', 'bik', 'bank_name'], 'string', 'max' => 255],
         ]);
     }
 
@@ -73,7 +76,7 @@ class ClientInfo extends \common\models\BaseModel
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(), [
-            'client_id' => 'Клиент',
+            'name' => 'Название',
             'organization_name' => 'Организация',
             'position_name' => 'Должность',
             'action_basis' => 'На основании чего',
@@ -92,13 +95,5 @@ class ClientInfo extends \common\models\BaseModel
             'bik' => 'БИК',
             'bank_name' => 'Банк',
         ]);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getClient()
-    {
-        return $this->hasOne(Client::className(), ['id' => 'client_id']);
     }
 }

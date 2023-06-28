@@ -31,6 +31,7 @@ class Gallery extends \common\models\BaseModel
     const TYPE_BRIEF          = 7;
     const TYPE_DOCUMENT       = 8;
     const TYPE_CLIENT_INFO    = 9;
+    const TYPE_ORGANIZATION   = 10;
 
     /**
      * {@inheritdoc}
@@ -96,7 +97,8 @@ class Gallery extends \common\models\BaseModel
             self::TYPE_NOTIFICATION        => 'Уведомления',
             self::TYPE_BRIEF               => 'Бриф',
             self::TYPE_DOCUMENT            => 'Документы',
-            self::TYPE_CLIENT_INFO         => 'Информация о клиенте',
+            self::TYPE_CLIENT_INFO         => 'Реквизиты клиентов',
+            self::TYPE_ORGANIZATION        => 'Реквизиты организации',
         ];
     }
 

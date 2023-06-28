@@ -7,6 +7,8 @@ use yii\base\Model;
 
 class GeneratorForm extends Model
 {
+    const PDF_CSS_FILE_PATH = '/backend/web/css/pdf.css';
+
     public $type_id;
     public $order_id;
 
@@ -33,6 +35,15 @@ class GeneratorForm extends Model
 
             ]);
         }
+    }
+
+    public function cssInline()
+    {
+        $filePath = $_SERVER['DOCUMENT_ROOT'].self::PDF_CSS_FILE_PATH;
+        if(file_exists($filePath)) {
+            return file_get_contents($filePath);
+        }
+        return false;
     }
 
 

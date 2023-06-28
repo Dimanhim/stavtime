@@ -16,7 +16,7 @@ $notifications = Yii::$app->notifications->adminData();
             <a href="<?= Url::home()?>" class="nav-link">Главная</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="<?= Url::to(['settings/index']) ?>" class="nav-link">Настройки</a>
+            <a href="<?= Url::to(['organization/index']) ?>" class="nav-link">Реквизиты</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="<?= Url::to(['order/index']) ?>" class="nav-link">Заявки</a>
