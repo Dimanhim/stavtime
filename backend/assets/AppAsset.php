@@ -48,6 +48,7 @@ class AppAsset extends AssetBundle
     {
         return [
             'js/jquery-ui.min.js',
+            'js/bootstrap.min.js',
             'js/chosen.jquery.min.js',
             'js/jquery.fancybox.min.js',
             'js/slugify.js',

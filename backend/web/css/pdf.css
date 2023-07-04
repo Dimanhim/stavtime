@@ -19,6 +19,7 @@ h2  {
 p {
     font-size: 14px;
     text-align: justify;
+    margin: 10px 0;
 }
 .center {
     text-align: center;
@@ -26,8 +27,11 @@ p {
 .right {
     text-align: right;
 }
-.block {
-    margin: 10px 0;
+.block,
+div,
+table
+{
+
 }
 table {
     width: 100%;

@@ -24,6 +24,7 @@ use yii\helpers\Url;
 
         <!-- SidebarSearch Form -->
         <!-- href be escaped -->
+        <!--
          <div class="form-inline">
             <div class="input-group" data-widget="sidebar-search">
                 <input class="form-control form-control-sidebar" type="search" placeholder="Поиск" aria-label="Search">
@@ -34,6 +35,7 @@ use yii\helpers\Url;
                 </div>
             </div>
         </div>
+        -->
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -41,22 +43,28 @@ use yii\helpers\Url;
             echo \hail812\adminlte\widgets\Menu::widget([
                 'items' => [
                     [
-                        'label' => 'Starter Pages',
-                        'icon' => 'tachometer-alt',
-                        'badge' => '<span class="right badge badge-info">2</span>',
+                        'label' => 'Заявки',
+                        'icon' => 'address-card',
+                        //'badge' => '<span class="right badge badge-info">2</span>',
                         'items' => [
-                            ['label' => 'Active Page', 'url' => ['site/index'], 'iconStyle' => 'far'],
-                            ['label' => 'Inactive Page', 'iconStyle' => 'far'],
+                            ['label' => 'Список', 'url' => ['order/index'], 'iconStyle' => 'far'],
+                            ['label' => 'Добавить', 'url' => ['order/create'], 'iconStyle' => 'far'],
                         ]
                     ],
-                    ['label' => 'Simple Link', 'icon' => 'th', 'badge' => '<span class="right badge badge-danger">New</span>'],
-                    ['label' => 'Yii2 PROVIDED', 'header' => true],
-                    ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
-                    ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
-                    ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank'],
-                    ['label' => 'MULTI LEVEL EXAMPLE', 'header' => true],
-                    ['label' => 'Level1'],
                     [
+                        'label' => 'Клиенты',
+                        'icon' => 'user',
+                        //'badge' => '<span class="right badge badge-info">2</span>',
+                        'items' => [
+                            ['label' => 'Список', 'url' => ['client/index'], 'iconStyle' => 'far'],
+                            ['label' => 'Добавить', 'url' => ['client/create'], 'iconStyle' => 'far'],
+                        ]
+                    ],
+
+
+                    ['label' => 'СТАТИСТИКА', 'header' => true],
+                    ['label' => 'Level1'],
+                    /*[
                         'label' => 'Level1',
                         'items' => [
                             ['label' => 'Level2', 'iconStyle' => 'far'],
@@ -71,12 +79,28 @@ use yii\helpers\Url;
                             ],
                             ['label' => 'Level2', 'iconStyle' => 'far']
                         ]
-                    ],
-                    ['label' => 'Level1'],
-                    ['label' => 'LABELS', 'header' => true],
-                    ['label' => 'Important', 'iconStyle' => 'far', 'iconClassAdded' => 'text-danger'],
-                    ['label' => 'Warning', 'iconClass' => 'nav-icon far fa-circle text-warning'],
-                    ['label' => 'Informational', 'iconStyle' => 'far', 'iconClassAdded' => 'text-info'],
+                    ],*/
+                    ['label' => 'Сплит-шаблон'],
+                    ['label' => 'Заполненная форма'],
+                    ['label' => 'Переход с сайта'],
+                    ['label' => 'ID рекламной кампании/Город'],
+                    ['label' => 'ID объявления/тип/позиция'],
+                    ['label' => 'Ключевая фраза'],
+                    ['label' => 'ДОПОЛНИТЕЛЬНЫЕ РАЗДЕЛЫ', 'header' => true],
+                    ['label' => 'Бриф', 'url' => 'brief/index', 'iconStyle' => 'far', 'iconClassAdded' => 'text-danger'],
+                    ['label' => 'Реквизиты', 'url' => 'organization/index', 'iconStyle' => 'far', 'iconClassAdded' => 'text-warning'],
+
+                    //['label' => 'Important', 'iconStyle' => 'far', 'iconClassAdded' => 'text-danger'],
+
+                    //['label' => 'Informational', 'iconStyle' => 'far', 'iconClassAdded' => 'text-info'],
+
+                    //['label' => 'Сгенерировать pdf', 'url' => ['document/generate'], 'icon' => 'file-pdf'],
+
+
+                    ['label' => 'Yii2 PROVIDED', 'header' => true],
+                    ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
+                    ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
+                    ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank'],
                 ],
             ]);
             ?>

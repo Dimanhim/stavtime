@@ -22,88 +22,414 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-        <?= Html::a('Информация', ['info', 'id' => $model->id], [
-            'class' => 'btn btn-warning'
-        ]) ?>
-        <?= Html::a('Добавить документ', ['document/create', 'order_id' => $model->id], [
-            'class' => 'btn btn-success'
-        ]) ?>
         <?= Html::a('Сгенерировать документ', ['document/generate', 'order_id' => $model->id], [
             'class' => 'btn btn-success'
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'name',
-            [
-                'attribute' => 'status_id',
-                'value' => function($data) {
-                    return $data->statusName;
-                }
-            ],
-            [
-                'attribute' => 'client_id',
-                'format' => 'raw',
-                'value' => function($data) {
-                    if($data->client) {
-                        return Html::a($data->client->name, ['client/view', 'id' => $data->client->id]);
-                    }
-                },
-            ],
-            //'service_id',
-            'price',
-            'phone',
-            'email:email',
-            'split_template',
-            'pressed_btn',
-            'utm_source',
-            'utm_campaign',
-            'utm_medium',
-            'utm_content',
-            'utm_term',
-            'comment',
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#main-tab" role="tab" aria-controls="main-tab" aria-selected="true">
+                Основная информация
+            </a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#step-tab" role="tab" aria-controls="step-tab" aria-selected="false">
+                Этапы работы
+                <?= Html::a('<i class="bi bi-plus-square-fill"></i>', ['step/create', 'order_id' => $model->id], ['class' => 'action-link pull-right']) ?>
+            </a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#payment-tab" role="tab" aria-controls="payment-tab" aria-selected="false">
+                Оплаты
+                <?= Html::a('<i class="bi bi-plus-square-fill"></i>', ['payment/create', 'order_id' => $model->id], ['class' => 'action-link pull-right']) ?>
+            </a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#document-tab" role="tab" aria-controls="document-tab" aria-selected="false">
+                Документы
+                <?= Html::a('<i class="bi bi-plus-square-fill"></i>', ['document/create', 'order_id' => $model->id], ['class' => 'action-link pull-right']) ?>
+            </a>
+        </li>
+    </ul>
 
 
-            [
-                'attribute' => 'image_fields',
-                'format' => 'raw',
-                'value' => function($data) {
-                    return $data->imagesHtml;
-                }
-            ],
-            [
-                'attribute' => 'is_active',
-                'value' => function($data) {
-                    return $data->active;
-                }
-            ],
-            [
-                'attribute' => 'created_at',
-                'value' => function($data) {
-                    return $data->createdAt;
-                }
-            ],
-            [
-                'attribute' => 'updated_at',
-                'value' => function($data) {
-                    return $data->updatedAt;
-                }
-            ],
-            [
-                'attribute' => 'Отправить бриф',
-                'format' => 'raw',
-                'value' => function($data) {
-                    if($data->send_brief) {
-                        return Html::tag('span', 'Бриф отправлен', ['class' => 'send-brief']);
-                    }
-                    else {
-                        return Html::a('Отправить', ['order/send-brief', 'id' => $data->id], ['class' => 'btn btn-warning']);
-                    }
-                }
-            ],
-        ],
-    ]) ?>
+
+
+
+
+    <div class="tab-content" id="myTabContent">
+        <!-- Основная информация -->
+        <div class="tab-pane fade show active" id="main-tab" role="tabpanel" aria-labelledby="home-tab">
+            <div class="card">
+                <div class="card-body card-body-o">
+                    <?= DetailView::widget([
+                        'model' => $model,
+                        'attributes' => [
+                            'name',
+                            [
+                                'attribute' => 'status_id',
+                                'value' => function($data) {
+                                    return $data->statusName;
+                                }
+                            ],
+                            [
+                                'attribute' => 'client_id',
+                                'format' => 'raw',
+                                'value' => function($data) {
+                                    if($data->client) {
+                                        return Html::a($data->client->name, ['client/view', 'id' => $data->client->id]);
+                                    }
+                                },
+                            ],
+                            //'service_id',
+                            'price',
+                            'phone',
+                            'email:email',
+                            'split_template',
+                            'pressed_btn',
+                            'utm_source',
+                            'utm_campaign',
+                            'utm_medium',
+                            'utm_content',
+                            'utm_term',
+                            'comment',
+
+
+                            [
+                                'attribute' => 'image_fields',
+                                'format' => 'raw',
+                                'value' => function($data) {
+                                    return $data->imagesHtml;
+                                }
+                            ],
+                            [
+                                'attribute' => 'is_active',
+                                'value' => function($data) {
+                                    return $data->active;
+                                }
+                            ],
+                            [
+                                'attribute' => 'created_at',
+                                'value' => function($data) {
+                                    return $data->createdAt;
+                                }
+                            ],
+                            [
+                                'attribute' => 'updated_at',
+                                'value' => function($data) {
+                                    return $data->updatedAt;
+                                }
+                            ],
+                            [
+                                'attribute' => 'Отправить бриф',
+                                'format' => 'raw',
+                                'value' => function($data) {
+                                    if($data->send_brief) {
+                                        return Html::tag('span', 'Бриф отправлен', ['class' => 'send-brief']);
+                                    }
+                                    else {
+                                        return Html::a('Отправить', ['order/send-brief', 'id' => $data->id], ['class' => 'btn btn-warning']);
+                                    }
+                                }
+                            ],
+                        ],
+                    ]) ?>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="step-tab" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Название</th>
+                            <th>Выполнение</th>
+                            <th>Документ</th>
+                            <th>Дедлайн</th>
+                            <th>Выполнить</th>
+                        </tr>
+                        <?php if($steps = $model->steps) : ?>
+                            <?php foreach($steps as $step) : ?>
+                                <?php $doneClass = !$step->done ? ' class="pale-red"' : '' ?>
+                                <tr<?= $doneClass ?>>
+                                    <td><?= $step->name ?></td>
+                                    <td><?= $step->doneName ?></td>
+                                    <td><?= $step->mainImageHtml ?></td>
+                                    <td><?= $step->deadline ?></td>
+                                    <td><?= $step->done ? '<i class="bi bi-check-circle"></i>' : Html::a('<i class="bi bi-check2-square"></i>', ['step/done', 'id' => $step->id]) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <tr>
+                                <td colspan="5">Этапов не найдено</td>
+                            </tr>
+                        <?php endif; ?>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Название</th>
+                            <th>Тип</th>
+                            <th>Основание</th>
+                            <th>Сумма</th>
+                            <th>Дата</th>
+                        </tr>
+                        <?php if($payments = $model->payments) : ?>
+                            <?php foreach($payments as $payment) : ?>
+                                <tr>
+                                    <td><?= $payment->name ?></td>
+                                    <td><?= $payment->typeName ?></td>
+                                    <td><?= $payment->document ? $payment->document->name.' '.$payment->document->mainImageHtml : '' ?></td>
+                                    <td><?= $payment->price ?></td>
+                                    <td><?= date('d.m.Y', $payment->created_at) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <tr>
+                                <td colspan="5">Оплаты не проводились</td>
+                            </tr>
+                        <?php endif; ?>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="document-tab" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Название</th>
+                            <th>Скачать</th>
+                        </tr>
+                        <?php if($documents = $model->documents) : ?>
+                            <?php foreach($documents as $document) : ?>
+                                <tr>
+                                    <td>
+                                        <?= $document->name ?>
+                                    </td>
+                                    <td>
+                                        <?= $document->mainImageHtml ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <tr>
+                                <td colspan="2">Документов не найдено</td>
+                            </tr>
+                        <?php endif; ?>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <!--
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Основная информация
+                </div>
+                <div class="card-body card-body-o">
+                    <?= DetailView::widget([
+                        'model' => $model,
+                        'attributes' => [
+                            'name',
+                            [
+                                'attribute' => 'status_id',
+                                'value' => function($data) {
+                                    return $data->statusName;
+                                }
+                            ],
+                            [
+                                'attribute' => 'client_id',
+                                'format' => 'raw',
+                                'value' => function($data) {
+                                    if($data->client) {
+                                        return Html::a($data->client->name, ['client/view', 'id' => $data->client->id]);
+                                    }
+                                },
+                            ],
+                            //'service_id',
+                            'price',
+                            'phone',
+                            'email:email',
+                            'split_template',
+                            'pressed_btn',
+                            'utm_source',
+                            'utm_campaign',
+                            'utm_medium',
+                            'utm_content',
+                            'utm_term',
+                            'comment',
+
+
+                            [
+                                'attribute' => 'image_fields',
+                                'format' => 'raw',
+                                'value' => function($data) {
+                                    return $data->imagesHtml;
+                                }
+                            ],
+                            [
+                                'attribute' => 'is_active',
+                                'value' => function($data) {
+                                    return $data->active;
+                                }
+                            ],
+                            [
+                                'attribute' => 'created_at',
+                                'value' => function($data) {
+                                    return $data->createdAt;
+                                }
+                            ],
+                            [
+                                'attribute' => 'updated_at',
+                                'value' => function($data) {
+                                    return $data->updatedAt;
+                                }
+                            ],
+                            [
+                                'attribute' => 'Отправить бриф',
+                                'format' => 'raw',
+                                'value' => function($data) {
+                                    if($data->send_brief) {
+                                        return Html::tag('span', 'Бриф отправлен', ['class' => 'send-brief']);
+                                    }
+                                    else {
+                                        return Html::a('Отправить', ['order/send-brief', 'id' => $data->id], ['class' => 'btn btn-warning']);
+                                    }
+                                }
+                            ],
+                        ],
+                    ]) ?>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+            <div class="card card-img card-img-o">
+                <div class="card-header card-header-o">
+                    Этапы работы <i class="bi bi-chevron-down"></i>
+                    <?//= Html::a('<i class="bi bi-plus-square-fill"></i>', ['step/create', 'order_id' => $model->id], ['class' => 'action-link pull-right']) ?>
+                </div>
+                <div class="card-body card-body-o">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Название</th>
+                            <th>Выполнение</th>
+                            <th>Документ</th>
+                            <th>Дедлайн</th>
+                            <th>Выполнить</th>
+                        </tr>
+                        <?php if($steps = $model->steps) : ?>
+                            <?php foreach($steps as $step) : ?>
+                                <?php $doneClass = !$step->done ? ' class="pale-red"' : '' ?>
+                                <tr<?= $doneClass ?>>
+                                    <td><?= $step->name ?></td>
+                                    <td><?= $step->doneName ?></td>
+                                    <td><?= $step->mainImageHtml ?></td>
+                                    <td><?= $step->deadline ?></td>
+                                    <td><?= $step->done ? '<i class="bi bi-check-circle"></i>' : Html::a('<i class="bi bi-check2-square"></i>', ['step/done', 'id' => $step->id]) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <tr>
+                                <td colspan="5">Этапов не найдено</td>
+                            </tr>
+                        <?php endif; ?>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card card-img card-img-o">
+                <div class="card-header card-header-o">
+                    Оплаты <i class="bi bi-chevron-down"></i>
+                    <?//= Html::a('<i class="bi bi-plus-square-fill"></i>', ['payment/create', 'order_id' => $model->id], ['class' => 'action-link pull-right']) ?>
+                </div>
+                <div class="card-body card-body-o">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Название</th>
+                            <th>Тип</th>
+                            <th>Основание</th>
+                            <th>Сумма</th>
+                            <th>Дата</th>
+                        </tr>
+                        <?php if($payments = $model->payments) : ?>
+                            <?php foreach($payments as $payment) : ?>
+                                <tr>
+                                    <td><?= $payment->name ?></td>
+                                    <td><?= $payment->typeName ?></td>
+                                    <td><?= $payment->document ? $payment->document->name.' '.$payment->document->mainImageHtml : '' ?></td>
+                                    <td><?= $payment->price ?></td>
+                                    <td><?= date('d.m.Y', $payment->created_at) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <tr>
+                                <td colspan="5">Оплаты не проводились</td>
+                            </tr>
+                        <?php endif; ?>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-img card-img-o">
+                <div class="card-header card-header-o">
+                    Документы <i class="bi bi-chevron-down"></i>
+                    <?//= Html::a('<i class="bi bi-plus-square-fill"></i>', ['document/create', 'order_id' => $model->id], ['class' => 'action-link pull-right']) ?>
+                </div>
+                <div class="card-body card-body-o">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Название</th>
+                            <th>Скачать</th>
+                        </tr>
+                        <?php if($documents = $model->documents) : ?>
+                            <?php foreach($documents as $document) : ?>
+                                <tr>
+                                    <td>
+                                        <?= $document->name ?>
+                                    </td>
+                                    <td>
+                                        <?= $document->mainImageHtml ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <tr>
+                                <td colspan="2">Документов не найдено</td>
+                            </tr>
+                        <?php endif; ?>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    -->
+
+
 
 </div>

@@ -76,7 +76,32 @@ $this->params['breadcrumbs'][] = $this->title;
                     Реквизиты
                 </div>
                 <div class="card-body">
-
+                    <?php if($model->info) : ?>
+                    <?= DetailView::widget([
+                        'model' => $model->info,
+                        'attributes' => [
+                            'organization_name',
+                            'position_name',
+                            'action_basis',
+                            'person_name',
+                            'short_person_name',
+                            'phone',
+                            'email',
+                            'legal_address',
+                            'actual_address',
+                            'inn',
+                            'kpp',
+                            'okpo',
+                            'ogrn',
+                            'rs',
+                            'kors',
+                            'bik',
+                            'bank_name',
+                        ],
+                    ]) ?>
+                    <?php else : ?>
+                        <p>Реквизиты не заполнены</p>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

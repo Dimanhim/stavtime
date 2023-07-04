@@ -43,6 +43,13 @@
     margin-left: -1px;
 }
 
+/*.field-payment-order_id,
+.field-payment-document_id
+{
+    display: none;
+}*/
+
+
 .pagination > li > a,
 .pagination > li > span
 {

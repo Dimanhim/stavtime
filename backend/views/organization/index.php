@@ -10,7 +10,6 @@ use himiklab\sortablegrid\SortableGridView;
 /** @var backend\models\OrganizationSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Реквизиты организаций';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="organization-index">

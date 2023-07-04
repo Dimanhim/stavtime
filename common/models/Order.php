@@ -161,6 +161,30 @@ class Order extends \common\models\BaseModel
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDocuments()
+    {
+        return $this->hasMany(Document::className(), ['order_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPayments()
+    {
+        return $this->hasMany(Payment::className(), ['order_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSteps()
+    {
+        return $this->hasMany(Step::className(), ['order_id' => 'id']);
+    }
+
+    /**
      * @return array
      */
     public static function getStatuses()

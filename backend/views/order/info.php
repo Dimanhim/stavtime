@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = 'Информация';
     <?= Html::a('Перейти к заявке', ['order/view', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
 </p>
 <div class="row">
-    <div class="col-6">
+    <div class="col-md-6">
         <div class="card">
             <div class="card-header">
                 Основная информация
@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = 'Информация';
             </div>
         </div>
     </div>
-    <div class="col-6">
+    <div class="col-md-6">
         <div class="card">
             <div class="card-header">
                 Документы
@@ -65,43 +65,27 @@ $this->params['breadcrumbs'][] = 'Информация';
                         <th>Название</th>
                         <th>Скачать</th>
                     </tr>
-                    <tr>
-                        <td>
-                            Договор
-                        </td>
-                        <td>
-                            <?= Html::a('<i class="bi bi-file-earmark-pdf"></i>', ['order/document', 'id' => '1']) ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Договор 2
-                        </td>
-                        <td>
-                            <?= Html::a('<i class="bi bi-file-earmark-pdf"></i>', ['order/document', 'id' => '1']) ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Счет на предоплату
-                        </td>
-                        <td>
-                            <?= Html::a('<i class="bi bi-file-earmark-pdf"></i>', ['order/document', 'id' => '1']) ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Акт выполненных работ
-                        </td>
-                        <td>
-                            <?= Html::a('<i class="bi bi-file-earmark-pdf"></i>', ['order/document', 'id' => '1']) ?>
-                        </td>
-                    </tr>
+                    <?php if($documents = $model->documents) : ?>
+                        <?php foreach($documents as $document) : ?>
+                            <tr>
+                                <td>
+                                    <?= $document->name ?>
+                                </td>
+                                <td>
+                                    <?= $document->mainImageHtml ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else : ?>
+                        <tr>
+                            <td colspan="2">Документов не найдено</td>
+                        </tr>
+                    <?php endif; ?>
                 </table>
             </div>
         </div>
     </div>
-    <div class="col-6">
+    <div class="col-md-8">
         <div class="card">
             <div class="card-header">
                 Оплаты
@@ -110,16 +94,61 @@ $this->params['breadcrumbs'][] = 'Информация';
                 <table class="table table-striped">
                     <tr>
                         <th>Название</th>
+                        <th>Тип</th>
                         <th>Основание</th>
                         <th>Сумма</th>
                         <th>Дата</th>
                     </tr>
+                    <?php if($payments = $model->payments) : ?>
+                        <?php foreach($payments as $payment) : ?>
+                            <tr>
+                                <td><?= $payment->name ?></td>
+                                <td><?= $payment->typeName ?></td>
+                                <td><?= $payment->document ? $payment->document->name.' '.$payment->document->mainImageHtml : '' ?></td>
+                                <td><?= $payment->price ?></td>
+                                <td><?= date('d.m.Y', $payment->created_at) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else : ?>
+                        <tr>
+                            <td colspan="5">Оплаты не проводились</td>
+                        </tr>
+                    <?php endif; ?>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                Этапы работы
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
                     <tr>
-                        <td>Предоплата</td>
-                        <td>Счет на предоплату <?= Html::a('<i class="bi bi-file-earmark-pdf"></i>', ['order/document', 'id' => '1']) ?></td>
-                        <td>5000</td>
-                        <td>21.06.2023</td>
+                        <th>Название</th>
+                        <th>Выполнение</th>
+                        <th>Документ</th>
+                        <th>Дедлайн</th>
+                        <th>Выполнить</th>
                     </tr>
+                    <?php if($steps = $model->steps) : ?>
+                        <?php foreach($steps as $step) : ?>
+                        <?php $doneClass = !$step->done ? ' class="pale-red"' : '' ?>
+                            <tr<?= $doneClass ?>>
+                                <td><?= $step->name ?></td>
+                                <td><?= $step->doneName ?></td>
+                                <td><?= $step->mainImageHtml ?></td>
+                                <td><?= $step->deadline ?></td>
+                                <td><?= $step->done ? '<i class="bi bi-check-circle"></i>' : Html::a('<i class="bi bi-check2-square"></i>', ['step/done', 'id' => $step->id]) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else : ?>
+                        <tr>
+                            <td colspan="5">Этапов не найдено</td>
+                        </tr>
+                    <?php endif; ?>
                 </table>
             </div>
         </div>

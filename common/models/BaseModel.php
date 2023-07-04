@@ -166,7 +166,6 @@ class BaseModel extends ActiveRecord
      */
     public function deleteModel()
     {
-        file_put_contents('info-log.txt', date('d.m.Y H:i:s').' - '.print_r('delete', true)."\n", FILE_APPEND);
         $this->is_active = null;
         $this->deleted = 1;
         $this->update(false);
@@ -294,14 +293,6 @@ class BaseModel extends ActiveRecord
             else {
                 return Html::a($this->mainImage->getExtensionSvg(20, 20, '#000'), $this->mainImage->fileUrl, ['target' => '_blanc', 'download' => true]);
             }
-
-
-
-
-
-
-
-
         }
     }
     public function getImagesHtml()

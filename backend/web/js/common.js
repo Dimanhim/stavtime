@@ -58,18 +58,22 @@ $(document).ready(function() {
      * сворачивает/разворачивает карточку
      * */
     $('body').on('click', '.card-header-o', function(e) {
-        e.preventDefault();
-        let parent = $(this).closest('.card-img-o');
-        let body = parent.find('.card-body-o');
-        let icon = $(this).find('.bi')
-        if(body.is(':visible')) {
-            body.slideUp();
-            icon.removeClass('bi-chevron-up').addClass('bi-chevron-down')
+        //e.preventDefault();
+        let target = e.target;
+        if($(target).is('.card-header-o')) {
+            let parent = $(this).closest('.card-img-o');
+            let body = parent.find('.card-body-o');
+            let icon = $(this).find('.bi')
+            if(body.is(':visible')) {
+                body.slideUp();
+                icon.removeClass('bi-chevron-up').addClass('bi-chevron-down')
+            }
+            else {
+                body.slideDown();
+                icon.removeClass('bi-chevron-down').addClass('bi-chevron-up')
+            }
         }
-        else {
-            body.slideDown();
-            icon.removeClass('bi-chevron-down').addClass('bi-chevron-up')
-        }
+
     });
 
     /**
@@ -181,6 +185,7 @@ $(document).ready(function() {
         })
         return false;
     });
+
 
     initPlugins()
 })

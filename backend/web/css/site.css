@@ -101,6 +101,17 @@ ul.list-block li {
 .card {
     margin-top: 10px;
 }
+.tab-pane .card {
+    margin-top: 0;
+}
+.nav-item {
+    position: relative;
+}
+.action-link {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
 /* add sorting icons to gridview sort links */
 a.asc:after, a.desc:after {
     content: '';

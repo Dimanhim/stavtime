@@ -2,18 +2,16 @@
 
 namespace backend\controllers;
 
-use backend\components\MailSender;
-use Yii;
-use backend\components\Helpers;
-use common\models\Order;
-use backend\models\OrderSearch;
+use common\models\Step;
+use backend\models\StepSearch;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ClientController implements the CRUD actions for Client model.
+ * StepController implements the CRUD actions for Step model.
  */
-class OrderController extends BaseController
+class StepController extends BaseController
 {
     /**
      * @inheritDoc
@@ -23,7 +21,7 @@ class OrderController extends BaseController
         return array_merge(
             parent::behaviors(),
             [
-                'className' => Order::className(),
+                'className' => Step::className(),
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -35,13 +33,13 @@ class OrderController extends BaseController
     }
 
     /**
-     * Lists all Client models.
+     * Lists all Step models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new OrderSearch();
+        $searchModel = new StepSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -51,32 +49,36 @@ class OrderController extends BaseController
     }
 
     /**
-     * Displays a single Client model.
+     * Displays a single Step model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-        $model = $this->findModel($id);
-        $model->managerSeen();
         return $this->render('view', [
-            'model' => $model,
+            'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Client model.
+     * Creates a new Step model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($order_id = null)
     {
-        $model = new Order();
+        $model = new Step();
+        $referrer = null;
+
+        if($order_id) {
+            $model->order_id = $order_id;
+            $referrer = ['order/view', 'id' => $order_id];
+        }
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['index']);
+                return $referrer ? $this->redirect($referrer) : $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -88,7 +90,7 @@ class OrderController extends BaseController
     }
 
     /**
-     * Updates an existing Client model.
+     * Updates an existing Step model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -99,38 +101,10 @@ class OrderController extends BaseController
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    public function actionSendBrief($id)
-    {
-        $model = $this->findModel($id);
-        if($model->createUser()) {
-            if(
-                Yii::$app->mailSender->toAdmin(MailSender::SUBJECT_ADMIN_PROFILE, $model)
-                and
-                Yii::$app->mailSender->toUser($model->email, MailSender::SUBJECT_USER_ORDER, $model)
-            ) {
-                $model->send_brief = 1;
-                if($model->save()) {
-                    Yii::$app->session->setFlash('success', 'Ссылка на ЛК успешно отправлена');
-                    return $this->redirect(['order/view', 'id' => $id]);
-                }
-            }
-        }
-        Yii::$app->session->setFlash('error', 'Произошла ошибка отправки брифа');
-        return $this->redirect(['order/view', 'id' => $id]);
-    }
-
-    public function actionInfo($id)
-    {
-        $model = $this->findModel($id);
-        return $this->render('info', [
             'model' => $model,
         ]);
     }

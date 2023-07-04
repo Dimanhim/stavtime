@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "stv_documents".
@@ -96,5 +97,22 @@ class Document extends \common\models\BaseModel
     public function getTypes()
     {
         return [];
+    }
+
+    public static function getListOrder($order_id = null)
+    {
+        $data = [];
+        if($order_id) {
+            $documents = self::findModels()->andWhere(['not', ['name' => null]])->andWhere(['order_id' => $order_id])->all();
+        }
+        else {
+            $documents = self::findModels()->andWhere(['not', ['name' => null]])->all();
+        }
+        if($documents) {
+            foreach($documents as $document) {
+                $data[$document->id] = $document->name.', '.($document->order ? $document->order->order_name : '');
+            }
+        }
+        return $data;
     }
 }

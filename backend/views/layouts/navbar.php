@@ -29,6 +29,8 @@ $notifications = Yii::$app->notifications->adminData();
                 <li><a href="<?= Url::to(['portfolio/index']) ?>" class="dropdown-item">Портфолио</a></li>
                 <li><a href="<?= Url::to(['brief/index']) ?>" class="dropdown-item">Бриф</a></li>
                 <li><a href="<?= Url::to(['document/index']) ?>" class="dropdown-item">Документы</a></li>
+                <li><a href="<?= Url::to(['payment/index']) ?>" class="dropdown-item">Оплаты</a></li>
+                <li><a href="<?= Url::to(['step/index']) ?>" class="dropdown-item">Этапы работы</a></li>
             </ul>
         </li>
     </ul>
