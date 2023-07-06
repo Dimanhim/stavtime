@@ -240,20 +240,7 @@ class Order extends \common\models\BaseModel
     {
         // Генерируем пароль
         if($client = $this->client) {
-            if($client->user_id) return $client->user_id;
-            $user_id = Yii::$app->security->generateRandomString(12);
-            if(!file_exists(Yii::getAlias('users'))) {
-                mkdir(Yii::getAlias('users'));
-            }
-            $dirName = Yii::getAlias('users').'/'.$user_id;
-            if(!file_exists($dirName)) {
-                mkdir($dirName, 0777);
-            }
-
-            $client->user_id = $user_id;
-            if($client->save()) {
-                return $client->user_id;
-            }
+            return $client->createLk();
         }
         return false;
     }
@@ -294,5 +281,18 @@ class Order extends \common\models\BaseModel
     public function adminNotifications()
     {
         return Notification::find()->where(['model_type' => Notification::MODEL_TYPE_ORDER, 'type_id' => Notification::TYPE_CREATE, 'model_id' => $this->id, 'manager_seen' => null])->one();
+    }
+
+    public static function getSessionOrder()
+    {
+        $session = Yii::$app->session;
+        if($session->get('order_id') and ($order = Order::findOne($session->get('order_id')))) return $order;
+        return false;
+    }
+
+    public static function setSessionOrder($order_id)
+    {
+        $session = Yii::$app->session;
+        $session->set('order_id', $order_id);
     }
 }

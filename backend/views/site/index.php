@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Главная';
+$this->title = 'Админ-панель';
 $this->params['breadcrumbs'] = [['label' => $this->title]];
 ?>
 

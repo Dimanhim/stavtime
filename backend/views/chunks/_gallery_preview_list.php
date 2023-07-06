@@ -10,7 +10,7 @@ use yii\helpers\Html;
         <div class="image-preview-container">
             <div class="row image-preview-container-o">
                 <?php foreach($images as $image) : ?>
-                    <div class="col-3 image-preview image-preview-o" data-id="<?= $image->id ?>">
+                    <div class="col-6 image-preview image-preview-o" data-id="<?= $image->id ?>">
                         <div class="image-preview-content">
                             <a href="<?= $image->fileUrl ?>" <?= $image->galleryAttributes() ?>>
                                 <?= $image->img ?>

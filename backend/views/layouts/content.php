@@ -26,7 +26,7 @@ use yii\bootstrap4\Breadcrumbs;
                     <?php
                     echo Breadcrumbs::widget([
                         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                        'homeLink' => ['label' => 'Главная', 'url' => '/'],
+                        'homeLink' => ['label' => 'Главная', 'url' => '/admin'],
                         'options' => [
                             'class' => 'breadcrumb float-sm-right'
                         ]

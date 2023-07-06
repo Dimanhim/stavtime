@@ -13,6 +13,8 @@ use Yii;
  */
 class Image extends \common\models\BaseModel
 {
+    const DEFAULT_AVATAR_PATH = '/images/default_avatar.jpg';
+
     public $_images_extensions = [
         'jpg', 'jpeg', 'png', 'gif', 'svg'
     ];

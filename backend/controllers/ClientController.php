@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\OrderSearch;
 use common\models\Client;
 use backend\models\ClientSearch;
 use common\models\ClientInfo;
@@ -58,9 +59,16 @@ class ClientController extends BaseController
     public function actionView($id)
     {
         $model = $this->findModel($id);
+
+        $orderSearchModel = new OrderSearch();
+        $orderSearchModel->client_id = $model->id;
+        $orderDataProvider = $orderSearchModel->search($this->request->queryParams);
+
         $model->managerSeen();
         return $this->render('view', [
             'model' => $model,
+            'orderSearchModel' => $orderSearchModel,
+            'orderDataProvider' => $orderDataProvider,
         ]);
     }
 
@@ -119,5 +127,12 @@ class ClientController extends BaseController
             'model' => $model,
             'info' => $info,
         ]);
+    }
+
+    public function actionCreateLk($id)
+    {
+        $model = $this->findModel($id);
+        $model->createLk();
+        return $this->redirect(\Yii::$app->request->referrer);
     }
 }

@@ -67,6 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= DetailView::widget([
                         'model' => $model,
                         'attributes' => [
+                            'order_name',
                             'name',
                             [
                                 'attribute' => 'status_id',

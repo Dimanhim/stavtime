@@ -227,4 +227,23 @@ class Client extends \common\models\BaseModel implements IdentityInterface
     {
         return Notification::find()->where(['model_type' => Notification::MODEL_TYPE_CLIENT, 'type_id' => Notification::TYPE_CREATE, 'model_id' => $this->id, 'manager_seen' => null])->one();
     }
+
+    public function createLk()
+    {
+        if($this->user_id) return $this->user_id;
+        $user_id = Yii::$app->security->generateRandomString(12);
+        if(!file_exists(Yii::getAlias('users'))) {
+            mkdir(Yii::getAlias('users'));
+        }
+        $dirName = Yii::getAlias('users').'/'.$user_id;
+        if(!file_exists($dirName)) {
+            mkdir($dirName, 0777);
+        }
+
+        $this->user_id = $user_id;
+        if($this->save()) {
+            return $this->user_id;
+        }
+        return false;
+    }
 }

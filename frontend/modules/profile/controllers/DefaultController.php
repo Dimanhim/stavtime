@@ -2,6 +2,7 @@
 
 namespace frontend\modules\profile\controllers;
 
+use backend\controllers\BaseController;
 use frontend\modules\profile\models\ProfileLoginForm;
 use frontend\modules\profile\Profile;
 use Yii;
@@ -16,7 +17,7 @@ use yii\web\Response;
 /**
  * Default controller for the `profile` module
  */
-class DefaultController extends Controller
+class DefaultController extends BaseController
 {
     public $client;
 

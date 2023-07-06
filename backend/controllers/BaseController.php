@@ -2,6 +2,11 @@
 
 namespace backend\controllers;
 
+use common\models\Client;
+use common\models\Image;
+use common\models\Order;
+use himiklab\thumbnail\EasyThumbnail;
+use himiklab\thumbnail\EasyThumbnailImage;
 use Yii;
 use common\models\ClinicType;
 use yii\filters\VerbFilter;
@@ -23,9 +28,13 @@ class BaseController extends Controller
      */
     public function beforeAction($action)
     {
+
+        $this->initSettings();
+        $this->initOrder();
         if(($model = $this->getModel()) && ($modelName = $model::modelName())) {
             $this->view->title = $modelName;
         }
+
         return parent::beforeAction($action);
     }
     /**
@@ -46,6 +55,9 @@ class BaseController extends Controller
         );
     }
 
+    /**
+     * @return array
+     */
     public function actions()
     {
         return [
@@ -54,6 +66,34 @@ class BaseController extends Controller
                 'modelName' => $this->behaviors()['className'],
             ],
         ];
+    }
+
+    public function initSettings()
+    {
+        Yii::$app->params['avatarPath'] = Image::DEFAULT_AVATAR_PATH;
+        Yii::$app->params['isAdmin'] = true;
+        $profileClass = 'Client';
+        $userClass = 'User';
+        if($className = Yii::$app->user->identity->className()) {
+            $class = end(explode('\\', $className));
+            if($class == $profileClass) {
+                Yii::$app->params['isAdmin'] = false;
+                if($client = Client::findOne(Yii::$app->user->identity->id)) {
+                    if($client->mainImage) {
+                        Yii::$app->params['avatarPath'] = EasyThumbnailImage:: thumbnailFileUrl(Yii::getAlias('@upload').$client->mainImage->path, 160, 160, EasyThumbnailImage::THUMBNAIL_OUTBOUND);
+                    }
+                }
+            }
+        }
+    }
+
+    public function initOrder()
+    {
+        if($order = Order::getSessionOrder()) {
+            foreach($order->attributes as $order_attribute_name => $order_attribute_value) {
+                Yii::$app->params['order'][$order_attribute_name] = $order_attribute_value;
+            }
+        }
     }
 
     /**
