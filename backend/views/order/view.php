@@ -1,5 +1,6 @@
 <?php
 
+use frontend\modules\profile\Profile;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -30,34 +31,34 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#main-tab" role="tab" aria-controls="main-tab" aria-selected="true">
+            <a class="nav-link active" id="tab-1" data-toggle="tab" href="#main-tab" role="tab" aria-controls="main-tab" aria-selected="true">
                 Основная информация
             </a>
         </li>
         <li class="nav-item" role="presentation">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#step-tab" role="tab" aria-controls="step-tab" aria-selected="false">
+            <a class="nav-link" id="tab-2" data-toggle="tab" href="#step-tab" role="tab" aria-controls="step-tab" aria-selected="false">
                 Этапы работы
                 <?= Html::a('<i class="bi bi-plus-square-fill"></i>', ['step/create', 'order_id' => $model->id], ['class' => 'action-link pull-right']) ?>
             </a>
         </li>
         <li class="nav-item" role="presentation">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#payment-tab" role="tab" aria-controls="payment-tab" aria-selected="false">
+            <a class="nav-link" id="tab-3" data-toggle="tab" href="#payment-tab" role="tab" aria-controls="payment-tab" aria-selected="false">
                 Оплаты
                 <?= Html::a('<i class="bi bi-plus-square-fill"></i>', ['payment/create', 'order_id' => $model->id], ['class' => 'action-link pull-right']) ?>
             </a>
         </li>
         <li class="nav-item" role="presentation">
-            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#document-tab" role="tab" aria-controls="document-tab" aria-selected="false">
+            <a class="nav-link" id="tab-4" data-toggle="tab" href="#document-tab" role="tab" aria-controls="document-tab" aria-selected="false">
                 Документы
                 <?= Html::a('<i class="bi bi-plus-square-fill"></i>', ['document/create', 'order_id' => $model->id], ['class' => 'action-link pull-right']) ?>
             </a>
         </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="tab-5" data-toggle="tab" href="#brief-tab" role="tab" aria-controls="brief-tab" aria-selected="false">
+                Бриф
+            </a>
+        </li>
     </ul>
-
-
-
-
-
 
     <div class="tab-content" id="myTabContent">
         <!-- Основная информация -->
@@ -83,6 +84,22 @@ $this->params['breadcrumbs'][] = $this->title;
                                         return Html::a($data->client->name, ['client/view', 'id' => $data->client->id]);
                                     }
                                 },
+                            ],
+                            [
+                                'attribute' => 'Личный кабинет',
+                                'format' => 'raw',
+                                'value' => function($data) {
+                                    if($data->client) {
+                                        if($data->client->user_id) {
+                                            return Html::a('Перейти', Yii::$app->urlManager->hostInfo.Profile::ROUTE.'/login?user_id='.$data->client->user_id, ['target' => '_blanc']);
+
+                                        }
+                                        else {
+                                            return Html::a('Создать', ['client/create-lk', 'id' => $data->client->id], ['class' => 'btn btn-warning']);
+                                        }
+                                    }
+
+                                }
                             ],
                             //'service_id',
                             'price',
@@ -201,7 +218,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
         </div>
-        <div class="tab-pane fade" id="document-tab" role="tabpanel" aria-labelledby="contact-tab">
+        <div class="tab-pane fade" id="document-tab" role="tabpanel" aria-labelledby="document-tab">
             <div class="card">
                 <div class="card-body">
                     <table class="table table-striped">
@@ -226,6 +243,13 @@ $this->params['breadcrumbs'][] = $this->title;
                             </tr>
                         <?php endif; ?>
                     </table>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="brief-tab" role="tabpanel" aria-labelledby="brief-tab">
+            <div class="card">
+                <div class="card-body">
+                    Бриф
                 </div>
             </div>
         </div>

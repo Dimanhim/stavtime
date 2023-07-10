@@ -207,3 +207,39 @@ a.desc:after {
 .select2-container--krajee-bs5 .select2-selection--multiple .select2-search--inline .select2-search__field {
     margin: 0 0.5rem;
 }
+
+/* BTNS */
+.btn-primary {
+    color: #007bff !important;
+}
+.btn-success {
+    color: #28a745 !important;
+}
+.btn-warning {
+    color: #ffc107 !important;
+}
+.btn-danger {
+    color: #dc3545 !important;
+}
+.btn-primary,
+.btn-default,
+.btn-success,
+.btn-warning,
+.btn-danger
+{
+    background-color: transparent !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+}
+.btn-primary:hover,
+.btn-default:hover,
+.btn-success:hover,
+.btn-warning:hover,
+.btn-danger:hover
+{
+    background-color: #000 !important;
+    border-color: #000 !important;
+    color: #fff !important;
+}
+/* END BTNS*/

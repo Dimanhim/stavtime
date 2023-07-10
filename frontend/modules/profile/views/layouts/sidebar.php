@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Url;
+use common\models\SessionOrder;
 
 ?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -50,33 +51,37 @@ use yii\helpers\Url;
                         ]
                     ],
                     ['label' => 'Simple Link', 'icon' => 'th', 'badge' => '<span class="right badge badge-danger">New</span>'],
-                    ['label' => 'Yii2 PROVIDED', 'header' => true],
-                    ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
-                    ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
-                    ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank'],
-                    ['label' => 'MULTI LEVEL EXAMPLE', 'header' => true],
-                    ['label' => 'Level1'],
+                    ['label' => 'МЕНЮ', 'header' => true],
                     [
-                        'label' => 'Level1',
+                        'label' => 'Все заявки',
                         'items' => [
-                            ['label' => 'Level2', 'iconStyle' => 'far'],
-                            [
-                                'label' => 'Level2',
-                                'iconStyle' => 'far',
-                                'items' => [
-                                    ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle'],
-                                    ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle'],
-                                    ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle']
-                                ]
-                            ],
-                            ['label' => 'Level2', 'iconStyle' => 'far']
+                            ['label' => 'Заявка 1', 'url' => ['/profile/order/view', 'id' => 1], 'iconStyle' => 'far'],
+                            ['label' => 'Разработка интернет-магазина', 'url' => ['/profile/order/view', 'id' => 1], 'iconStyle' => 'far'],
+                            ['label' => 'Настройка рекламной кампании Яндекс Директ', 'url' => ['/profile/order/view', 'id' => 1], 'iconStyle' => 'far'],
                         ]
                     ],
-                    ['label' => 'Level1'],
+                    ['label' => 'Бриф', 'url' => ['/profile/brief']],
+                    [
+                        'label' => 'Этапы работы',
+                        'items' => [
+                            ['label' => 'Предоплата', 'iconStyle' => 'far'],
+                            ['label' => 'Разработка лендинга', 'iconStyle' => 'far'],
+
+                        ]
+                    ],
+                    [
+                        'label' => 'Документы',
+                        'items' => [
+                            ['label' => 'Предоплата', 'iconStyle' => 'far'],
+                            ['label' => 'Разработка лендинга', 'iconStyle' => 'far'],
+
+                        ]
+                    ],
+
                     ['label' => 'LABELS', 'header' => true],
-                    ['label' => 'Important', 'iconStyle' => 'far', 'iconClassAdded' => 'text-danger'],
-                    ['label' => 'Warning', 'iconClass' => 'nav-icon far fa-circle text-warning'],
-                    ['label' => 'Informational', 'iconStyle' => 'far', 'iconClassAdded' => 'text-info'],
+                    ['label' => 'Активная заявка', 'url' => ['order/view', 'id' => Yii::$app->params['order_id']], 'iconStyle' => 'far', 'iconClassAdded' => 'text-danger'],
+                    //['label' => 'Warning', 'iconClass' => 'nav-icon far fa-circle text-warning'],
+                    //['label' => 'Informational', 'iconStyle' => 'far', 'iconClassAdded' => 'text-info'],
                 ],
             ]);
             ?>

@@ -34,6 +34,8 @@ class Gallery extends \common\models\BaseModel
     const TYPE_ORGANIZATION   = 10;
     const TYPE_PAYMENT        = 11;
     const TYPE_STEP           = 12;
+    const TYPE_BRIEF_CLIENT   = 13;
+    const TYPE_OFFICE         = 14;
 
     /**
      * {@inheritdoc}
@@ -103,6 +105,8 @@ class Gallery extends \common\models\BaseModel
             self::TYPE_ORGANIZATION        => 'Реквизиты организации',
             self::TYPE_PAYMENT             => 'Оплаты',
             self::TYPE_STEP                => 'Этапы работы',
+            self::TYPE_BRIEF_CLIENT        => 'Бриф клиента',
+            self::TYPE_OFFICE              => 'Делопроизводство',
         ];
     }
 

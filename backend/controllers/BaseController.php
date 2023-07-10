@@ -5,6 +5,7 @@ namespace backend\controllers;
 use common\models\Client;
 use common\models\Image;
 use common\models\Order;
+use common\models\SessionOrder;
 use himiklab\thumbnail\EasyThumbnail;
 use himiklab\thumbnail\EasyThumbnailImage;
 use Yii;
@@ -89,7 +90,7 @@ class BaseController extends Controller
 
     public function initOrder()
     {
-        if($order = Order::getSessionOrder()) {
+        if($order = SessionOrder::getOrder()) {
             foreach($order->attributes as $order_attribute_name => $order_attribute_value) {
                 Yii::$app->params['order'][$order_attribute_name] = $order_attribute_value;
             }

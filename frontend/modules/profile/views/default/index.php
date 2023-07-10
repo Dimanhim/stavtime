@@ -3,6 +3,7 @@ $this->title = (Yii::$app->user->identity->name ? Yii::$app->user->identity->nam
 $this->params['breadcrumbs'] = [['label' => $this->title]];
 ?>
 <div class="container-fluid">
+    <h2>Здесь будет список заявок. У активной будет бэк и соответствующая надпись</h2>
     <div class="row">
         <div class="col-lg-6">
             <?= \hail812\adminlte\widgets\Alert::widget([

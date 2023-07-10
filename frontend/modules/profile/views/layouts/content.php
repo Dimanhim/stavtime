@@ -2,6 +2,10 @@
 /* @var $content string */
 
 use yii\bootstrap4\Breadcrumbs;
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+use common\models\SessionOrder;
+
 ?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -20,9 +24,10 @@ use yii\bootstrap4\Breadcrumbs;
                     </h1>
                 </div><!-- /.col -->
                 <div class="col-md-2">
-                    <p>
-                        Заявка "Такая то"
-                    </p>
+                    <?php $form = ActiveForm::begin(['id' => 'form-change-order', 'action' => '/profile/default/change-order', 'fieldConfig' => ['options' => ['tag' => false]]]) ?>
+                    <?= $form->field($orderForm, 'order_id', ['template' => "{input}"])->dropDownList(SessionOrder::userOrders(), ['prompt' => '[Заявка не выбрана]', 'class' => 'select-style change-order-o']) ?>
+                    <?= Html::submitButton('Отправить', ['id' => 'change-order-btn', 'class' => 'btn btn-default', 'style' => 'display: none']) ?>
+                    <?php ActiveForm::end() ?>
                 </div>
                 <div class="col-sm-5">
                     <?php

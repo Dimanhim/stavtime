@@ -99,4 +99,34 @@ class Brief extends \common\models\BaseModel
         if(array_key_exists($this->type_id, $types)) return $types[$this->type_id];
         return false;
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBriefOrders()
+    {
+        return $this->hasMany(BriefOrder::className(), ['brief_id' => 'id']);
+    }
+
+    /**
+     * получает модель ответа пользователя на вопрос брифа
+     *
+     * @return BriefOrder|null
+     */
+    public function getBriefOrder()
+    {
+        return BriefOrder::findOne(['brief_id' => $this->id, 'order_id' => Yii::$app->params['order_id']]);
+    }
+
+    /**
+     * возвращает ответ пользователя на вопрос брифа
+     *
+     * @return mixed
+     */
+    public function getUserAnswer()
+    {
+        if($briefOrder = $this->briefOrder) {
+            return $briefOrder->value;
+        }
+    }
 }

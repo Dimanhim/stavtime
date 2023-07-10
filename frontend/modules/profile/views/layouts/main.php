@@ -3,11 +3,13 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use backend\assets\AppAsset;
 use yii\helpers\Html;
+use frontend\modules\profile\models\ChangeOrderForm;
+use common\models\Order;
 
 \hail812\adminlte3\assets\FontAwesomeAsset::register($this);
 \hail812\adminlte3\assets\AdminLteAsset::register($this);
-
 
 
 $this->registerCssFile('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback');
@@ -42,7 +44,11 @@ $this->registerCssFile('/css/profile.css?v='.mt_rand(1000,10000), ['depends' => 
     <?= $this->render('sidebar', ['assetDir' => $assetDir]) ?>
 
     <!-- Content Wrapper. Contains page content -->
-    <?= $this->render('content', ['content' => $content, 'assetDir' => $assetDir]) ?>
+    <?= $this->render('content', [
+        'content' => $content,
+        'assetDir' => $assetDir,
+        'orderForm' => ChangeOrderForm::getModel(),
+    ]) ?>
     <!-- /.content-wrapper -->
 
     <!-- Control Sidebar -->

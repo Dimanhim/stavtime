@@ -171,6 +171,14 @@ class Order extends \common\models\BaseModel
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getBriefValues()
+    {
+        return $this->hasMany(Brief::className(), ['order_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getPayments()
     {
         return $this->hasMany(Payment::className(), ['order_id' => 'id']);
@@ -283,16 +291,5 @@ class Order extends \common\models\BaseModel
         return Notification::find()->where(['model_type' => Notification::MODEL_TYPE_ORDER, 'type_id' => Notification::TYPE_CREATE, 'model_id' => $this->id, 'manager_seen' => null])->one();
     }
 
-    public static function getSessionOrder()
-    {
-        $session = Yii::$app->session;
-        if($session->get('order_id') and ($order = Order::findOne($session->get('order_id')))) return $order;
-        return false;
-    }
 
-    public static function setSessionOrder($order_id)
-    {
-        $session = Yii::$app->session;
-        $session->set('order_id', $order_id);
-    }
 }
