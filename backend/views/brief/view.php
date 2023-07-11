@@ -37,6 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'short_description:ntext',
             'description:ntext',
+            'tag_id' => 'tagName',
 
             [
                 'attribute' => 'image_fields',

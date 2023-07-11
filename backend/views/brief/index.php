@@ -41,6 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => Brief::getTypes(),
             ],
             'name',
+            'tag_id' => 'tagName',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Brief $model, $key, $index, $column) {

@@ -27,6 +27,9 @@ class Brief extends \common\models\BaseModel
     const TYPE_SERVICE_INFO          = 4;
     const TYPE_TECH_INFO             = 5;
 
+    const TAG_ID_INPUT               = 1;
+    const TAG_ID_TEXTAREA            = 2;
+
     /**
      * {@inheritdoc}
      */
@@ -57,7 +60,7 @@ class Brief extends \common\models\BaseModel
     public function rules()
     {
         return array_merge(parent::rules(), [
-            [['type_id'], 'integer'],
+            [['type_id', 'tag_id'], 'integer'],
             [['short_description', 'description'], 'string'],
             [['name'], 'string', 'max' => 255],
         ]);
@@ -73,7 +76,15 @@ class Brief extends \common\models\BaseModel
             'name' => 'Название вопроса',
             'short_description' => 'Короткое описание',
             'description' => 'Описание',
+            'tag_id' => 'Тег',
+            'tagName' => 'Тег',
         ]);
+    }
+
+    public function afterFind()
+    {
+        if(!$this->tag_id) $this->tag_id = self::TAG_ID_TEXTAREA;
+        return parent::afterFind();
     }
 
     /**
@@ -101,11 +112,32 @@ class Brief extends \common\models\BaseModel
     }
 
     /**
+     * @return array
+     */
+    public static function getTags()
+    {
+        return [
+            self::TAG_ID_INPUT    => 'input',
+            self::TAG_ID_TEXTAREA => 'textarea',
+        ];
+    }
+
+    /**
+     * @return bool|mixed
+     */
+    public function getTagName()
+    {
+        $tags = self::getTags();
+        if(array_key_exists($this->tag_id, $tags)) return $tags[$this->tag_id];
+        return false;
+    }
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getBriefOrders()
     {
-        return $this->hasMany(BriefOrder::className(), ['brief_id' => 'id']);
+        return $this->hasMany(BriefOrder::className(), ['order_id' => Yii::$app->params['order_id']]);
     }
 
     /**

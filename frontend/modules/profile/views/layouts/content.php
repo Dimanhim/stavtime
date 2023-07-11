@@ -1,6 +1,7 @@
 <?php
 /* @var $content string */
 
+use common\widgets\Alert;
 use yii\bootstrap4\Breadcrumbs;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -12,6 +13,7 @@ use common\models\SessionOrder;
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
+                <?= Alert::widget() ?>
                 <div class="col-sm-5">
                     <h1 class="m-0">
                         <?php

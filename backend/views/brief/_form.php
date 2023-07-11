@@ -20,6 +20,7 @@ use common\models\Brief;
                 $form->field($model, 'name')->textInput(['maxlength' => true]),
                 $form->field($model, 'short_description')->textarea(['cols' => 3, 'rows' => 10]),
                 $form->field($model, 'description')->textarea(['cols' => 3, 'rows' => 10]),
+                $form->field($model, 'tag_id')->dropDownList(Brief::getTags(), ['prompt' => '[Не выбрано]']),
                 $form->field($model, 'is_active')->checkbox()
             ];
             echo $model->getFormCard($attributes, 'Основная информация');

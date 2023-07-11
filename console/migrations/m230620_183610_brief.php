@@ -21,6 +21,7 @@ class m230620_183610_brief extends Migration
             'name'                  => Schema::TYPE_STRING,
             'short_description'     => Schema::TYPE_TEXT,
             'description'           => Schema::TYPE_TEXT,
+            'tag_id'                => Schema::TYPE_INTEGER,
 
             'is_active'             => Schema::TYPE_SMALLINT . ' DEFAULT 1',
             'deleted'               => Schema::TYPE_SMALLINT,
