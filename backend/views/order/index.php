@@ -40,8 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'order_name',
                 'format' => 'raw',
                 'value' => function($data) {
-                    $name = $data->order_name ? $data->order_name : 'Б/Н';
-                    return Html::a($name, ['order/view', 'id' => $data->id]);
+                    return Html::a($data->orderName, ['order/view', 'id' => $data->id]);
                 }
             ],
             'name',

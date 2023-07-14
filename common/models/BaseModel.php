@@ -103,7 +103,6 @@ class BaseModel extends ActiveRecord
     public function beforeSave($insert)
     {
         if(!$this->unique_id) $this->unique_id = uniqid();
-        $this->handleImages();
         return parent::beforeSave($insert);
     }
 
@@ -115,6 +114,7 @@ class BaseModel extends ActiveRecord
         else {
             Yii::$app->session->setFlash('success', 'Запись успешно обновлена');
         }
+        $this->handleImages();
         parent::afterSave($insert, $changedAttributes);
     }
 
@@ -349,4 +349,6 @@ class BaseModel extends ActiveRecord
         if($user_id) $data['user_id'] = $user_id;
         return $data;
     }
+
+
 }

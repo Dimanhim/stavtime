@@ -53,8 +53,12 @@ class SessionOrder extends Order
      */
     public static function userOrders()
     {
-        if($orders = self::find()->where(['client_id' => Yii::$app->user->identity->id])->asArray()->all()) {
-            return ArrayHelper::map($orders, 'id', 'name');
+        if($orders = self::find()->where(['client_id' => Yii::$app->user->identity->id])->orderBy(['id' => SORT_DESC])->all()) {
+            $data = [];
+            foreach($orders as $order) {
+                $data[$order->id] = $order->orderName;
+            }
+            return $data;
         }
         return [];
     }

@@ -145,9 +145,10 @@ class Brief extends \common\models\BaseModel
      *
      * @return BriefOrder|null
      */
-    public function getBriefOrder()
+    public function getBriefOrder($order_id = null)
     {
-        return BriefOrder::findOne(['brief_id' => $this->id, 'order_id' => Yii::$app->params['order_id']]);
+        $orderId = $order_id ? $order_id : Yii::$app->params['order_id'];
+        return BriefOrder::findOne(['brief_id' => $this->id, 'order_id' => $orderId]);
     }
 
     /**
@@ -155,10 +156,18 @@ class Brief extends \common\models\BaseModel
      *
      * @return mixed
      */
-    public function getUserAnswer()
+    public function getUserAnswer($order_id = null)
     {
-        if($briefOrder = $this->briefOrder) {
+        if($briefOrder = $this->getBriefOrder($order_id)) {
             return $briefOrder->value;
         }
+    }
+
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function getBriefsList()
+    {
+        return self::find()->orderBy(['position' => 'SORT ASC'])->all();
     }
 }

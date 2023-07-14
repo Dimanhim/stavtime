@@ -3,6 +3,8 @@
 use frontend\modules\profile\Profile;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use common\models\Brief;
+use yii\helpers\Url;
 
 /** @var yii\web\View $this */
 /** @var common\models\Client $model */
@@ -68,6 +70,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= DetailView::widget([
                         'model' => $model,
                         'attributes' => [
+                            [
+                                'attribute' => 'order_name',
+                                'format' => 'raw',
+                                'value' => function($data) {
+                                    return Html::a($data->orderName, ['order/view', 'id' => $data->id]);
+                                }
+                            ],
                             'order_name',
                             'name',
                             [
@@ -166,7 +175,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <th>Выполнение</th>
                             <th>Документ</th>
                             <th>Дедлайн</th>
-                            <th>Выполнить</th>
+                            <th>Действия</th>
                         </tr>
                         <?php if($steps = $model->steps) : ?>
                             <?php foreach($steps as $step) : ?>
@@ -176,7 +185,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <td><?= $step->doneName ?></td>
                                     <td><?= $step->mainImageHtml ?></td>
                                     <td><?= $step->deadline ?></td>
-                                    <td><?= $step->done ? '<i class="bi bi-check-circle"></i>' : Html::a('<i class="bi bi-check2-square"></i>', ['step/done', 'id' => $step->id]) ?></td>
+                                    <td>
+                                        <?= Html::a('<i class="bi bi-eye"></i>', ['step/view', 'id' => $step->id]) ?>
+                                        <?= Html::a('<i class="bi bi-pencil-square"></i>', ['step/update', 'id' => $step->id]) ?>
+                                        <?= $step->done ? '<i class="bi bi-check-circle"></i>' : Html::a('<i class="bi bi-check2-square"></i>', ['step/done', 'id' => $step->id]) ?>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php else : ?>
@@ -249,7 +262,28 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="tab-pane fade" id="brief-tab" role="tabpanel" aria-labelledby="brief-tab">
             <div class="card">
                 <div class="card-body">
-                    Бриф
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Вопрос</th>
+                            <th>Ответ</th>
+                        </tr>
+                        <?php if($briefs = Brief::getBriefsList()) : ?>
+                            <?php foreach($briefs as $brief) : ?>
+                                <tr>
+                                    <td>
+                                        <?= $brief->name ?>
+                                    </td>
+                                    <td>
+                                        <?= $brief->getUserAnswer($model->id) ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <tr>
+                                <td colspan="2">Бриф не заполнен</td>
+                            </tr>
+                        <?php endif; ?>
+                    </table>
                 </div>
             </div>
         </div>

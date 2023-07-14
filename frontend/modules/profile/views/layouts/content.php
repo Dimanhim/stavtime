@@ -14,7 +14,7 @@ use common\models\SessionOrder;
         <div class="container-fluid">
             <div class="row mb-2">
                 <?= Alert::widget() ?>
-                <div class="col-sm-5">
+                <div class="col-sm-3">
                     <h1 class="m-0">
                         <?php
                         if (!is_null($this->title)) {
@@ -25,9 +25,9 @@ use common\models\SessionOrder;
                         ?>
                     </h1>
                 </div><!-- /.col -->
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <?php $form = ActiveForm::begin(['id' => 'form-change-order', 'action' => '/profile/default/change-order', 'fieldConfig' => ['options' => ['tag' => false]]]) ?>
-                    <?= $form->field($orderForm, 'order_id', ['template' => "{input}"])->dropDownList(SessionOrder::userOrders(), ['prompt' => '[Заявка не выбрана]', 'class' => 'select-style change-order-o']) ?>
+                    <?= $form->field($orderForm, 'order_id', ['template' => "{label}{input}"])->dropDownList(SessionOrder::userOrders(), ['prompt' => '[Заявка не выбрана]', 'class' => 'select-style change-order-o'])->label('Вы просматриваете заявку ') ?>
                     <?= Html::submitButton('Отправить', ['id' => 'change-order-btn', 'class' => 'btn btn-default', 'style' => 'display: none']) ?>
                     <?php ActiveForm::end() ?>
                 </div>

@@ -125,10 +125,14 @@ class Order extends \common\models\BaseModel
                 Notification::TYPE_CREATE,
                 $this->id
             );
-            file_put_contents('info-log.txt', date('d.m.Y H:i:s').' $notificationData - '.print_r($notificationData, true)."\n", FILE_APPEND);
             Notification::add($notificationData);
         }
         return parent::afterSave($insert, $changetAttributes);
+    }
+
+    public function getOrderName()
+    {
+        return $this->order_name ? $this->order_name.' ('.$this->price.' руб.)' : 'Б/Н ('.$this->price.' руб.)';
     }
 
     public function createClient()
@@ -289,6 +293,16 @@ class Order extends \common\models\BaseModel
     public function adminNotifications()
     {
         return Notification::find()->where(['model_type' => Notification::MODEL_TYPE_ORDER, 'type_id' => Notification::TYPE_CREATE, 'model_id' => $this->id, 'manager_seen' => null])->one();
+    }
+
+    public function getIsActive()
+    {
+        return Yii::$app->params['order_id'] == $this->id;
+    }
+
+    public function getLinkClass()
+    {
+        return $this->isActive ? ' step-done' : ' step-not-done';
     }
 
 

@@ -87,7 +87,7 @@ use yii\helpers\Url;
                     ['label' => 'ID объявления/тип/позиция'],
                     ['label' => 'Ключевая фраза'],
                     ['label' => 'ДОПОЛНИТЕЛЬНЫЕ РАЗДЕЛЫ', 'header' => true],
-                    ['label' => 'Бриф', 'url' => 'brief/index', 'iconStyle' => 'far', 'iconClassAdded' => 'text-danger'],
+                    ['label' => 'Бриф', 'url' => ['brief/index'], 'iconStyle' => 'far', 'iconClassAdded' => 'text-danger'],
                     ['label' => 'Реквизиты', 'url' => 'organization/index', 'iconStyle' => 'far', 'iconClassAdded' => 'text-warning'],
 
                     //['label' => 'Important', 'iconStyle' => 'far', 'iconClassAdded' => 'text-danger'],

@@ -10,6 +10,18 @@
 {
     width: 40%;
 }
+.step-done, .step-done a {
+    background: #6a6969;
+    color: #c2c7d0 !important;
+}
+#changeorderform-order_id {
+    margin-left: 20px;
+}
+
+
+
+
+
 /* BTNS */
 .btn-primary {
     color: #007bff !important;

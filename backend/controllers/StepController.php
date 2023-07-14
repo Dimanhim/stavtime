@@ -101,11 +101,19 @@ class StepController extends BaseController
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(\Yii::$app->request->referrer);
         }
 
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+    public function actionDone($id)
+    {
+        $model = $this->findModel($id);
+        $model->done = 1;
+        $model->save();
+        return $this->redirect(\Yii::$app->request->referrer);
     }
 }

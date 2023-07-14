@@ -30,7 +30,7 @@ class BriefController extends ProfileController
     }
     public function actionIndex()
     {
-        $briefs = Brief::find()->orderBy(['position' => 'SORT ASC'])->all();
+        $briefs = Brief::getBriefsList();
         return $this->render('index', [
             'briefs' => $briefs,
         ]);

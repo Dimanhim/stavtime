@@ -2,6 +2,7 @@
 
 use yii\helpers\Url;
 use common\models\SessionOrder;
+use frontend\modules\profile\models\Profile;
 
 ?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -52,34 +53,14 @@ use common\models\SessionOrder;
                     ],
                     ['label' => 'Simple Link', 'icon' => 'th', 'badge' => '<span class="right badge badge-danger">New</span>'],
                     ['label' => 'МЕНЮ', 'header' => true],
-                    [
-                        'label' => 'Все заявки',
-                        'items' => [
-                            ['label' => 'Заявка 1', 'url' => ['/profile/order/view', 'id' => 1], 'iconStyle' => 'far'],
-                            ['label' => 'Разработка интернет-магазина', 'url' => ['/profile/order/view', 'id' => 1], 'iconStyle' => 'far'],
-                            ['label' => 'Настройка рекламной кампании Яндекс Директ', 'url' => ['/profile/order/view', 'id' => 1], 'iconStyle' => 'far'],
-                        ]
-                    ],
+                    Profile::getSidebarOrders(),
                     ['label' => 'Бриф', 'url' => ['/profile/brief']],
-                    [
-                        'label' => 'Этапы работы',
-                        'items' => [
-                            ['label' => 'Предоплата', 'iconStyle' => 'far'],
-                            ['label' => 'Разработка лендинга', 'iconStyle' => 'far'],
-
-                        ]
-                    ],
-                    [
-                        'label' => 'Документы',
-                        'items' => [
-                            ['label' => 'Предоплата', 'iconStyle' => 'far'],
-                            ['label' => 'Разработка лендинга', 'iconStyle' => 'far'],
-
-                        ]
-                    ],
-
-                    ['label' => 'LABELS', 'header' => true],
+                    Profile::getSidebarSteps(),
+                    Profile::getSidebarDocuments(),
+                    Profile::getSidebarPayments(),
+                    ['label' => 'АДМИНИСТРАТОР', 'header' => true],
                     ['label' => 'Активная заявка', 'url' => ['order/view', 'id' => Yii::$app->params['order_id']], 'iconStyle' => 'far', 'iconClassAdded' => 'text-danger'],
+                    ['label' => 'Заполненный бриф', 'url' => ['order/view', 'id' => Yii::$app->params['order_id']], 'iconStyle' => 'far', 'iconClassAdded' => 'text-danger'],
                     //['label' => 'Warning', 'iconClass' => 'nav-icon far fa-circle text-warning'],
                     //['label' => 'Informational', 'iconStyle' => 'far', 'iconClassAdded' => 'text-info'],
                 ],

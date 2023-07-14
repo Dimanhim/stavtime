@@ -120,4 +120,10 @@ class Step extends \common\models\BaseModel
         if(array_key_exists($this->done, $dones)) return $dones[$this->done];
         return false;
     }
+    public function getLinkClass()
+    {
+        return $this->done ? ' step-done' : ' step-not-done';
+    }
+
+
 }
