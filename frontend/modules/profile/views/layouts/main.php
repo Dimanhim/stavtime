@@ -21,6 +21,9 @@ $this->registerJsFile($publishedRes[1].'/control_sidebar.js', ['depends' => '\ha
 $this->registerJsFile('/js/profile.js?v='.mt_rand(1000,10000), ['depends' => 'hail812\adminlte3\assets\AdminLteAsset']);
 $this->registerCssFile( '/admin/css/admin.css?v='.mt_rand(1000,10000), ['depends' => 'hail812\adminlte3\assets\AdminLteAsset']);
 $this->registerCssFile('/css/profile.css?v='.mt_rand(1000,10000), ['depends' => 'hail812\adminlte3\assets\AdminLteAsset']);
+
+$this->registerCssFile('css/jquery.fancybox.min.css', ['depends' => 'hail812\adminlte3\assets\AdminLteAsset']);
+$this->registerJsFile('js/jquery.fancybox.min.js', ['depends' => 'hail812\adminlte3\assets\AdminLteAsset']);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

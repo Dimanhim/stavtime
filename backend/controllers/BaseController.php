@@ -71,10 +71,12 @@ class BaseController extends Controller
 
     public function initSettings()
     {
+        if(!Yii::$app->user->identity) return false;
         Yii::$app->params['avatarPath'] = Image::DEFAULT_AVATAR_PATH;
         Yii::$app->params['isAdmin'] = true;
         $profileClass = 'Client';
         $userClass = 'User';
+
         if($className = Yii::$app->user->identity->className()) {
             $class = end(explode('\\', $className));
             if($class == $profileClass) {

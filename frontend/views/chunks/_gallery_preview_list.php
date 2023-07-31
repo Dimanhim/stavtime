@@ -9,17 +9,13 @@ $class = (isset($rows) and $rows) ? 'col-md-'.$rows : 'col-md-6';
 <?php if ($model && ($images = $model->images)): ?>
     <div class="container-fluid">
         <div class="image-preview-container">
-            <div class="row image-preview-container-o">
+            <div class="row" style="width: 100%;">
                 <?php foreach($images as $image) : ?>
-                    <div class="<?= $class ?> image-preview image-preview-o" data-id="<?= $image->id ?>">
+                    <div class="<?= $class ?> image-preview" data-id="<?= $image->id ?>">
                         <div class="image-preview-content">
                             <a href="<?= $image->fileUrl ?>" <?= $image->galleryAttributes() ?>>
                                 <?= $image->img ?>
                             </a>
-
-                            <p>
-                                <?= Html::a('Удалить', ['images/delete', 'id' => $image->id], ['class' => 'btn btn-sm btn-danger delete-image delete-image-o', 'data-confirm' => 'Удалить файл?']) ?>
-                            </p>
                         </div>
                     </div>
                 <?php endforeach; ?>

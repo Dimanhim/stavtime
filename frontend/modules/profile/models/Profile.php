@@ -103,7 +103,7 @@ class Profile
     {
         $models = [];
         $order = Yii::$app->params['orderModel'];
-        if($order) $models = $order->documents;
+        if($order) $models = $order->orderDocuments;
         return Yii::$app->controller->renderPartial('/chunks/_navbar_documents', [
             'models' => $models
         ]);

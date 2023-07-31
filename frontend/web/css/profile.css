@@ -17,7 +17,24 @@
 #changeorderform-order_id {
     margin-left: 20px;
 }
-
+.image-preview {
+    padding: 5px;
+    text-align: center;
+}
+.image-preview-container {
+    display: flex;
+}
+.image-preview .delete-image {
+    margin-top: 10px;
+}
+.image-preview .image-preview-content {
+    padding-top: 5px;
+    border: 1px solid #ddd;
+}
+.image-preview:first-child .image-preview-content {
+    border: 2px solid #eee;
+    box-shadow: 1px 1px 3px #198754, -1px -1px 3px #198754;
+}
 
 
 

@@ -118,10 +118,11 @@ class Gallery extends \common\models\BaseModel
         return $this->hasMany(Image::className(), ['gallery_id' => 'id'])->andWhere(['is_active' => 1])->andWhere(['is', 'deleted', null])->orderBy(['position' => SORT_ASC]);
     }
 
-    public function getPreviewListHTML()
+    public function getPreviewListHTML($rows = null)
     {
         return Yii::$app->controller->renderPartial('//chunks/_gallery_preview_list', [
-            'model' => $this
+            'model' => $this,
+            'rows' => $rows,
         ]);
     }
 }

@@ -13,17 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="document-view">
 
-    <p>
-        <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Вы уверены, что хотите удалить документ?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -45,18 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'is_active',
                 'value' => function($data) {
                     return $data->active;
-                }
-            ],
-            [
-                'attribute' => 'created_at',
-                'value' => function($data) {
-                    return $data->createdAt;
-                }
-            ],
-            [
-                'attribute' => 'updated_at',
-                'value' => function($data) {
-                    return $data->updatedAt;
                 }
             ],
         ],

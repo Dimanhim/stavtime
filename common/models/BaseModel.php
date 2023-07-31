@@ -295,9 +295,9 @@ class BaseModel extends ActiveRecord
             }
         }
     }
-    public function getImagesHtml()
+    public function getImagesHtml($rows = null)
     {
-        if($this->gallery) return $this->gallery->getPreviewListHTML();
+        if($this->gallery) return $this->gallery->getPreviewListHTML($rows);
     }
     public function getAvatar()
     {

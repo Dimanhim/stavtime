@@ -175,6 +175,14 @@ class Order extends \common\models\BaseModel
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getOrderDocuments()
+    {
+        return Document::find()->where(['order_id' => Yii::$app->params['order_id']])->all();
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getBriefValues()
     {
         return $this->hasMany(Brief::className(), ['order_id' => 'id']);
@@ -191,9 +199,25 @@ class Order extends \common\models\BaseModel
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getOrderPayments()
+    {
+        return Payment::find()->where(['order_id' => Yii::$app->params['order_id']])->all();
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getSteps()
     {
         return $this->hasMany(Step::className(), ['order_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOrderSteps()
+    {
+        return Step::find()->where(['order_id' => Yii::$app->params['order_id']])->all();
     }
 
     /**
