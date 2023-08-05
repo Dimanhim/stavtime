@@ -15,7 +15,7 @@ use yii\filters\VerbFilter;
 /**
  * DocumentController implements the CRUD actions for Document model.
  */
-class DocumentController extends BaseController
+class DocumentController extends ProfileController
 {
     /**
      * @inheritDoc

@@ -78,18 +78,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                     return $data->active;
                                 }
                             ],
-                            [
-                                'attribute' => 'created_at',
-                                'value' => function($data) {
-                                    return $data->createdAt;
-                                }
-                            ],
-                            [
-                                'attribute' => 'updated_at',
-                                'value' => function($data) {
-                                    return $data->updatedAt;
-                                }
-                            ],
                         ],
                     ]) ?>
                 </div>

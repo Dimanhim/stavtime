@@ -2,6 +2,8 @@
 
 namespace backend\controllers;
 
+use common\models\Brief;
+use common\models\BriefOrder;
 use common\models\Client;
 use common\models\Image;
 use common\models\Order;
@@ -29,9 +31,9 @@ class BaseController extends Controller
      */
     public function beforeAction($action)
     {
-
-        $this->initSettings();
         $this->initOrder();
+        $this->initSettings();
+
         if(($model = $this->getModel()) && ($modelName = $model::modelName())) {
             $this->view->title = $modelName;
         }
@@ -86,17 +88,33 @@ class BaseController extends Controller
                         Yii::$app->params['avatarPath'] = EasyThumbnailImage:: thumbnailFileUrl(Yii::getAlias('@upload').$client->mainImage->path, 160, 160, EasyThumbnailImage::THUMBNAIL_OUTBOUND);
                     }
                 }
+                Yii::$app->params['brief'] = 0;
+                $countBriefs = Brief::findModels()->count();
+                $countOrderBriefs = BriefOrder::findModels()->where(['order_id' => Yii::$app->params['order_id']])->andWhere(['not', ['value' => '']])->count();
+                if($countOrderBriefs && $countBriefs > $countOrderBriefs) {
+                    Yii::$app->params['brief'] = 1;
+                }
+                elseif($countBriefs == $countOrderBriefs) {
+                    Yii::$app->params['brief'] = 2;
+                }
+
             }
         }
     }
 
     public function initOrder()
     {
+        if(Yii::$app->controller->id == 'order' and Yii::$app->request->get('id')) {
+            if(Order::find()->where(['id' => Yii::$app->request->get('id')])->exists()) {
+                SessionOrder::setSessionOrder(Yii::$app->request->get('id'));
+            }
+        }
         if($order = SessionOrder::getOrder()) {
             foreach($order->attributes as $order_attribute_name => $order_attribute_value) {
                 Yii::$app->params['order'][$order_attribute_name] = $order_attribute_value;
             }
         }
+        Yii::$app->params['orders_count'] = count(Order::getOrders());
     }
 
     /**

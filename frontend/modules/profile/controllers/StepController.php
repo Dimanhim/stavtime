@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * StepController implements the CRUD actions for Step model.
  */
-class StepController extends BaseController
+class StepController extends ProfileController
 {
     /**
      * @inheritDoc

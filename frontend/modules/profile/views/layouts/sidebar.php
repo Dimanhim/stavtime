@@ -20,7 +20,7 @@ use frontend\modules\profile\models\Profile;
                 <img src="<?= Yii::$app->params['avatarPath'] ?>" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="<?= Url::to(['profile/profile/edit']) ?>" class="d-block"><?= Yii::$app->user->identity->name ?></a>
+                <a href="<?= Url::to(['default/edit']) ?>" class="d-block"><?= Yii::$app->user->identity->name ?></a>
             </div>
         </div>
 
@@ -40,21 +40,30 @@ use frontend\modules\profile\models\Profile;
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <?php
+            $briefBadge = '<span class="right badge badge-danger">Не заполнен</span>';
+            if(Yii::$app->params['brief'] == 1) {
+                $briefBadge = '<span class="right badge badge-warning">Частично</span>';
+
+            }
+            elseif(Yii::$app->params['brief'] == 2) {
+                $briefBadge = '<span class="right badge badge-success">Заполнен</span>';
+            }
             echo \hail812\adminlte\widgets\Menu::widget([
                 'items' => [
-                    [
-                        'label' => 'Starter Pages',
-                        'icon' => 'tachometer-alt',
-                        'badge' => '<span class="right badge badge-info">2</span>',
+                    Profile::getSidebarOrders(),
+                    /*[
+                        'label' => 'Мои заявки',
+                        'icon' => 'address-book',
+                        'badge' => '<span class="right badge badge-info">'.Yii::$app->params['orders_count'].'</span>',
                         'items' => [
                             ['label' => 'Active Page', 'url' => ['site/index'], 'iconStyle' => 'far'],
                             ['label' => 'Inactive Page', 'iconStyle' => 'far'],
                         ]
-                    ],
-                    ['label' => 'Simple Link', 'icon' => 'th', 'badge' => '<span class="right badge badge-danger">New</span>'],
-                    ['label' => 'МЕНЮ', 'header' => true],
-                    Profile::getSidebarOrders(),
-                    ['label' => 'Бриф', 'url' => ['/profile/brief']],
+                    ],*/
+                    ['label' => 'Бриф', 'url' => ['brief/index'], 'icon' => 'question-circle', 'badge' => $briefBadge],
+                    //['label' => 'МЕНЮ', 'header' => true],
+                    //Profile::getSidebarOrders(),
+                    //['label' => 'Бриф', 'url' => ['/profile/brief']],
                     //Profile::getSidebarSteps(),
                     //Profile::getSidebarDocuments(),
                     //Profile::getSidebarPayments(),

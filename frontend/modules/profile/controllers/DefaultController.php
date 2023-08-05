@@ -26,7 +26,6 @@ class DefaultController extends ProfileController
      */
     public function actionIndex()
     {
-        file_put_contents('info-log.txt', date('d.m.Y H:i:s').' params - '.print_r(Yii::$app->params, true)."\n", FILE_APPEND);
         return $this->render('index');
     }
 

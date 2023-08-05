@@ -16,6 +16,8 @@ class Profile
     {
         $data = [
             'label' => 'Мои заявки',
+            'icon' => 'address-book',
+            'badge' => '<span class="right badge badge-info">'.Yii::$app->params['orders_count'].'</span>',
             'url' => ['order/index'],
         ];
         if(($orders = self::getOrders())) {

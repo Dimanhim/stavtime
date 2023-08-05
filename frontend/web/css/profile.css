@@ -1,9 +1,9 @@
 .select-style {
     background: #fff;
     padding: 5px 20px;
-    border: none;
     color: #007bff;
     border: 1px solid #007bff;
+    border-radius: 0.25rem;
 }
 .table.table-brief-form th:first-child,
 .table.table-brief-form td:first-child

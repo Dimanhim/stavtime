@@ -220,6 +220,11 @@ class Order extends \common\models\BaseModel
         return Step::find()->where(['order_id' => Yii::$app->params['order_id']])->all();
     }
 
+    public static function getOrders()
+    {
+        return Order::find()->where(['client_id' => Yii::$app->user->identity->id])->all();
+    }
+
     /**
      * @return array
      */

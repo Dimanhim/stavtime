@@ -1,135 +1,80 @@
 <?php
+
+use yii\helpers\Html;
+use common\models\Order;
+
 $this->title = (Yii::$app->user->identity->name ? Yii::$app->user->identity->name .' - ' : ''). 'Личный кабинет ';
 $this->params['breadcrumbs'] = [['label' => $this->title]];
+$orderModel = new Order();
 ?>
 <div class="container-fluid">
-    <h2>Здесь будет список заявок. У активной будет бэк и соответствующая надпись</h2>
-    <div class="row">
-        <div class="col-lg-6">
-            <?= \hail812\adminlte\widgets\Alert::widget([
-                'type' => 'success',
-                'body' => '<h3>Congratulations!!!</h3>',
-            ]) ?>
-            <?= \hail812\adminlte\widgets\Callout::widget([
-                'type' => 'danger',
-                'head' => 'I am a danger callout!',
-                'body' => 'There is a problem that we need to fix. A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.'
-            ]) ?>
-        </div>
-    </div>
+    <h2>Инструкция по работе с личным кабинетом</h2>
 
-    <div class="row">
-        <div class="col-12 col-sm-6 col-md-3">
-            <?= \hail812\adminlte\widgets\InfoBox::widget([
-                'text' => 'CPU Traffic',
-                'number' => '10 <small>%</small>',
-                'icon' => 'fas fa-cog',
-            ]) ?>
-        </div>
-    </div>
+    <p>
+        Уважаемый(ая) <?= Yii::$app->user->identity->name ?>!
+    </p>
+    <p>
+        На этой странице мы расскажем как пользоваться личным кабинетом
+    </p>
+    <p>
+        Ваши заявки в нашей компании (<?= Yii::$app->params['orders_count'] ?>):
+    </p>
+    <?php if($orders = Order::getOrders()) : ?>
+    <ul>
+        <?php foreach($orders as $order) : ?>
+            <?php $active = ($order->id == Yii::$app->params['order_id']) ? ' (активная)' : '' ?>
+            <li><?= Html::a($order->name.' ('.$order->price.')', ['order/view', 'id' => $order->id]).$active  ?></li>
+        <?php endforeach; ?>
+    </ul>
+    <?php else : ?>
+        <p><b>Заявок не найдено</b></p>
+    <?php endif; ?>
+    <p>
+        Заявка, которую сейчас Вы просматриваете <?= Html::a('просмотреть', ['order/view', 'id' => Yii::$app->params['order_id']]) ?>
+    </p>
+    <p>
+        Этапы работы по заявке:
+    </p>
+    <?php if($steps = $orderModel->getOrderSteps()) : ?>
+        <ul>
+            <?php foreach($steps as $step) : ?>
+                <li><?= Html::a($step->name, ['step/view', 'id' => $step->id]) ?></li>
+            <?php endforeach; ?>
+        </ul>
+    <?php else : ?>
+        <p style="margin-left: 20px;">
+            <b>Этапов работы не найдено</b>
+        </p>
+    <?php endif; ?>
 
-    <div class="row">
-        <div class="col-md-4 col-sm-6 col-12">
-            <?= \hail812\adminlte\widgets\InfoBox::widget([
-                'text' => 'Messages',
-                'number' => '1,410',
-                'icon' => 'far fa-envelope',
-            ]) ?>
-        </div>
-        <div class="col-md-4 col-sm-6 col-12">
-            <?= \hail812\adminlte\widgets\InfoBox::widget([
-                'text' => 'Bookmarks',
-                'number' => '410',
-                'theme' => 'success',
-                'icon' => 'far fa-flag',
-            ]) ?>
-        </div>
-        <div class="col-md-4 col-sm-6 col-12">
-            <?= \hail812\adminlte\widgets\InfoBox::widget([
-                'text' => 'Uploads',
-                'number' => '13,648',
-                'theme' => 'gradient-warning',
-                'icon' => 'far fa-copy',
-            ]) ?>
-        </div>
-    </div>
+    <p>
+        Оплаты по заявке:
+    </p>
+    <?php if($payments = $orderModel->getOrderPayments()) : ?>
+        <ul>
+            <?php foreach($payments as $payment) : ?>
+                <li><?= Html::a($payment->name, ['payment/view', 'id' => $step->id]) ?></li>
+            <?php endforeach; ?>
+        </ul>
+    <?php else : ?>
+        <p style="margin-left: 20px;">
+            <b>Оплат не найдено</b>
+        </p>
+    <?php endif; ?>
 
-    <div class="row">
-        <div class="col-md-4 col-sm-6 col-12">
-            <?= \hail812\adminlte\widgets\InfoBox::widget([
-                'text' => 'Bookmarks',
-                'number' => '41,410',
-                'icon' => 'far fa-bookmark',
-                'progress' => [
-                    'width' => '70%',
-                    'description' => '70% Increase in 30 Days'
-                ]
-            ]) ?>
-        </div>
-        <div class="col-md-4 col-sm-6 col-12">
-            <?php $infoBox = \hail812\adminlte\widgets\InfoBox::begin([
-                'text' => 'Likes',
-                'number' => '41,410',
-                'theme' => 'success',
-                'icon' => 'far fa-thumbs-up',
-                'progress' => [
-                    'width' => '70%',
-                    'description' => '70% Increase in 30 Days'
-                ]
-            ]) ?>
-            <?= \hail812\adminlte\widgets\Ribbon::widget([
-                'id' => $infoBox->id.'-ribbon',
-                'text' => 'Ribbon',
-            ]) ?>
-            <?php \hail812\adminlte\widgets\InfoBox::end() ?>
-        </div>
-        <div class="col-md-4 col-sm-6 col-12">
-            <?= \hail812\adminlte\widgets\InfoBox::widget([
-                'text' => 'Events',
-                'number' => '41,410',
-                'theme' => 'gradient-warning',
-                'icon' => 'far fa-calendar-alt',
-                'progress' => [
-                    'width' => '70%',
-                    'description' => '70% Increase in 30 Days'
-                ],
-                'loadingStyle' => true
-            ]) ?>
-        </div>
-    </div>
+    <p>
+        Документы по заявке:
+    </p>
+    <?php if($documents = $orderModel->getOrderDocuments()) : ?>
+        <ul>
+            <?php foreach($documents as $document) : ?>
+                <li><?= Html::a($document->name, ['document/view', 'id' => $step->id]) ?></li>
+            <?php endforeach; ?>
+        </ul>
+    <?php else : ?>
+        <p style="margin-left: 20px;">
+            <b>Документов не найдено</b>
+        </p>
+    <?php endif; ?>
 
-    <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-            <?= \hail812\adminlte\widgets\SmallBox::widget([
-                'title' => '150',
-                'text' => 'New Orders',
-                'icon' => 'fas fa-shopping-cart',
-            ]) ?>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-            <?php $smallBox = \hail812\adminlte\widgets\SmallBox::begin([
-                'title' => '150',
-                'text' => 'New Orders',
-                'icon' => 'fas fa-shopping-cart',
-                'theme' => 'success'
-            ]) ?>
-            <?= \hail812\adminlte\widgets\Ribbon::widget([
-                'id' => $smallBox->id.'-ribbon',
-                'text' => 'Ribbon',
-                'theme' => 'warning',
-                'size' => 'lg',
-                'textSize' => 'lg'
-            ]) ?>
-            <?php \hail812\adminlte\widgets\SmallBox::end() ?>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-            <?= \hail812\adminlte\widgets\SmallBox::widget([
-                'title' => '44',
-                'text' => 'User Registrations',
-                'icon' => 'fas fa-user-plus',
-                'theme' => 'gradient-success',
-                'loadingStyle' => true
-            ]) ?>
-        </div>
-    </div>
 </div>

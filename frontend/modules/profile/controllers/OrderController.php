@@ -14,7 +14,7 @@ use backend\controllers\BaseController;
 /**
  * ClientController implements the CRUD actions for Client model.
  */
-class OrderController extends BaseController
+class OrderController extends ProfileController
 {
     /**
      * @inheritDoc

@@ -14,7 +14,8 @@ class SessionOrder extends Order
     public static function getOrder()
     {
         $session = Yii::$app->session;
-        if($session->get('order_id') and ($order = Order::findOne($session->get('order_id')))) {
+        $clientOrder = Order::findOne(['client_id' => Yii::$app->user->identity->id, 'id' => $session->get('order_id')]);
+        if($clientOrder and $session->get('order_id') and ($order = Order::findOne($session->get('order_id')))) {
             Yii::$app->params['order_id'] = $order->id;
             Yii::$app->params['orderModel'] = $order;
         }

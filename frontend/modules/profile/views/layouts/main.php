@@ -41,7 +41,10 @@ $this->registerJsFile('js/jquery.fancybox.min.js', ['depends' => 'hail812\adminl
 
 <div class="wrapper">
     <!-- Navbar -->
-    <?= $this->render('navbar', ['assetDir' => $assetDir]) ?>
+    <?= $this->render('navbar', [
+        'assetDir' => $assetDir,
+        'orderForm' => ChangeOrderForm::getModel(),
+    ]) ?>
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
@@ -51,7 +54,6 @@ $this->registerJsFile('js/jquery.fancybox.min.js', ['depends' => 'hail812\adminl
     <?= $this->render('content', [
         'content' => $content,
         'assetDir' => $assetDir,
-        'orderForm' => ChangeOrderForm::getModel(),
     ]) ?>
     <!-- /.content-wrapper -->
 

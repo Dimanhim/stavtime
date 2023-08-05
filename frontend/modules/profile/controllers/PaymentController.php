@@ -15,7 +15,7 @@ use yii\web\Response;
 /**
  * PaymentController implements the CRUD actions for Payment model.
  */
-class PaymentController extends BaseController
+class PaymentController extends ProfileController
 {
     /**
      * @inheritDoc
