@@ -72,7 +72,7 @@ class Order extends \common\models\BaseModel
     public function rules()
     {
         return array_merge(parent::rules(), [
-            [['status_id', 'service_id', 'price', 'client_id', 'send_brief'], 'integer'],
+            [['status_id', 'service_id', 'landing_tariff_id', 'price', 'client_id', 'send_brief'], 'integer'],
             [['utm_source', 'utm_campaign', 'utm_medium', 'utm_content', 'utm_term', 'comment'], 'string'],
             [['name', 'order_name', 'phone', 'email', 'split_template', 'pressed_btn'], 'string', 'max' => 255],
         ]);
@@ -89,6 +89,7 @@ class Order extends \common\models\BaseModel
             'status_id' => 'Статус',
             'client_id' => 'Клиент',
             'service_id' => 'Услуга',
+            'landing_tariff_id' => 'Тариф',
             'price' => 'Цена',
             'phone' => 'Телефон',
             'email' => 'E-mail',
@@ -165,6 +166,11 @@ class Order extends \common\models\BaseModel
     public function getService()
     {
         return $this->hasOne(Service::className(), ['id' => 'service_id']);
+    }
+
+    public function getLandingTariff()
+    {
+        return $this->hasOne(LandingTariff::className(), ['id' => 'landing_tariff_id']);
     }
 
     /**

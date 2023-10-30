@@ -22,6 +22,7 @@ class m230606_192254_orders extends Migration
             'client_id'             => Schema::TYPE_INTEGER,
             'status_id'             => Schema::TYPE_INTEGER,
             'service_id'            => Schema::TYPE_INTEGER,
+            'landing_tariff_id'     => Schema::TYPE_INTEGER,
             'price'                 => Schema::TYPE_INTEGER,
             'phone'                 => Schema::TYPE_STRING,
             'email'                 => Schema::TYPE_STRING,
