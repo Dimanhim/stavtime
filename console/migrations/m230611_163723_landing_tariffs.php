@@ -6,14 +6,14 @@ use yii\db\Schema;
 /**
  * Class m230611_163723_services
  */
-class m230611_163723_services extends Migration
+class m230611_163723_landing_tariffs extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->createTable('{{%services}}', [
+        $this->createTable('{{%landing_tariffs}}', [
             'id'                    => Schema::TYPE_PK,
             'unique_id'             => Schema::TYPE_STRING . ' NOT NULL',
 
@@ -36,6 +36,6 @@ class m230611_163723_services extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%services}}');
+        $this->dropTable('{{%landing_tariffs}}');
     }
 }

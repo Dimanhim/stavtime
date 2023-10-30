@@ -3,7 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Portfolio;
-use common\models\Service;
+use common\models\LandingTariff;
 use frontend\components\Site;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\SiteForm;
@@ -83,7 +83,7 @@ class SiteController extends Controller
         $site = new Site();
         $this->view->title = $site->title;
         $portfolio = Portfolio::findModels()->all();
-        $services = Service::findModels()->all();
+        $services = LandingTariff::findModels()->all();
         $model = new SiteForm();
 
         return $this->render('index', [

@@ -26,7 +26,7 @@ class Gallery extends \common\models\BaseModel
     const TYPE_IMAGE          = 2;
     const TYPE_CLIENT         = 3;
     const TYPE_PORTFOLIO      = 4;
-    const TYPE_SERVICE        = 5;
+    const TYPE_LANDING_TARIFF = 5;
     const TYPE_NOTIFICATION   = 6;
     const TYPE_BRIEF          = 7;
     const TYPE_DOCUMENT       = 8;

@@ -20,7 +20,7 @@ use Yii;
  * @property int|null $created_at
  * @property int|null $updated_at
  */
-class Service extends \common\models\BaseModel
+class LandingTariff extends \common\models\BaseModel
 {
     const PACKET_VIP      = 1;
     const PACKET_BUSINESS = 2;
@@ -31,7 +31,7 @@ class Service extends \common\models\BaseModel
      */
     public static function tableName()
     {
-        return 'stv_services';
+        return '{{%landing_tariffs}}';
     }
 
     /**
@@ -39,7 +39,7 @@ class Service extends \common\models\BaseModel
      */
     public static function modelName()
     {
-        return 'Услуги';
+        return 'Тарифы лендинга';
     }
 
     /**
@@ -47,7 +47,7 @@ class Service extends \common\models\BaseModel
      */
     public static function typeId()
     {
-        return Gallery::TYPE_SERVICE;
+        return Gallery::TYPE_LANDING_TARIFF;
     }
 
     /**

@@ -2,8 +2,8 @@
 
 namespace backend\controllers;
 
-use common\models\Service;
-use backend\models\ServiceSearch;
+use backend\models\LandingTariffSearch;
+use common\models\LandingTariff;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -11,7 +11,7 @@ use yii\filters\VerbFilter;
 /**
  * ServiceController implements the CRUD actions for Service model.
  */
-class ServiceController extends BaseController
+class LandingTariffController extends BaseController
 {
     /**
      * @inheritDoc
@@ -21,7 +21,7 @@ class ServiceController extends BaseController
         return array_merge(
             parent::behaviors(),
             [
-                'className' => Service::className(),
+                'className' => LandingTariff::className(),
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -39,7 +39,7 @@ class ServiceController extends BaseController
      */
     public function actionIndex()
     {
-        $searchModel = new ServiceSearch();
+        $searchModel = new LandingTariffSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -68,7 +68,7 @@ class ServiceController extends BaseController
      */
     public function actionCreate()
     {
-        $model = new Service();
+        $model = new LandingTariff();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {

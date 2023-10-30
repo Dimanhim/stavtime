@@ -25,7 +25,7 @@ $notifications = Yii::$app->notifications->adminData();
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Справочники</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                 <li><a href="<?= Url::to(['client/index']) ?>" class="dropdown-item">Клиенты</a></li>
-                <li><a href="<?= Url::to(['service/index']) ?>" class="dropdown-item">Услуги</a></li>
+                <li><a href="<?= Url::to(['landing-tariff/index']) ?>" class="dropdown-item">Тарифы лендинга</a></li>
                 <li><a href="<?= Url::to(['portfolio/index']) ?>" class="dropdown-item">Портфолио</a></li>
                 <li><a href="<?= Url::to(['brief/index']) ?>" class="dropdown-item">Бриф</a></li>
                 <li><a href="<?= Url::to(['document/index']) ?>" class="dropdown-item">Документы</a></li>

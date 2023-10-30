@@ -1,6 +1,6 @@
 <?php
 
-use common\models\Service;
+use common\models\LandingTariff;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'term',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Service $model, $key, $index, $column) {
+                'urlCreator' => function ($action, LandingTariff $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

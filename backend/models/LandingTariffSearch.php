@@ -2,14 +2,14 @@
 
 namespace backend\models;
 
+use common\models\LandingTariff;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Service;
 
 /**
  * ServiceSearch represents the model behind the search form of `common\models\Service`.
  */
-class ServiceSearch extends Service
+class LandingTariffSearch extends LandingTariff
 {
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class ServiceSearch extends Service
      */
     public function search($params)
     {
-        $query = Service::findModels();
+        $query = LandingTariff::findModels();
 
         // add conditions that should always apply here
 
