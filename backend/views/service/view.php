@@ -4,21 +4,21 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var common\models\Portfolio $model */
+/** @var common\models\Service $model */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => $model->modelName, 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="portfolio-view">
+<div class="service-view">
 
     <p>
         <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Вы уверены, что хотите удалить работу?',
+                'confirm' => 'Вы действительно хотите удалить услугу?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -28,52 +28,25 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            [
-                'attribute' => 'order_id',
-                'format' => 'raw',
-                'value' => function($data) {
-                    if($data->order) {
-                        $str = '';
-                        $order = $data->order->order_name ? $data->order->order_name : 'Б/н';
-                        $str .= Html::a($order. '', ['order/view', 'id' => $data->order->id]);
-                        if($data->order->client) {
-                            $str .= ' ('.Html::a($data->order->client->name. '', ['client/view', 'id' => $data->order->client->id]).')';
-                        }
-                        return $str;
-                    }
-                }
-            ],
             'name',
             'price',
-            'price_lead',
-            'conversion',
+            'old_price',
             [
-                'attribute' => 'link',
+                'attribute' => 'short_description',
                 'format' => 'raw',
-                'value' => function($data) {
-                    if($data->link) {
-                        return Html::a($data->link, $data->link, ['target' => '_blanc']);
-                    }
-                }
+                'value:description',
             ],
             [
-                'attribute' => 'portfolio_services',
+                'attribute' => 'description',
                 'format' => 'raw',
-                'value' => function($data) {
-                    if($data->services) {
-                        return $data->getListLinksChunk($data->services, 'service');
-                    }
-                }
+                'value:description',
             ],
-            'description:ntext',
-            'comment:ntext',
-            'created_date',
 
             [
                 'attribute' => 'image_fields',
                 'format' => 'raw',
                 'value' => function($data) {
-                    return $data->getImagesHtml(4);
+                    return $data->imagesHtml;
                 }
             ],
             [

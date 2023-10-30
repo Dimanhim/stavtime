@@ -2,16 +2,16 @@
 
 namespace backend\controllers;
 
-use common\models\Portfolio;
-use backend\models\PortfolioSearch;
+use common\models\Service;
+use backend\models\ServiceSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PortfolioController implements the CRUD actions for Portfolio model.
+ * ServiceController implements the CRUD actions for Service model.
  */
-class PortfolioController extends BaseController
+class ServiceController extends BaseController
 {
     /**
      * @inheritDoc
@@ -21,7 +21,7 @@ class PortfolioController extends BaseController
         return array_merge(
             parent::behaviors(),
             [
-                'className' => Portfolio::className(),
+                'className' => Service::className(),
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -33,13 +33,13 @@ class PortfolioController extends BaseController
     }
 
     /**
-     * Lists all Portfolio models.
+     * Lists all Service models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new PortfolioSearch(['admin' => true]);
+        $searchModel = new ServiceSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -49,7 +49,7 @@ class PortfolioController extends BaseController
     }
 
     /**
-     * Displays a single Portfolio model.
+     * Displays a single Service model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -62,13 +62,13 @@ class PortfolioController extends BaseController
     }
 
     /**
-     * Creates a new Portfolio model.
+     * Creates a new Service model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Portfolio();
+        $model = new Service();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -84,7 +84,7 @@ class PortfolioController extends BaseController
     }
 
     /**
-     * Updates an existing Portfolio model.
+     * Updates an existing Service model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -95,7 +95,7 @@ class PortfolioController extends BaseController
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [

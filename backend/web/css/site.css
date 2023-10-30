@@ -22,6 +22,12 @@ main > .container {
     color: #c55;
     font-style: italic;
 }
+.help-block {
+    color: #f00;
+}
+.select2-container .select2-search--inline {
+    width: 0.35rem;
+}
 .form-group {
     margin-bottom: 10px;
 }

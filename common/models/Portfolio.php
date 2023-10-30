@@ -24,6 +24,8 @@ use Yii;
  */
 class Portfolio extends \common\models\BaseModel
 {
+    public $portfolio_services = null;
+
     /**
      * {@inheritdoc}
      */
@@ -58,7 +60,7 @@ class Portfolio extends \common\models\BaseModel
             [['conversion'], 'number'],
             [['description', 'comment'], 'string'],
             [['name', 'link'], 'string', 'max' => 255],
-            [['created_date'], 'safe'],
+            [['created_date', 'portfolio_services'], 'safe'],
         ]);
     }
 
@@ -77,6 +79,7 @@ class Portfolio extends \common\models\BaseModel
             'description' => 'Описание',
             'comment' => 'Информация',
             'created_date' => 'Дата создания работы',
+            'portfolio_services' => 'Услуги',
         ]);
     }
 
@@ -85,6 +88,7 @@ class Portfolio extends \common\models\BaseModel
         if($this->created_date) {
             $this->created_date = date('d.m.Y', $this->created_date);
         }
+        $this->setPortfolioServices();
         return parent::afterFind();
     }
 
@@ -93,7 +97,30 @@ class Portfolio extends \common\models\BaseModel
         if($this->created_date) {
             $this->created_date = strtotime($this->created_date);
         }
+        $this->handlePortfolioServices();
         return parent::beforeSave($insert);
+    }
+
+    public function setPortfolioServices()
+    {
+        if($this->services) {
+            foreach($this->services as $service) {
+                $this->portfolio_services[] = $service->id;
+            }
+        }
+    }
+
+    public function handlePortfolioServices()
+    {
+        if($this->portfolio_services) {
+            PortfolioService::deleteAll(['portfolio_id' => $this->id]);
+            foreach ($this->portfolio_services as $serviceId) {
+                $portfolio_service = new PortfolioService();
+                $portfolio_service->portfolio_id = $this->id;
+                $portfolio_service->service_id = $serviceId;
+                $portfolio_service->save();
+            }
+        }
     }
 
     /**
@@ -102,5 +129,12 @@ class Portfolio extends \common\models\BaseModel
     public function getOrder()
     {
         return $this->hasOne(Order::className(), ['id' => 'order_id']);
+    }
+
+    public function getServices()
+    {
+        return $this->hasMany(Service::className(), ['id' => 'service_id'])
+            ->viaTable(Yii::$app->db->tablePrefix.'portfolio_services', ['portfolio_id' => 'id'])
+            ->orderBy([Yii::$app->db->tablePrefix.'services.position' => SORT_ASC]);
     }
 }

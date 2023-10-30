@@ -1,6 +1,7 @@
 <?php
 
 use common\models\Client;
+use common\models\Service;
 use common\models\Order;
 use kartik\widgets\Select2;
 use yii\helpers\Html;
@@ -27,6 +28,14 @@ use kartik\widgets\DatePicker;
                 $form->field($model, 'description')->textarea(['cols' => 3, 'rows' => 10]),
                 $form->field($model, 'comment')->textarea(['cols' => 3, 'rows' => 10]),
                 $form->field($model, 'created_date')->widget(DatePicker::className(), []),
+                $form->field($model, 'portfolio_services')->widget(Select2::className(), [
+                    'options' => ['placeholder' => '[не выбраны]', 'multiple' => true],
+                    'showToggleAll' => false,
+                    'pluginOptions' => [
+                        'allowClear' => true,
+                    ],
+                    'data' => Service::getList(),
+                ]),
                 $form->field($model, 'order_id')->widget(Select2::className(), [
                     'options' => ['placeholder' => '[не выбран]'],
                     'showToggleAll' => false,

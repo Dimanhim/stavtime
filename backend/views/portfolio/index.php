@@ -32,6 +32,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'name',
             [
+                'attribute' => 'portfolio_services',
+                'format' => 'raw',
+                'value' => function($data) {
+                    return count($data->services);
+                }
+            ],
+            [
                 'attribute' => 'order_id',
                 'format' => 'raw',
                 'value' => function($data) {
