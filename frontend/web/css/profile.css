@@ -74,3 +74,56 @@
     color: #fff !important;
 }
 /* END BTNS*/
+
+[class*="sidebar-dark-"] .sidebar span {
+    color: #c2c7d0;
+}
+[class*="sidebar-dark-"] .sidebar span:focus, [class*="sidebar-dark-"] .sidebar span:hover {
+    text-decoration: none;
+}
+[class*="sidebar-dark-"] .user-panel span:hover {
+    color: #fff;
+}
+
+span.badge-warning {
+    color: #1f2d3d !important;
+}
+.nav-item {
+    position: relative;
+}
+.action-link {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+/* INDEX INSTRUCTION */
+.profile-main img {
+    width: 300px;
+    border: 1px solid #ddd;
+    margin: 20px;
+}
+.profile-annotation {
+    font-style: italic;
+    font-size: 0.8rem;
+}
+.profile-separator {
+    height: 1px;
+    background: #ddd;
+}
+.card--o .card-body-o {
+    display: none;
+}
+.card-o .card-body-o {
+    display: none;
+}
+.download-img-btn {
+    margin-top: 10px;
+}
+.brief-head {
+    background: #ccc;
+}
+.brief-head td {
+    text-align: center;
+    text-transform: uppercase;
+}

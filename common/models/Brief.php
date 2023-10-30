@@ -148,7 +148,7 @@ class Brief extends \common\models\BaseModel
     public function getBriefOrder($order_id = null)
     {
         $orderId = $order_id ? $order_id : Yii::$app->params['order_id'];
-        return BriefOrder::findOne(['brief_id' => $this->id, 'order_id' => Yii::$app->params['order_id']]);
+        return BriefOrder::findOne(['brief_id' => $this->id, 'order_id' => $orderId]);
     }
 
     /**

@@ -70,7 +70,7 @@ class Document extends \common\models\BaseModel
             'client_id' => 'Клиент',
             'order_id' => 'Заявка',
             'name' => 'Название',
-            'short_description' => 'Короткое описание',
+            'short_description' => 'Краткое описание',
             'description' => 'Описание',
         ]);
     }

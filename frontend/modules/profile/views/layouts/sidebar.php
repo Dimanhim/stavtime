@@ -20,7 +20,8 @@ use frontend\modules\profile\models\Profile;
                 <img src="<?= Yii::$app->params['avatarPath'] ?>" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="<?= Url::to(['default/edit']) ?>" class="d-block"><?= Yii::$app->user->identity->name ?></a>
+                <!--<a href="<?//= Url::to(['default/edit']) ?>" class="d-block"><?//= Yii::$app->user->identity->name ?></a>-->
+                <span class="d-block"><?= Yii::$app->user->identity->name ?></span>
             </div>
         </div>
 

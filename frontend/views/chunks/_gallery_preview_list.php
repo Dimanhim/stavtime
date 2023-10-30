@@ -13,9 +13,12 @@ $class = (isset($rows) and $rows) ? 'col-md-'.$rows : 'col-md-6';
                 <?php foreach($images as $image) : ?>
                     <div class="<?= $class ?> image-preview" data-id="<?= $image->id ?>">
                         <div class="image-preview-content">
-                            <a href="<?= $image->fileUrl ?>" <?= $image->galleryAttributes() ?>>
+                            <a href="<?= $image->filePath ?>" <?= $image->galleryAttributes() ?>>
                                 <?= $image->img ?>
                             </a>
+                            <p>
+                                <?= Html::a('Скачать', $image->filePath, ['class' => 'btn btn-xs btn-primary download-img-btn', 'download' => true]) ?>
+                            </p>
                         </div>
                     </div>
                 <?php endforeach; ?>

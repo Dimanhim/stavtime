@@ -73,7 +73,7 @@ class StepController extends BaseController
 
         if($order_id) {
             $model->order_id = $order_id;
-            $referrer = ['order/view', 'id' => $order_id];
+            $referrer = ['order/view', 'id' => $order_id, '#' => 'step-tab'];
         }
 
         if ($this->request->isPost) {
@@ -101,7 +101,7 @@ class StepController extends BaseController
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(\Yii::$app->request->referrer);
+            return $this->redirect(['order/view', 'id' => $model->order->id, '#' => 'step-tab']);
         }
 
         return $this->render('update', [
@@ -114,6 +114,6 @@ class StepController extends BaseController
         $model = $this->findModel($id);
         $model->done = 1;
         $model->save();
-        return $this->redirect(\Yii::$app->request->referrer);
+        return $this->redirect(['order/view', 'id' => $model->order->id, '#' => 'step-tab']);
     }
 }

@@ -70,6 +70,7 @@ class ProfileLoginForm extends Model
      */
     public function login()
     {
+        if(!$this->getUser()) return false;
         return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
     }
 
@@ -81,7 +82,7 @@ class ProfileLoginForm extends Model
     protected function getUser()
     {
         if ($this->_user === null) {
-            $this->_user = Client::findByUsername($this->username);
+            $this->_user = Client::findByAuthParams($this);
         }
 
         return $this->_user;

@@ -36,6 +36,7 @@ class Gallery extends \common\models\BaseModel
     const TYPE_STEP           = 12;
     const TYPE_BRIEF_CLIENT   = 13;
     const TYPE_OFFICE         = 14;
+    const TYPE_ANY            = 15;
 
     /**
      * {@inheritdoc}

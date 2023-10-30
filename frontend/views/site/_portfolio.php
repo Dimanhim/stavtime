@@ -14,9 +14,12 @@
                             </div>
                             <figcaption>
                                 <div class="name-project">
+                                    <!--
                                     <a href="<?= $item->link ?>" target="blanc">
-                                        <?= $item->name ?>
+                                        <?//= $item->name ?>
                                     </a>
+                                    -->
+                                    <span><?= $item->name ?></span>
                                 </div>
                                 <div class="port_desc">
                                     <p>цена создания:<br/><span><?= $item->price ? $item->price : '---' ?> руб.</span></p>

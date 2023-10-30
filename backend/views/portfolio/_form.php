@@ -5,6 +5,7 @@ use common\models\Order;
 use kartik\widgets\Select2;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\widgets\DatePicker;
 
 /** @var yii\web\View $this */
 /** @var common\models\Portfolio $model */
@@ -25,13 +26,14 @@ use yii\widgets\ActiveForm;
                 $form->field($model, 'link')->textInput(['maxlength' => true]),
                 $form->field($model, 'description')->textarea(['cols' => 3, 'rows' => 10]),
                 $form->field($model, 'comment')->textarea(['cols' => 3, 'rows' => 10]),
+                $form->field($model, 'created_date')->widget(DatePicker::className(), []),
                 $form->field($model, 'order_id')->widget(Select2::className(), [
                     'options' => ['placeholder' => '[не выбран]'],
                     'showToggleAll' => false,
                     'pluginOptions' => [
                         'allowClear' => true,
                     ],
-                    'data' => Order::getList(),
+                    'data' => Order::getListName(),
                 ]),
                 $form->field($model, 'is_active')->checkbox()
             ];

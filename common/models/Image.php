@@ -13,7 +13,7 @@ use Yii;
  */
 class Image extends \common\models\BaseModel
 {
-    const DEFAULT_AVATAR_PATH = '/images/default_avatar.jpg';
+    const DEFAULT_AVATAR_PATH = '/images/default_avatar.png';
 
     public $_images_extensions = [
         'jpg', 'jpeg', 'png', 'gif', 'svg'
@@ -155,6 +155,11 @@ class Image extends \common\models\BaseModel
             return '/upload'.$this->path;
         }
         return false;
+    }
+
+    public function getFilePath()
+    {
+        return '/upload/'.$this->path;
     }
 
     /**

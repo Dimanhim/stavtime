@@ -10,6 +10,7 @@ class MailSender extends Component
     const SUBJECT_ADMIN_ORDER          = 1;
     const SUBJECT_ADMIN_PROFILE        = 2;
     const SUBJECT_USER_ORDER           = 3;
+    const SUBJECT_FILL_BRIEF           = 4;
 
     private $_subjects = [
         1 => [
@@ -23,6 +24,10 @@ class MailSender extends Component
         3 => [
             'title' => 'Заявка на разработку лендинга',
             'view' => 'user_brief',
+        ],
+        4 => [
+            'title' => 'Заполнен бриф пользователем',
+            'view' => 'fill_brief',
         ],
     ];
 

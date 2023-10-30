@@ -13,7 +13,7 @@ $class = (isset($rows) and $rows) ? 'col-md-'.$rows : 'col-md-6';
                 <?php foreach($images as $image) : ?>
                     <div class="<?= $class ?> image-preview image-preview-o" data-id="<?= $image->id ?>">
                         <div class="image-preview-content">
-                            <a href="<?= $image->fileUrl ?>" <?= $image->galleryAttributes() ?>>
+                            <a href="<?= $image->filePath ?>" <?= $image->galleryAttributes() ?>>
                                 <?= $image->img ?>
                             </a>
 

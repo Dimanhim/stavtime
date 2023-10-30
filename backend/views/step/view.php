@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /** @var common\models\Step $model */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => $model->modelName, 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->modelName, 'url' => ['order/update', 'id' => Yii::$app->params['order_id']]];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

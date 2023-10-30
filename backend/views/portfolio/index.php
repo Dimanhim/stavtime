@@ -58,6 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->createdAt;
                 }
             ],
+            'is_active:boolean',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Portfolio $model, $key, $index, $column) {

@@ -11,6 +11,8 @@ use common\models\Portfolio;
  */
 class PortfolioSearch extends Portfolio
 {
+    public $admin = false;
+
     /**
      * {@inheritdoc}
      */
@@ -44,7 +46,7 @@ class PortfolioSearch extends Portfolio
      */
     public function search($params)
     {
-        $query = Portfolio::findModels();
+        $query = Portfolio::findModels($this->admin);
 
         // add conditions that should always apply here
 

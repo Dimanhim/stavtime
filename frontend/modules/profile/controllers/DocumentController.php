@@ -48,4 +48,31 @@ class DocumentController extends ProfileController
             'model' => $this->findModel($id),
         ]);
     }
+
+    /**
+     * Creates a new Document model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return string|\yii\web\Response
+     */
+    public function actionCreate()
+    {
+        $model = new Document();
+        if($order = \Yii::$app->params['orderModel']) {
+            $model->order_id = $order->id;
+            if($order->client) {
+                $model->client_id = $order->client->id;
+            }
+        }
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
+    }
 }

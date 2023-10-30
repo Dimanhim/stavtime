@@ -36,6 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <a class="nav-link" id="tab-4" data-toggle="tab" href="#document-tab" role="tab" aria-controls="document-tab" aria-selected="false">
                 Документы
             </a>
+            <?= Html::a('<i class="bi bi-plus-square-fill"></i>', ['document/create', 'order_id' => $model->id], ['class' => 'action-link pull-right']) ?>
         </li>
         <li class="nav-item" role="presentation">
             <a class="nav-link" id="tab-5" data-toggle="tab" href="#brief-tab" role="tab" aria-controls="brief-tab" aria-selected="false">
@@ -93,7 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <th>Название</th>
                             <th>Выполнение</th>
                             <th>Документ</th>
-                            <th>Дедлайн</th>
+                            <th>Дата</th>
                         </tr>
                         <?php if($steps = $model->orderSteps) : ?>
                             <?php foreach($steps as $step) : ?>

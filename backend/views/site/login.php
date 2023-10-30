@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 ?>
-<div id="login-form" class="col-4 offset-4">
+<div id="login-form" class="col-md-4 offset-md-4">
     <div class="card">
         <div class="card-body login-card-body">
             <p class="login-box-msg">Войдите в систему</p>

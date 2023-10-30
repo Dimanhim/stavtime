@@ -107,7 +107,10 @@ class Order extends \common\models\BaseModel
     public function beforeSave($insert)
     {
         $this->phone = Helpers::setPhoneFormat($this->phone);
-        if(!$this->client_id or !Client::find()->where(['phone' => $this->phone])->exists()) {
+        if($client = Client::findOne(['phone' => $this->phone])) {
+            $this->client_id = $client->id;
+        }
+        if(!$this->client_id) {
             $this->createClient();
         }
         return parent::beforeSave($insert);
@@ -225,6 +228,11 @@ class Order extends \common\models\BaseModel
         return Order::find()->where(['client_id' => Yii::$app->user->identity->id])->all();
     }
 
+    public function getPortfolio()
+    {
+        return $this->hasOne(Portfolio::className(), ['order_id' => 'id']);
+    }
+
     /**
      * @return array
      */
@@ -332,6 +340,11 @@ class Order extends \common\models\BaseModel
     public function getLinkClass()
     {
         return $this->isActive ? ' step-done' : ' step-not-done';
+    }
+
+    public static function getListName()
+    {
+        return ArrayHelper::map(self::findModels(['admin' => true])->asArray()->all(), 'id', 'order_name');
     }
 
 

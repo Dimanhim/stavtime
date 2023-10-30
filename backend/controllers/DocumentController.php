@@ -82,7 +82,7 @@ class DocumentController extends BaseController
         }
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $model->order ? $this->redirect(['/order/view', 'id' => $model->order->id]) : $this->redirect(\Yii::$app->request->referrer);
             }
         } else {
             $model->loadDefaultValues();

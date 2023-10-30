@@ -67,6 +67,7 @@ class SiteController extends BaseController
      */
     public function actionIndex()
     {
+        Yii::info('success 22');
         return $this->render('index');
     }
 
@@ -83,7 +84,7 @@ class SiteController extends BaseController
         $this->layout = 'blank';
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->goHome();
         }
         $model->password = '';
         return $this->render('login', [

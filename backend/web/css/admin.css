@@ -66,3 +66,6 @@
     background: #e9ecef;
 }
 /* PAGINATION */
+.kv-editor-container {
+    height: 100% !important;
+}

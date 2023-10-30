@@ -13,8 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="service-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
         <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
@@ -34,7 +32,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'price',
             'old_price',
             'term',
-            'description:ntext',
+            [
+                'attribute' => 'description',
+                'format' => 'raw',
+                'value:description',
+            ],
 
             [
                 'attribute' => 'image_fields',

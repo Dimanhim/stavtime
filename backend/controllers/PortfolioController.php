@@ -39,7 +39,7 @@ class PortfolioController extends BaseController
      */
     public function actionIndex()
     {
-        $searchModel = new PortfolioSearch();
+        $searchModel = new PortfolioSearch(['admin' => true]);
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [

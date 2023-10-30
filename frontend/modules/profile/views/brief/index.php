@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 
+$this->params['breadcrumbs'][] = 'Бриф';
 ?>
 <p>
     <?= Html::a('Редактировать', ['update'], ['class' => 'btn btn-success']) ?>

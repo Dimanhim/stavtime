@@ -2,6 +2,7 @@
 
 namespace frontend\modules\profile\controllers;
 
+use frontend\models\ResetPasswordForm;
 use frontend\modules\profile\controllers\ProfileController;
 use frontend\modules\profile\models\ChangeOrderForm;
 use frontend\modules\profile\models\ProfileLoginForm;
@@ -10,9 +11,12 @@ use Yii;
 use common\models\Client;
 use common\models\LoginForm;
 use common\models\SessionOrder;
+use yii\base\InvalidArgumentException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\web\BadRequestHttpException;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
 /**
@@ -29,16 +33,15 @@ class DefaultController extends ProfileController
         return $this->render('index');
     }
 
-    public function actionLogin($user_id = null)
+    public function actionLogin($user_id = null, $action_id = null)
     {
         $model = new ProfileLoginForm();
         if($user_id and ($client = Client::findOne(['user_id' => $user_id]))) {
             $model->username = $client->email;
             $model->password = $client->user_id;
             if($model->login()) {
-                return $this->redirect([Profile::ROUTE]);
+                return $action_id ? $this->redirect(["/profile/{$action_id}/update"]) : $this->redirect([Profile::ROUTE]);
             }
-
         }
         if (!Yii::$app->user->isGuest) {
             return $this->redirect([Profile::ROUTE.'/index']);
@@ -76,5 +79,16 @@ class DefaultController extends ProfileController
             }
         }
         return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function actionEdit()
+    {
+        $model = Client::findOne(Yii::$app->user->identity->id);
+        if(!$model) {
+            throw new NotFoundHttpException('Пользователь личного кабинета не найден');
+        }
+        return $this->render('edit', [
+            'model' => $model,
+        ]);
     }
 }

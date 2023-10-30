@@ -23,7 +23,7 @@ class Client extends \common\models\BaseModel implements IdentityInterface
      */
     public static function tableName()
     {
-        return 'stv_clients';
+        return '{{%clients}}';
     }
 
     /**
@@ -49,6 +49,7 @@ class Client extends \common\models\BaseModel implements IdentityInterface
     {
         return array_merge(parent::rules(), [
             [['type', 'status_id'], 'integer'],
+            [['email'], 'email'],
             [['name', 'phone', 'email', 'comment', 'user_id'], 'string', 'max' => 255],
         ]);
     }
@@ -125,6 +126,11 @@ class Client extends \common\models\BaseModel implements IdentityInterface
     public static function findByUsername($email)
     {
         return static::findOne(['email' => $email]);
+    }
+
+    public function findByAuthParams($profileLoginForm)
+    {
+        return static::findOne(['email' => $profileLoginForm->username, 'user_id' => $profileLoginForm->password]);
     }
     /**
      * Validates password

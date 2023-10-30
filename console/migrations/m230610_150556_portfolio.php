@@ -25,6 +25,7 @@ class m230610_150556_portfolio extends Migration
             'link'                  => Schema::TYPE_STRING,
             'description'           => Schema::TYPE_TEXT,
             'comment'               => Schema::TYPE_TEXT,
+            'created_date'          => Schema::TYPE_INTEGER,
 
             'is_active'             => Schema::TYPE_SMALLINT . ' DEFAULT 1',
             'deleted'               => Schema::TYPE_SMALLINT,

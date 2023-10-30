@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /** @var common\models\Step $model */
 
 $this->title = 'Редактирование этапа: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => $model->modelName, 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->modelName, 'url' => ['order/view', 'id' => $model->order->id]];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Редактирование';
 ?>

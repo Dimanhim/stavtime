@@ -28,7 +28,7 @@ class SiteForm extends Model
             ['phone', 'required', 'message' => 'Поле "Телефон" должно быть заполнено'],
             ['email', 'required', 'message' => 'Поле "E-mail" должно быть заполнено'],
             ['email', 'email', 'message' => 'Введите корректный E-mail адрес'],
-            ['email', 'uniqueEmail', 'message' => 'Такой E-mail уже зарегистрирован в системе'],
+            //['email', 'uniqueEmail', 'message' => 'Такой E-mail уже зарегистрирован в системе'],
             [['service_id'], 'integer'],
             [['phone', 'email', 'pressed_btn'], 'string', 'message' => 'Недопустимое значение поля'],
             ['utm', 'safe'],
@@ -40,7 +40,6 @@ class SiteForm extends Model
         $model = new Order();
         $model->attributes = $this->attributes;
         $model->setUtmLabels($this);
-        file_put_contents('info-log.txt', date('d.m.Y H:i:s').' model - '.print_r($model, true)."\n", FILE_APPEND);
         if($model->save()) {
             $this->order = $model;
             return true;

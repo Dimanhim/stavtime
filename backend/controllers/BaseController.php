@@ -150,7 +150,7 @@ class BaseController extends Controller
                 return $findModel;
             }
         }
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('Запрошенная страница не существует');
     }
 
     public function getModel()

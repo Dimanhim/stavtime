@@ -24,6 +24,8 @@ use yii\web\UploadedFile;
  */
 class BaseModel extends ActiveRecord
 {
+    //свойство для администрирования
+    public $admin;
     public $image_field;
     //public $image_fields = ['image_field' => 'image_id'];
     public $image_fields;
@@ -85,8 +87,8 @@ class BaseModel extends ActiveRecord
         return [
             'id' => 'ID',
             'unique_id' => 'Уникальный ID',
-            'image_field' => 'Изображение',
-            'image_fields' => 'Изображение',
+            'image_field' => 'Документ',
+            'image_fields' => 'Документ',
             'image_preview_field' => 'Превью изображения',
             'is_active' => 'Активность',
             'deleted' => 'Удален',
@@ -147,9 +149,14 @@ class BaseModel extends ActiveRecord
     /**
      * @return mixed
      */
-    public static function findModels()
+    public static function findModels($admin = false)
     {
-        return self::className()::find()->where(['is', 'deleted', null])->andWhere(['is_active' => 1])->orderBy(['position' => 'SORT ASC']);
+
+        return $admin
+            ?
+            self::className()::find()->where(['is', 'deleted', null])->orderBy(['position' => 'SORT ASC'])
+            :
+            self::className()::find()->where(['is', 'deleted', null])->andWhere(['is_active' => 1])->orderBy(['position' => 'SORT ASC']);
     }
 
     /**
@@ -286,7 +293,7 @@ class BaseModel extends ActiveRecord
             if(in_array($this->mainImage->extension, $this->mainImage->_images_extensions)) {
                 return Html::a(
                     EasyThumbnailImage::thumbnailImg(Yii::getAlias('@upload').$this->mainImage->path, 100, 100, EasyThumbnailImage::THUMBNAIL_OUTBOUND),
-                    EasyThumbnailImage::thumbnailFileUrl(Yii::getAlias('@upload').$this->mainImage->path, 1000, 1000, EasyThumbnailImage::THUMBNAIL_OUTBOUND),
+                    $this->mainImage->filePath,
                     ['data-fancybox' => 'gallery']
                 );
             }

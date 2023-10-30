@@ -28,8 +28,24 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'type_id',
-            'client_id',
-            'order_id',
+            [
+                'attribute' => 'client_id',
+                'format' => 'raw',
+                'value' => function($data) {
+                    if($data->client) {
+                        return Html::a($data->client->name, ['client/view', 'id' => $data->client->id]);
+                    }
+                }
+            ],
+            [
+                'attribute' => 'order_id',
+                'format' => 'raw',
+                'value' => function($data) {
+                    if($data->order) {
+                        return Html::a($data->order->name, ['order/view', 'id' => $data->order->id]);
+                    }
+                }
+            ],
             'name',
             'short_description:ntext',
             'description:ntext',

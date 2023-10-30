@@ -32,29 +32,39 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+        <!-- Основная информация TAB -->
         <li class="nav-item" role="presentation">
             <a class="nav-link active" id="tab-1" data-toggle="tab" href="#main-tab" role="tab" aria-controls="main-tab" aria-selected="true">
                 Основная информация
             </a>
         </li>
+
+        <!-- Этапы TAB -->
         <li class="nav-item" role="presentation">
             <a class="nav-link" id="tab-2" data-toggle="tab" href="#step-tab" role="tab" aria-controls="step-tab" aria-selected="false">
                 Этапы работы
                 <?= Html::a('<i class="bi bi-plus-square-fill"></i>', ['step/create', 'order_id' => $model->id], ['class' => 'action-link pull-right']) ?>
             </a>
         </li>
+
+        <!-- Оплаты TAB -->
         <li class="nav-item" role="presentation">
             <a class="nav-link" id="tab-3" data-toggle="tab" href="#payment-tab" role="tab" aria-controls="payment-tab" aria-selected="false">
                 Оплаты
                 <?= Html::a('<i class="bi bi-plus-square-fill"></i>', ['payment/create', 'order_id' => $model->id], ['class' => 'action-link pull-right']) ?>
             </a>
         </li>
+
+        <!-- Документы TAB -->
         <li class="nav-item" role="presentation">
             <a class="nav-link" id="tab-4" data-toggle="tab" href="#document-tab" role="tab" aria-controls="document-tab" aria-selected="false">
                 Документы
                 <?= Html::a('<i class="bi bi-plus-square-fill"></i>', ['document/create', 'order_id' => $model->id], ['class' => 'action-link pull-right']) ?>
             </a>
         </li>
+
+        <!-- Бриф TAB -->
         <li class="nav-item" role="presentation">
             <a class="nav-link" id="tab-5" data-toggle="tab" href="#brief-tab" role="tab" aria-controls="brief-tab" aria-selected="false">
                 Бриф
@@ -63,6 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </ul>
 
     <div class="tab-content" id="myTabContent">
+
         <!-- Основная информация -->
         <div class="tab-pane fade show active" id="main-tab" role="tabpanel" aria-labelledby="home-tab">
             <div class="card">
@@ -91,6 +102,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'value' => function($data) {
                                     if($data->client) {
                                         return Html::a($data->client->name, ['client/view', 'id' => $data->client->id]);
+                                    }
+                                },
+                            ],
+                            [
+                                'attribute' => 'Портфолио',
+                                'format' => 'raw',
+                                'value' => function($data) {
+                                    if($data->portfolio) {
+                                        return Html::a($data->portfolio->name, ['portfolio/view', 'id' => $data->portfolio->id]);
                                     }
                                 },
                             ],
@@ -166,6 +186,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
         </div>
+
+        <!-- Этапы работы -->
         <div class="tab-pane fade" id="step-tab" role="tabpanel" aria-labelledby="profile-tab">
             <div class="card">
                 <div class="card-body">
@@ -174,7 +196,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <th>Название</th>
                             <th>Выполнение</th>
                             <th>Документ</th>
-                            <th>Дедлайн</th>
+                            <th>Дата</th>
                             <th>Действия</th>
                         </tr>
                         <?php if($steps = $model->steps) : ?>
@@ -201,6 +223,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
         </div>
+
+        <!-- Оплаты -->
         <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="contact-tab">
             <div class="card">
                 <div class="card-body">
@@ -231,6 +255,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
         </div>
+
+        <!-- Документы -->
         <div class="tab-pane fade" id="document-tab" role="tabpanel" aria-labelledby="document-tab">
             <div class="card">
                 <div class="card-body">
@@ -243,7 +269,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <?php foreach($documents as $document) : ?>
                                 <tr>
                                     <td>
-                                        <?= $document->name ?>
+                                        <?= Html::a($document->name, ['document/view', 'id' => $document->id]) ?>
                                     </td>
                                     <td>
                                         <?= $document->mainImageHtml ?>
@@ -259,6 +285,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
         </div>
+
+        <!-- Бриф -->
         <div class="tab-pane fade" id="brief-tab" role="tabpanel" aria-labelledby="brief-tab">
             <div class="card">
                 <div class="card-body">

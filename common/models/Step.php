@@ -28,7 +28,7 @@ class Step extends \common\models\BaseModel
      */
     public static function tableName()
     {
-        return 'stv_steps';
+        return '{{%steps}}';
     }
 
     /**
@@ -68,10 +68,10 @@ class Step extends \common\models\BaseModel
         return array_merge(parent::attributeLabels(), [
             'order_id' => 'Заказ',
             'name' => 'Название',
-            'short_description' => 'Короткое описание',
+            'short_description' => 'Краткое описание',
             'description' => 'Описание',
             'done' => 'Выполнена',
-            'deadline' => 'Срок, до',
+            'deadline' => 'Дата',
         ]);
     }
 

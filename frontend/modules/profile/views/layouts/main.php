@@ -17,13 +17,18 @@ $this->registerCssFile('https://fonts.googleapis.com/css?family=Source+Sans+Pro:
 $assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
 
 $publishedRes = Yii::$app->assetManager->publish('@vendor/hail812/yii2-adminlte3/src/web/js');
+$this->registerCssFile( '/admin/css/bootstrap-icons.css', ['depends' => 'hail812\adminlte3\assets\AdminLteAsset']);
+$this->registerCssFile( '/admin/css/font-awesome.min.css', ['depends' => 'hail812\adminlte3\assets\AdminLteAsset']);
 $this->registerJsFile($publishedRes[1].'/control_sidebar.js', ['depends' => '\hail812\adminlte3\assets\AdminLteAsset']);
 $this->registerJsFile('/js/profile.js?v='.mt_rand(1000,10000), ['depends' => 'hail812\adminlte3\assets\AdminLteAsset']);
 $this->registerCssFile( '/admin/css/admin.css?v='.mt_rand(1000,10000), ['depends' => 'hail812\adminlte3\assets\AdminLteAsset']);
+
 $this->registerCssFile('/css/profile.css?v='.mt_rand(1000,10000), ['depends' => 'hail812\adminlte3\assets\AdminLteAsset']);
 
 $this->registerCssFile('css/jquery.fancybox.min.css', ['depends' => 'hail812\adminlte3\assets\AdminLteAsset']);
 $this->registerJsFile('js/jquery.fancybox.min.js', ['depends' => 'hail812\adminlte3\assets\AdminLteAsset']);
+$this->registerJsFile('js/inputmask.js', ['depends' => 'hail812\adminlte3\assets\AdminLteAsset']);
+$this->registerJsFile('js/jquery.inputmask.js', ['depends' => 'hail812\adminlte3\assets\AdminLteAsset']);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

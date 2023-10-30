@@ -30,6 +30,7 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
+
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript" >
     (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -47,15 +48,10 @@ AppAsset::register($this);
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/94545224" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
+
 <?= $content ?>
 
 <?php $this->endBody() ?>
-<script>
-
-</script>
-<script>
-
-</script>
 
 </body>
 </html>

@@ -40,7 +40,7 @@ class ServiceSearch extends Service
      */
     public function search($params)
     {
-        $query = Service::find();
+        $query = Service::findModels();
 
         // add conditions that should always apply here
 

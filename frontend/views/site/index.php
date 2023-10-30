@@ -34,11 +34,12 @@
                     <strong>МУЛЬТИЛЕНДИНГ В ПОДАРОК!!!</strong>
                 </p>
                 <p class="conf payment">
-                    новая технология <span class="multi">"мультилендинг"</span><br/>
-                    эксклюзивный дизайн<br/>
+                    новая технология <span class="popup-content" data-template="multi">"мультилендинг"</span><br/>
+                    эксклюзивный дизайн<br>
                     конструкторы <span>не используем</span><br/>
                     Конверсия - до <span>24%</span><br/>
-                    экономьте время - работа через <span>личный кабинет</span><br/>
+                    экономьте время - работа через <span class="popup-content" data-template="lk">личный кабинет</span><br/>
+
                 </p>
                 <!--<p class="conf payment">
                     <span>137</span> успешных лендингов<br />
@@ -52,7 +53,7 @@
                     <p>
                         Только <span class="tomorrow"></span>
                         закажите продающий Landing Page<br/> и получите <br/><strong><span
-                                    class="multi">МУЛЬТИЛЕНДИНГ</span></strong><br/> в подарок!</strong><br/>
+                                    class="popup-content" data-template="multi">МУЛЬТИЛЕНДИНГ</span></strong><br/> в подарок!</strong><br/>
                         <a href="#your-package">Узнать подробнее...</a>
                     </p>
                     <a onclick="showPopup('Акция', '');" class="button-slty package-go">Оставить заявку</a>
@@ -136,7 +137,7 @@
                         <li class="other-item1">Адаптивная верстка, которая одинаково хорошо будет смотреться на любых
                             типах экранов
                         </li>
-                        <li class="other-item2">Низкая цена за счет содержания удаленных специалистов - от 15 490
+                        <li class="other-item2">Низкая цена за счет содержания удаленных специалистов - от 28 490
                             рублей
                         </li>
                         <li class="other-item3">Внеднерие функционала мультилендинга и проведение А/Б-тестов для
@@ -165,12 +166,13 @@
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-6">
                     <span>2</span>
-                    <p>Договариваемся<br/> с Вами о цене, получаем предоплату 2000 руб.</p>
+                    <p>Договариваемся<br/> с Вами о цене, получаем предоплату в размере 50% от стоимости работ</p>
                 </div>
                 <div class="visible-xs clearfix"></div>
                 <div class="col-md-3 col-sm-3 col-xs-6">
                     <span>3</span>
-                    <p>Разрабатываем<br/> Landing Page в 3 этапа</p>
+                    <p>Разрабатываем<br/> Landing Page.</p>
+                    <p>Каждый этап Вы сможете отслеживать в личном кабинете.</p>
                 </div>
                 <div class="hidden-xs clearfix"></div>
                 <div class="col-md-3 col-sm-3 col-xs-6 col-md-offset-1 col-sm-offset-1">
@@ -203,7 +205,7 @@
         <div class="row">
             <div class="col-md-3 col-sm-3 col-xs-6">
                 <img src="/images/en_1.png">
-                <p>Продающий Landing Page с эксклюзивным дизайном, функционалом <span class="multi"><strong>мультилендинга,</strong></span>адаптированный
+                <p>Продающий Landing Page с эксклюзивным дизайном, функционалом <span class="popup-content" data-template="multi"><strong>мультилендинга,</strong></span>адаптированный
                     под любые экраны</p>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6">
@@ -235,7 +237,7 @@
     <div class="container">
         <h3>Поднимите свой бизнес на новый уровень уже сегодня!</h3>
         <p>
-            <span class="tomorrow"></span> закажите создание продающего лендинга и получите <span class="multi">мультилендинг</span><br/>
+            <span class="tomorrow"></span> закажите создание продающего лендинга и получите <span class="popup-content" data-template="multi">мультилендинг</span><br/>
             в подарок!</strong>
         </p>
         <a onclick="showPopup('Новый уровень', '');" class="get-user package-go">
@@ -338,7 +340,7 @@
     </div>
 </div>
 
-<div class="wp-set">
+<div id="send-order" class="wp-set">
     <h3>Оставьте и Вы своих конкурентов позади!</h3>
     <p>Отправьте заявку на разработку Landing Page</p>
     <div class="down"><span class="trin"></span></div>
@@ -359,14 +361,14 @@
                 <img class="logo" src="/images/footer_logo.png">
             </div>
             <div class="col-md-3 col-sm-3 hidden-xs copy-footer">
-                2011- 2023 Все права защищены
+                2011- <?= date('Y') ?> Все права защищены
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6 footer-goto">
                 <div class="go-to">наверх</div>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-12 footer-contacts">
                 <a href="tel:89383542735" class="foo_number">8 (938) 35-427-35</a>
-                <a href="mailto:admin@landing26.ru">admin@landing26.ru</a>
+                <a href="mailto:info@stavtime.ru">info@stavtime.ru</a>
             </div>
         </div>
     </div>
@@ -379,36 +381,16 @@
     <div class="remodal_bg"></div>
     <div class="package remodal_window">
         <button data-remodal-action="close" class="remodal-close" data-dismiss="modal" aria-label="Close"></button>
-        <h3>Спасибо!</h3>
-        <p>
-            Наши консультанты свяжутся с Вами в ближайшее время.
-        </p>
-        <p class="respect">
-            С уважением, Компания
-        </p>
-        <div class="logo-modal">
-            <img class="logo" src="/images/logo.png" alt="">
-        </div>
+        <div id="modal-content"></div>
     </div>
 </div>
-<div class="multi_description">
-    <div class="remodal_bg"></div>
-    <div class="package remodal_window">
-        <button data-remodal-action="close" class="remodal-close" data-dismiss="modal" aria-label="Close"></button>
-        <h3>Мультилендинг</h3>
-        <p style="font-size: 16px">
-            - это <strong>новая технология</strong>, при которой контент посадочной страницы (заголовки, тексты)
-            подстраивается под запрос пользователя. Этот принцип повышает конверсию до 400% и нет необходимости
-            создавать отдельную страницу под каждый запрос.
-        </p>
-        <p style="font-size: 16px">
-            Также, реализован механизм <strong>А/Б-тестирования</strong> для достижения максимальной конверсии
-        </p>
-        <p class="respect">
-            С уважением, Компания
-        </p>
-        <div class="logo-modal">
-            <img class="logo" src="/images/logo.png" alt="">
-        </div>
-    </div>
-</div>
+<?= $this->render('modals/_multi',[
+    'model' => $model,
+]) ?>
+<?= $this->render('modals/_success',[
+    'model' => $model,
+]) ?>
+<?= $this->render('modals/_lk',[
+    'model' => $model,
+]) ?>
+

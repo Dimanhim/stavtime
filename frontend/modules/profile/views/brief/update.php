@@ -4,6 +4,10 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use common\models\Brief;
 
+$this->params['breadcrumbs'][] = ['label' => 'Бриф', 'url' => ['brief/index']];
+$this->params['breadcrumbs'][] = 'Редактирование';
+
+$typeId = null;
 ?>
 <?php if($briefs) : ?>
     <?php $form = ActiveForm::begin(['id' => 'form-brief', 'fieldConfig' => ['options' => ['tag' => false]]]) ?>
@@ -13,6 +17,14 @@ use common\models\Brief;
                 <th>Ответ</th>
             </tr>
             <?php foreach($briefs as $brief) : ?>
+            <?php $showName = ($typeId != $brief->type_id) ?>
+            <?php if($showName) : ?>
+                <tr class="brief-head">
+                    <td colspan="2">
+                        <?= $brief->typeName ?>
+                    </td>
+                </tr>
+            <?php $typeId = $brief->type_id; endif; ?>
                 <tr>
                     <td><?= $brief->name ?></td>
                     <td>

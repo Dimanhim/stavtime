@@ -475,7 +475,7 @@ a {
 .wp-as h3 {
   text-align: center;
   font-family: Exo2Bold;
-  margin-bottom: 45px;
+  /*margin-bottom: 45px;*/
   margin-top: 15px;
 }
 
@@ -1245,13 +1245,13 @@ footer .footer-contacts a {
 .multi_description {
   display: none;
 }
-.multi {
+.popup-content {
   position: relative;
   display: inline-block;
   color: #000;
   cursor: pointer;
 }
-.multi:after {
+.popup-content:after {
   content: '';
   position: absolute;
   background: url('/images/question.png') no-repeat;
@@ -1264,6 +1264,9 @@ footer .footer-contacts a {
   color: #f20303 !important;
   font-size: 14px !important;
   text-align: left !important;
+}
+.modal-content {
+  display: none;
 }
 @media only screen and (max-width: 1350px) {
   .wp-up p {

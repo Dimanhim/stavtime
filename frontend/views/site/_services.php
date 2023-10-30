@@ -3,7 +3,7 @@
     <div class="container">
         <h4>
             Только <span class="tomorrow"></span><br/>закажите продающий лендинг <br/>и получите в подарок <span
-                class="multi">МУЛЬТИЛЕНДИНГ!!!</span>
+                class="popup-content" data-template="multi">МУЛЬТИЛЕНДИНГ!!!</span>
         </h4>
         <div class="row list-package">
             <?php if($services) : ?>

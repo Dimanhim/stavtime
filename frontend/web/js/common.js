@@ -105,34 +105,38 @@ $(document).ready(function(){
 		return false;
 	});
 
+	function replacePromoDate() {
+		var add_days = 1;
+		var arr_month = new Array('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря');
+		var current_date = new Date();
+		var current_time = current_date.getTime();
+		var next_time = current_time + 86400 * 1000 * add_days;
+		var next_date = new Date(next_time);
+
+		var str_day = next_date.getDate();
+		var number_month = next_date.getMonth();
+		var str_month = arr_month[number_month];
+		var str_year = next_date.getFullYear();
+		var str_text = 'до ' + str_day + ' ' + str_month;
+		jQuery('.tomorrow').html(str_text);
+	}
+
 	// Акция - замена даты
-	var arr_month = new Array('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря');
-	var date = new Date();
-	var month = date.getMonth();
-	var day = date.getDate() + 1;
-	if(month == 1 && day == 29) {
-		day = 1;
-		month = month + 1;
-	}
-	if(day == 32) {
-		day = 1;
-		month = month + 1;
-	}
-	month = arr_month[month];
-	var text = 'до ' + day + ' ' + month;
-	jQuery('.tomorrow').html(text);
+	replacePromoDate();
 
 	var wow = new WOW();
 	wow.init();
 
-	/*$('.remodal_bg').click(function() {
-		$('.popup_window').fadeOut(50);
+	$('.remodal_bg').click(function() {
+		modalClose()
 	});
+	function modalClose() {
+		$('.popup_window').modal('hide');
+		//$('.modal-backdrop').css('display', 'none');
+	}
 	$('.remodal-close').click(function() {
-		$('.popup_window').fadeOut(50);
-		$('.modal-backdrop').css('display', 'none');
-
-	});*/
+		modalClose()
+	});
 	$('.remodal-close').click(function() {
 		$('.multi_description').fadeOut(50);
 	});
@@ -152,8 +156,9 @@ $(document).ready(function(){
 			$('.header').animate({'marginTop': '15px'}, 0).css('background', "transparent");
 		}
 	});
-	$('.multi').on('click', function() {
-		$('.multi_description').fadeIn(300);
+	$('.popup-content').on('click', function() {
+		//$('.multi_description').fadeIn(300);
+		showModal($(this).attr('data-template'))
 	});
 	$(".phone").inputmask({"mask": "+7 (999) 999-9999"});
 
@@ -194,7 +199,6 @@ $(document).ready(function(){
 
 	$('body').on('submit', '.order-form', function (e) {
 		var form = $(this);
-		console.log('submit')
 		$.ajax({
 			url: form.attr("action"),
 			type: form.attr("method"),
@@ -202,8 +206,11 @@ $(document).ready(function(){
 			success: function (res) {
 				console.log('form res', res)
 				if(res.result == 1) {
-					$(".popup_form").modal('hide');
-					$(".popup_success").modal();
+					modalClose()
+					//$(".popup_form").modal('hide');
+
+					//$(".popup_success").modal();
+					showModal('success')
 				}
 
 			},
@@ -213,6 +220,11 @@ $(document).ready(function(){
 		});
 		return false;
 	});
+	function showModal(template) {
+		let content = $('.modal-content[data-template="' + template + '"]').html();
+		$('#modal-content').html(content);
+		$('.popup_window.popup_success').modal()
+	}
 
 	/*$("form").on("submit", function (e) {
 		var email = $(this).find('#modalform-email').val();
@@ -267,4 +279,5 @@ $(window).scroll(function () {
 		$('body').css('background', 'url("' + bg_30.src + '") no-repeat');
 	}
 });
+
 

@@ -58,6 +58,7 @@ class Portfolio extends \common\models\BaseModel
             [['conversion'], 'number'],
             [['description', 'comment'], 'string'],
             [['name', 'link'], 'string', 'max' => 255],
+            [['created_date'], 'safe'],
         ]);
     }
 
@@ -75,7 +76,24 @@ class Portfolio extends \common\models\BaseModel
             'link' => 'Ссылка',
             'description' => 'Описание',
             'comment' => 'Информация',
+            'created_date' => 'Дата создания работы',
         ]);
+    }
+
+    public function afterFind()
+    {
+        if($this->created_date) {
+            $this->created_date = date('d.m.Y', $this->created_date);
+        }
+        return parent::afterFind();
+    }
+
+    public function beforeSave($insert)
+    {
+        if($this->created_date) {
+            $this->created_date = strtotime($this->created_date);
+        }
+        return parent::beforeSave($insert);
     }
 
     /**

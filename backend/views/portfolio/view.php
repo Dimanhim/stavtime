@@ -33,7 +33,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
                 'value' => function($data) {
                     if($data->order) {
-                        return Html::a($data->order->name, ['order/view', 'id' => $data->order->id]);
+                        $str = '';
+                        $order = $data->order->order_name ? $data->order->order_name : 'Б/н';
+                        $str .= Html::a($order. '', ['order/view', 'id' => $data->order->id]);
+                        if($data->order->client) {
+                            $str .= ' ('.Html::a($data->order->client->name. '', ['client/view', 'id' => $data->order->client->id]).')';
+                        }
+                        return $str;
                     }
                 }
             ],
@@ -52,6 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'description:ntext',
             'comment:ntext',
+            'created_date',
 
             [
                 'attribute' => 'image_fields',

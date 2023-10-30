@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /** @var common\models\Payment $model */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => $model->modelName, 'url' => ['index']];
+$this->params['breadcrumbs'][] = $model->modelName;
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
