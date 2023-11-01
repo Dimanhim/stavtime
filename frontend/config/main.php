@@ -82,6 +82,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'portfolio' => 'site/portfolio',
             ],
         ],
     ],

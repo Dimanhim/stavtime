@@ -26,7 +26,7 @@ $(document).ready(function(){
  	});
 
  	// Просмотр работ
- 	$('.one-work .button-slty').magnificPopup({
+ 	$('.one-work .button-slty, .one-work .one-work-popup-link').magnificPopup({
 		type: 'image',
 		closeOnContentClick: true,
 		image: {

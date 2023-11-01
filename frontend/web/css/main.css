@@ -750,6 +750,9 @@ h3 {
 .recent-work .one-work:nth-child(4) {
   display: block;
 }
+#portfolio-page .one-work {
+  display: block;
+}
 
 .recent-work figure {
   position: relative;

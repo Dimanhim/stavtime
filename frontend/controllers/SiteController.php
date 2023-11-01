@@ -94,6 +94,15 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionPortfolio()
+    {
+        $this->view->title = 'Портфолио '.Yii::$app->name;
+        $portfolio = Portfolio::findModels()->all();
+        return $this->render('portfolio', [
+            'portfolio' => $portfolio,
+        ]);
+    }
+
     public function actionFormValidate()
     {
         $response = [
