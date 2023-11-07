@@ -137,4 +137,32 @@ class Portfolio extends \common\models\BaseModel
             ->viaTable(Yii::$app->db->tablePrefix.'portfolio_services', ['portfolio_id' => 'id'])
             ->orderBy([Yii::$app->db->tablePrefix.'services.position' => SORT_ASC]);
     }
+
+    public function getFirstService()
+    {
+        return $this->services ? $this->services[0] : null;
+    }
+
+    public function getFirstServiceName()
+    {
+        if($this->firstService) {
+            return $this->firstService->name;
+        }
+        return false;
+    }
+
+    public static function preparePortfolio($models)
+    {
+        $data = [];
+
+        if($models) {
+            foreach($models as $model) {
+                if($model->firstServiceName) {
+                    $data[$model->firstServiceName][] = $model;
+                }
+
+            }
+        }
+        return $data;
+    }
 }

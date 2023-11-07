@@ -1,10 +1,19 @@
+<?php
+
+use common\models\Portfolio;
+
+$portfolioItems = Portfolio::preparePortfolio($portfolio);
+
+?>
 <div id="portfolio-page">
     <div class="recent-work" id="portfolio">
         <h3>Портфолио <?= Yii::$app->name ?></h3>
         <div class="container">
             <div class="row">
-                <?php if($portfolio) : ?>
-                    <?php $i = 1; foreach($portfolio as $item) : ?>
+                <?php if($portfolioItems) : ?>
+                <?php foreach($portfolioItems as $portfolioName => $portfolio) : ?>
+                    <h2><?= $portfolioName ?></h2>
+                    <?php foreach($portfolio as $item) : ?>
                         <?php
                             $fullImage = ($item->gallery && $item->gallery->images && array_key_exists(1, $item->gallery->images))
                                 ?
@@ -20,7 +29,7 @@
                                             <?= $item->getImageByPath($item->mainImage->path, 400, 300) ?>
                                         </a>
                                     <?php else : ?>
-                                        <?= $item->getImageByPath($item->mainImage->path, 400, 300) ?>
+                                        <?= $item->mainImage ? $item->getImageByPath($item->mainImage->path, 400, 300) : null ?>
                                     <?php endif; ?>
                                 </div>
                                 <figcaption>
@@ -40,7 +49,8 @@
                                 </figcaption>
                             </figure>
                         </div>
-                        <?php $i++; endforeach; ?>
+                        <?php endforeach; ?>
+                    <?php endforeach; ?>
                 <?php endif; ?>
             </div>
         </div>
