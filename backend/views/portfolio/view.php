@@ -65,9 +65,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 }
             ],
+            [
+                'attribute' => 'portfolio_tags',
+                'format' => 'raw',
+                'value' => function($data) {
+                    if($data->services) {
+                        return $data->getListLinksChunk($data->tags, 'tag');
+                    }
+                }
+            ],
             'description:ntext',
             'comment:ntext',
             'created_date',
+            'is_private:boolean',
 
             [
                 'attribute' => 'image_fields',

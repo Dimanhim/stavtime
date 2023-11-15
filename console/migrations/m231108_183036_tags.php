@@ -4,29 +4,23 @@ use yii\db\Migration;
 use yii\db\Schema;
 
 /**
- * Class m230610_150556_portfolio
+ * Class m231108_183036_tags
  */
-class m230610_150556_portfolio extends Migration
+class m231108_183036_tags extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->createTable('{{%portfolio}}', [
+        $this->createTable('{{%tags}}', [
             'id'                    => Schema::TYPE_PK,
             'unique_id'             => Schema::TYPE_STRING . ' NOT NULL',
 
-            'order_id'              => Schema::TYPE_INTEGER,
-            'name'                  => Schema::TYPE_STRING,
-            'price'                 => Schema::TYPE_INTEGER,
-            'price_lead'            => Schema::TYPE_INTEGER,
-            'conversion'            => Schema::TYPE_FLOAT,
-            'link'                  => Schema::TYPE_STRING,
+            'name'                  => Schema::TYPE_STRING . ' NOT NULL',
+            'type_id'               => Schema::TYPE_INTEGER,
+            'short_description'     => Schema::TYPE_TEXT,
             'description'           => Schema::TYPE_TEXT,
-            'comment'               => Schema::TYPE_TEXT,
-            'created_date'          => Schema::TYPE_INTEGER,
-            'is_private'            => Schema::TYPE_SMALLINT . ' DEFAULT 1',
 
             'is_active'             => Schema::TYPE_SMALLINT . ' DEFAULT 1',
             'deleted'               => Schema::TYPE_SMALLINT,
@@ -41,6 +35,6 @@ class m230610_150556_portfolio extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%portfolio}}');
+        $this->dropTable('{{%tags}}');
     }
 }

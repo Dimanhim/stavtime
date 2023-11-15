@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use frontend\components\PortfolioFilter;
 
 /**
  * This is the model class for table "stv_portfolio".
@@ -24,14 +25,17 @@ use Yii;
  */
 class Portfolio extends \common\models\BaseModel
 {
+    const PRIVATE_PARAM = 'private';
+
     public $portfolio_services = null;
+    public $portfolio_tags = null;
 
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'stv_portfolio';
+        return '{{%portfolio}}';
     }
 
     /**
@@ -56,11 +60,11 @@ class Portfolio extends \common\models\BaseModel
     public function rules()
     {
         return array_merge(parent::rules(), [
-            [['order_id', 'price', 'price_lead'], 'integer'],
+            [['is_private', 'is_private', 'order_id', 'price', 'price_lead'], 'integer'],
             [['conversion'], 'number'],
             [['description', 'comment'], 'string'],
             [['name', 'link'], 'string', 'max' => 255],
-            [['created_date', 'portfolio_services'], 'safe'],
+            [['created_date', 'portfolio_services', 'portfolio_tags'], 'safe'],
         ]);
     }
 
@@ -79,7 +83,9 @@ class Portfolio extends \common\models\BaseModel
             'description' => 'Описание',
             'comment' => 'Информация',
             'created_date' => 'Дата создания работы',
+            'is_private' => 'Приватная',
             'portfolio_services' => 'Услуги',
+            'portfolio_tags' => 'Теги',
         ]);
     }
 
@@ -89,6 +95,7 @@ class Portfolio extends \common\models\BaseModel
             $this->created_date = date('d.m.Y', $this->created_date);
         }
         $this->setPortfolioServices();
+        $this->setPortfolioTags();
         return parent::afterFind();
     }
 
@@ -97,8 +104,14 @@ class Portfolio extends \common\models\BaseModel
         if($this->created_date) {
             $this->created_date = strtotime($this->created_date);
         }
-        $this->handlePortfolioServices();
         return parent::beforeSave($insert);
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        $this->handlePortfolioServices();
+        $this->handlePortfolioTags();
+        return parent::afterSave($insert, $changedAttributes);
     }
 
     public function setPortfolioServices()
@@ -123,6 +136,28 @@ class Portfolio extends \common\models\BaseModel
         }
     }
 
+    public function setPortfolioTags()
+    {
+        if($this->tags) {
+            foreach($this->tags as $tag) {
+                $this->portfolio_tags[] = $tag->id;
+            }
+        }
+    }
+
+    public function handlePortfolioTags()
+    {
+        if($this->portfolio_tags) {
+            PortfolioTag::deleteAll(['portfolio_id' => $this->id]);
+            foreach ($this->portfolio_tags as $tagId) {
+                $portfolio_tag = new PortfolioTag();
+                $portfolio_tag->portfolio_id = $this->id;
+                $portfolio_tag->tag_id = $tagId;
+                $portfolio_tag->save();
+            }
+        }
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -136,6 +171,13 @@ class Portfolio extends \common\models\BaseModel
         return $this->hasMany(Service::className(), ['id' => 'service_id'])
             ->viaTable(Yii::$app->db->tablePrefix.'portfolio_services', ['portfolio_id' => 'id'])
             ->orderBy([Yii::$app->db->tablePrefix.'services.position' => SORT_ASC]);
+    }
+
+    public function getTags()
+    {
+        return $this->hasMany(Tag::className(), ['id' => 'tag_id'])
+            ->viaTable(Yii::$app->db->tablePrefix.'portfolio_tags', ['portfolio_id' => 'id'])
+            ->orderBy([Yii::$app->db->tablePrefix.'tags.position' => SORT_ASC]);
     }
 
     public function getFirstService()
@@ -164,5 +206,31 @@ class Portfolio extends \common\models\BaseModel
             }
         }
         return $data;
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function findModels($admin = false)
+    {
+        return $admin
+            ?
+            self::className()::find()->where(['is', Yii::$app->db->tablePrefix.'portfolio.deleted', null])->orderBy([Yii::$app->db->tablePrefix.'portfolio.position' => 'SORT ASC'])
+            :
+            self::className()::find()->where(['is', Yii::$app->db->tablePrefix.'portfolio.deleted', null])->andWhere([Yii::$app->db->tablePrefix.'portfolio.is_active' => 1])->orderBy([Yii::$app->db->tablePrefix.'portfolio.position' => 'SORT ASC']);
+    }
+
+    public function getFullPath()
+    {
+        return '/portfolio/'.$this->unique_id;
+    }
+
+    /**
+     * передаются параметры в виде ['filter_teacher' => [1,3], 'filter_general' => [2]]
+     */
+    public function filterItems($params = null)
+    {
+        $filterItems = new PortfolioFilter(['searchModel' => $this, 'params' => $params]);
+        return $filterItems;
     }
 }

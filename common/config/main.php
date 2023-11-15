@@ -10,5 +10,8 @@ return [
         'cache' => [
             'class' => \yii\caching\FileCache::class,
         ],
+        'infoLog' => [
+            'class' => 'common\components\InfoLog',
+        ],
     ],
 ];

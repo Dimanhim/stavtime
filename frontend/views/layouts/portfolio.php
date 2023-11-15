@@ -4,14 +4,10 @@
 
 /** @var string $content */
 
-use common\widgets\Alert;
-use frontend\assets\AppAsset;
-use yii\bootstrap5\Breadcrumbs;
+use frontend\assets\PortfolioAsset;
 use yii\bootstrap5\Html;
-use yii\bootstrap5\Nav;
-use yii\bootstrap5\NavBar;
 
-AppAsset::register($this);
+PortfolioAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -20,9 +16,9 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="keywords"
-          content="создание лендингов, разработка лендингов, landing page, создание продающих лендинг пейдж, разработка продающих лендинг пейдж">
+          content="создание сайтов, разработка сайтов, создание продающих сайтов, разработка продающих сайтов">
     <meta name="description"
-          content="Разработка продающих лендингов. Эксклюзивный дизайн, высокая коверсия, без предоплаты, мультилендинги CRM-система в подарок!">
+          content="Разработка сайтов. Эксклюзивный дизайн, высокая коверсия, CRM-система в подарок!">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
@@ -30,7 +26,7 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-
+<div class="loader-block"></div>
 <!-- Yandex.Metrika counter -->
 <!--
 <script type="text/javascript" >

@@ -25,14 +25,8 @@ $(document).ready(function(){
     	}, 1000);
  	});
 
- 	// Просмотр работ
- 	$('.one-work .button-slty, .one-work .one-work-popup-link').magnificPopup({
-		type: 'image',
-		closeOnContentClick: true,
-		image: {
-			verticalFit: false
-		}
-	});
+
+
 
 	// Показать еще работы (по 4 каждый раз)
 	$(".more-view").on("click", function(e){
@@ -279,5 +273,17 @@ $(window).scroll(function () {
 		$('body').css('background', 'url("' + bg_30.src + '") no-repeat');
 	}
 });
+
+// Просмотр работ
+function initMagnific() {
+	$('.one-work .button-slty, .one-work .one-work-popup-link, .btn-portfolio-item-popup').magnificPopup({
+		type: 'image',
+		closeOnContentClick: true,
+		image: {
+			verticalFit: false
+		}
+	});
+}
+initMagnific()
 
 

@@ -1,6 +1,9 @@
 <?php
 
+use common\models\Service;
+use common\models\Tag;
 use common\models\Portfolio;
+use kartik\widgets\Select2;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -30,14 +33,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->mainImageHtml;
                 }
             ],
-            'name',
             [
-                'attribute' => 'portfolio_services',
+                'attribute' => 'name',
                 'format' => 'raw',
                 'value' => function($data) {
-                    return count($data->services);
+                    return Html::a($data->name, ['portfolio/update', 'id' => $data->id]);
                 }
             ],
+
             [
                 'attribute' => 'order_id',
                 'format' => 'raw',
@@ -59,6 +62,47 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 }
             ],
+
+            /*[
+                'attribute' => 'portfolio_services',
+                'format' => 'raw',
+                'value' => function($data) {
+                    if($data->services) {
+                        return $data->getListLinksChunk($data->services, 'service');
+                    }
+                },
+                'filter' => Select2::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'portfolio_services',
+                    'options' => ['placeholder' => '[не выбраны]', 'multiple' => true],
+                    'showToggleAll' => false,
+                    'pluginOptions' => [
+                        'allowClear' => true,
+                    ],
+                    'data' => Service::getList(),
+                ]),
+            ],*/
+            [
+                'attribute' => 'portfolio_tags',
+                'format' => 'raw',
+                'value' => function($data) {
+                    if($data->tags) {
+                        return $data->getListLinksChunk($data->tags, 'tag');
+                    }
+                },
+                'filter' => Select2::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'portfolio_tags',
+                    'options' => ['placeholder' => '[не выбраны]', 'multiple' => true],
+                    'showToggleAll' => false,
+                    'pluginOptions' => [
+                        'allowClear' => true,
+                    ],
+                    'data' => Tag::getList(),
+                ]),
+            ],
+
+
             [
                 'attribute' => 'created_at',
                 'value' => function($data) {

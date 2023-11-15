@@ -2,8 +2,8 @@
 
 namespace backend\controllers;
 
-use common\models\Portfolio;
-use backend\models\PortfolioSearch;
+use common\models\Tag;
+use backend\models\TagSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -11,7 +11,7 @@ use yii\filters\VerbFilter;
 /**
  * PortfolioController implements the CRUD actions for Portfolio model.
  */
-class PortfolioController extends BaseController
+class TagController extends BaseController
 {
     /**
      * @inheritDoc
@@ -21,7 +21,7 @@ class PortfolioController extends BaseController
         return array_merge(
             parent::behaviors(),
             [
-                'className' => Portfolio::className(),
+                'className' => Tag::className(),
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -39,7 +39,7 @@ class PortfolioController extends BaseController
      */
     public function actionIndex()
     {
-        $searchModel = new PortfolioSearch(['admin' => true]);
+        $searchModel = new TagSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -68,7 +68,7 @@ class PortfolioController extends BaseController
      */
     public function actionCreate()
     {
-        $model = new Portfolio();
+        $model = new Tag();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -95,7 +95,6 @@ class PortfolioController extends BaseController
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->refresh();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

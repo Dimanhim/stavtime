@@ -1,6 +1,6 @@
 <?php
 
-use common\models\Client;
+use common\models\Tag;
 use common\models\Service;
 use common\models\Order;
 use kartik\widgets\Select2;
@@ -36,6 +36,14 @@ use kartik\widgets\DatePicker;
                     ],
                     'data' => Service::getList(),
                 ]),
+                $form->field($model, 'portfolio_tags')->widget(Select2::className(), [
+                    'options' => ['placeholder' => '[не выбраны]', 'multiple' => true],
+                    'showToggleAll' => false,
+                    'pluginOptions' => [
+                        'allowClear' => true,
+                    ],
+                    'data' => Tag::getList(),
+                ]),
                 $form->field($model, 'order_id')->widget(Select2::className(), [
                     'options' => ['placeholder' => '[не выбран]'],
                     'showToggleAll' => false,
@@ -44,6 +52,7 @@ use kartik\widgets\DatePicker;
                     ],
                     'data' => Order::getListName(),
                 ]),
+                $form->field($model, 'is_private')->checkbox(),
                 $form->field($model, 'is_active')->checkbox()
             ];
             echo $model->getFormCard($attributes, 'Основная информация');

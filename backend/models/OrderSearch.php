@@ -25,7 +25,7 @@ class OrderSearch extends Order
                 [
                     'status_id', 'service_id', 'price', 'client_id',
                     'utm_source', 'utm_campaign', 'utm_medium', 'utm_content', 'utm_term', 'comment',
-                    'name', 'phone', 'email', 'split_template', 'pressed_btn',
+                    'name', 'order_name', 'phone', 'email', 'split_template', 'pressed_btn',
                     'utm_source','utm_campaign','utm_medium','utm_content','utm_term',
                     '_created_from', '_created_to'
                 ], 'safe'],
@@ -92,6 +92,7 @@ class OrderSearch extends Order
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'order_name', $this->order_name])
             ->andFilterWhere(['like', 'phone', $this->phone])
             ->andFilterWhere(['like', 'email', $this->email]);
 

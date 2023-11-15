@@ -9,7 +9,7 @@ use yii\helpers\Url;
 /** @var yii\web\View $this */
 /** @var common\models\Client $model */
 
-$this->title = 'Заявка: '.$model->name;
+$this->title = 'Заявка: '.($model->order_name ? $model->order_name : $model->name);
 $this->params['breadcrumbs'][] = ['label' => $model->modelName, 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);

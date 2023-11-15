@@ -139,6 +139,17 @@ class BaseModel extends ActiveRecord
         return false;
     }
 
+    /**
+     * @return bool
+     */
+    public function getSecondImage()
+    {
+        if($this->gallery && $this->gallery->images) {
+            return isset($this->gallery->images[1]) ? $this->gallery->images[1] : $this->gallery->images[0];
+        }
+        return false;
+    }
+
     public function fullPath($path)
     {
         $prefix = Yii::$app->db->tablePrefix;
@@ -242,8 +253,9 @@ class BaseModel extends ActiveRecord
 
     private function handleImages() {
 
-        $prefix = Yii::$app->db->tablePrefix;
-        $dirName = str_replace($prefix, '', self::className()::tableName());
+        $repSymb = [Yii::$app->db->tablePrefix, '{','}','%'];
+        $replaced = ['', '', '', ''];
+        $dirName = str_replace($repSymb, $replaced, self::className()::tableName());
         $filesDir = Yii::getAlias('@upload')."/{$dirName}/";
         if (!file_exists($filesDir)) mkdir($filesDir, 0777, true);
 
@@ -301,6 +313,23 @@ class BaseModel extends ActiveRecord
                 return Html::a($this->mainImage->getExtensionSvg(20, 20, '#000'), $this->mainImage->fileUrl, ['target' => '_blanc', 'download' => true]);
             }
         }
+    }
+    public function getImages()
+    {
+        if($this->gallery && $this->gallery->images) {
+            return $this->gallery->images;
+        }
+        return false;
+    }
+    public function getAllImages()
+    {
+        $images = [];
+        if($this->images) {
+            foreach($this->images as $image) {
+                if($image->isImage) $images[] = $image;
+            }
+        }
+        return $images;
     }
     public function getImagesHtml($rows = null)
     {

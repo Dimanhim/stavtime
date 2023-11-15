@@ -38,13 +38,14 @@ class Gallery extends \common\models\BaseModel
     const TYPE_OFFICE         = 14;
     const TYPE_ANY            = 15;
     const TYPE_SERVICE        = 16;
+    const TYPE_TAG            = 17;
 
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'stv_galleries';
+        return '{{%galleries}}';
     }
 
     /**

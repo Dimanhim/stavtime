@@ -82,7 +82,8 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'portfolio' => 'site/portfolio',
+                ['class' => 'frontend\components\CustomUrlRule'],
+                //'portfolio' => 'portfolio/index',
             ],
         ],
     ],
